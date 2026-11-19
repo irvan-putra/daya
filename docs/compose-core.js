@@ -495,10 +495,74 @@
     return { recipe: out, notes: notes };
   }
 
+  /* ---- shared AI-route prompt helpers (routes 2 and 3) ---- */
+
+  var SCHEMA_BRIEF =
+    "You convert an app description into a daya recipe: one JSON object, no prose. " +
+    'Fields: domain (always "web"), title (short string), theme ({"accent": one of amber, green, indigo, rose, slate, teal}), sections (list). ' +
+    'Section types: {"type":"timer","label":string,"seconds":number 5..3600}, ' +
+    '{"type":"counter","label":string,"start":number}, ' +
+    '{"type":"todo","heading":string,"storage_key":"lowercase-with-hyphens","items":[strings]}, ' +
+    '{"type":"list","items":[strings]}, ' +
+    '{"type":"text","heading":string,"body":string}, ' +
+    '{"type":"quiz","question":string,"choices":[2..6 strings],"answer":number}.';
+
+  /* Few-shot pair: the shape the model should imitate. Found necessary by
+   * real in-browser testing (2026-11-19): without it a 0.5B-class model
+   * echoes the schema text instead of emitting a recipe. */
+  var FEWSHOT_USER = 'a 25 minute timer for focus, called "Focus"';
+  var FEWSHOT_ASSISTANT =
+    '{"domain":"web","title":"Focus","theme":{"accent":"indigo"},' +
+    '"sections":[{"type":"timer","label":"focus","seconds":1500}]}';
+
+  function aiChatMessages(description, errors) {
+    var user = "App description: " + description;
+    if (errors && errors.length) {
+      user += "\nYour previous JSON failed validation: " + errors.join("; ") + ". Output fixed JSON only.";
+    }
+    return [
+      { role: "system", content: SCHEMA_BRIEF },
+      { role: "user", content: FEWSHOT_USER },
+      { role: "assistant", content: FEWSHOT_ASSISTANT },
+      { role: "user", content: user },
+    ];
+  }
+
+  function extractJson(text) {
+    var start = text.indexOf("{");
+    if (start === -1) return null;
+    var depth = 0;
+    for (var i = start; i < text.length; i++) {
+      if (text[i] === "{") depth++;
+      else if (text[i] === "}") {
+        depth--;
+        if (depth === 0) {
+          try {
+            return JSON.parse(text.slice(start, i + 1));
+          } catch (e) {
+            return null;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  function aiPrompt(description, errors) {
+    /* Flattened form of aiChatMessages for APIs that take a single string. */
+    return aiChatMessages(description, errors)
+      .map(function (m) { return m.role + ":\n" + m.content; })
+      .join("\n\n") + "\n\nassistant:";
+  }
+
   window.dayaCore = {
     describe: describe,
     validateRecipe: validateRecipe,
     DescribeError: DescribeError,
     ACCENTS: ACCENTS,
+    SCHEMA_BRIEF: SCHEMA_BRIEF,
+    extractJson: extractJson,
+    aiPrompt: aiPrompt,
+    aiChatMessages: aiChatMessages,
   };
 })();

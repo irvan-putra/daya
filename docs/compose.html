@@ -53,12 +53,14 @@ the recipe into a working page with <code>daya build recipe.json -o app.html</co
 <label class="route">
   <input type="radio" name="route" value="wasm" id="radio-wasm">
   <span class="name">Small AI model in this page</span>
-  <div class="detail">Downloads a small open model (SmolLM2-135M-Instruct, about
-  101&nbsp;MB, Apache-2.0) and runs it here on your device. Understands free
-  language better than the deterministic route, but it is experimental:
-  <span class="warn">speed and output quality on phones are untested</span>,
-  and output is retried at most 3 times, then the validator's errors are
-  shown as-is. Nothing loads until you tap the button below.
+  <div class="detail">Downloads a small open model (Qwen2.5-0.5B-Instruct, about
+  469&nbsp;MB, Apache-2.0) and runs it here on your device. It tries to
+  understand free-form language beyond the documented phrasings. Experimental:
+  it passed one desktop smoke test (one valid recipe, about a minute), but
+  <span class="warn">speed and output quality on phones are untested and a
+  desktop minute will be longer on a phone</span>. Output is retried at most
+  3 times, then the validator's errors are shown as-is. Nothing loads until
+  you tap the button below.
   <span class="status" id="wasm-status"></span></div>
 </label>
 </div>
@@ -71,7 +73,7 @@ its runtime from cdn.jsdelivr.net (they see the download, not your words);
 your description is processed by the model running in this page.</p>
 <p>
 <button id="go">Make recipe</button>
-<button id="load-model" class="secondary" hidden>Load model (~101 MB, one time)</button>
+<button id="load-model" class="secondary" hidden>Load model (~469 MB, one time)</button>
 </p>
 <progress class="progress" id="model-progress" max="1" hidden></progress>
 </div>
@@ -92,8 +94,13 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
   "use strict";
   var MAX_ATTEMPTS = 3;
   var WLLAMA_VERSION = "3.13.0";
-  var MODEL_URL = "https://huggingface.co/QuantFactory/SmolLM2-135M-Instruct-GGUF/resolve/476854d00ede130660aba430d15f9347ad2e7d0e/SmolLM2-135M-Instruct.Q4_K_M.gguf";
-  var MODEL_BYTES = 105454144;
+  /* Qwen2.5-0.5B-Instruct Q4_K_M: chosen by real in-browser testing
+     (2026-11-19). SmolLM2-135M (101 MB) was tried first and failed
+     validation with two different prompts; this model produced a valid
+     recipe in one attempt. Revision and digest pinned. */
+  var MODEL_URL = "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/9217f5db79a29953eb74d5343926648285ec7e67/qwen2.5-0.5b-instruct-q4_k_m.gguf";
+  var MODEL_BYTES = 491400032;
+  var MODEL_SHA256 = "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db";
   var wllama = null;
 
   var els = {
@@ -176,46 +183,9 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
     });
   }
 
-  var SCHEMA_BRIEF =
-    "Output ONLY a JSON object for a daya web recipe, no prose, no markdown. " +
-    'Shape: {"domain":"web","title":"1-80 chars","description":"optional, max 280 chars",' +
-    '"theme":{"accent":"one of amber, green, indigo, rose, slate, teal"},' +
-    '"sections":[...]}. Section types: ' +
-    '{"type":"text","heading":"1-80","body":"1-2000"}; ' +
-    '{"type":"list","heading":"optional","items":["1-200 chars each, 1-50"]}; ' +
-    '{"type":"counter","label":"1-80","start":0}; ' +
-    '{"type":"quiz","question":"1-280","choices":["2-6 of max 120 chars"],"answer":0}; ' +
-    '{"type":"timer","label":"1-80","seconds":5-3600}; ' +
-    '{"type":"todo","heading":"optional","storage_key":"lowercase-letters-digits-hyphens-max-32, unique","items":["optional starter items"]}. ' +
-    "Only these fields, no others.";
-
-  function extractJson(text) {
-    var start = text.indexOf("{");
-    if (start === -1) return null;
-    var depth = 0;
-    for (var i = start; i < text.length; i++) {
-      if (text[i] === "{") depth++;
-      else if (text[i] === "}") {
-        depth--;
-        if (depth === 0) {
-          try {
-            return JSON.parse(text.slice(start, i + 1));
-          } catch (e) {
-            return null;
-          }
-        }
-      }
-    }
-    return null;
-  }
-
-  function aiPrompt(description, errors) {
-    var prompt = SCHEMA_BRIEF + "\nApp description: " + description;
-    if (errors && errors.length) {
-      prompt += "\nYour previous JSON failed validation: " + errors.join("; ") + ". Fix it.";
-    }
-    return prompt;
-  }
+  var SCHEMA_BRIEF = window.dayaCore.SCHEMA_BRIEF;
+  var extractJson = window.dayaCore.extractJson;
+  var aiPrompt = window.dayaCore.aiPrompt;
 
   function runBrowserAi(description) {
     var notes = [];
@@ -270,7 +240,7 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
       var Wllama = mods[0].Wllama;
       var WasmFromCDN = mods[1].default;
       var instance = new Wllama(WasmFromCDN);
-      els.wasmStatus.textContent = "Downloading model (~101 MB, one time)...";
+      els.wasmStatus.textContent = "Downloading model (~469 MB, one time)...";
       return instance.loadModelFromUrl(MODEL_URL, {
         progressCallback: function (p) {
           els.progress.value = p.total ? p.loaded / p.total : 0;
@@ -291,7 +261,7 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
 
   function runWasm(description) {
     if (!wllama) {
-      showFailure("Model not loaded", ["Tap 'Load model' first. The download is about 101 MB, one time."]);
+      showFailure("Model not loaded", ["Tap 'Load model' first. The download is about 469 MB, one time."]);
       return Promise.resolve();
     }
     var errors = null;
@@ -300,12 +270,9 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
       attempt++;
       els.wasmStatus.textContent = "Generating, attempt " + attempt + " of " + MAX_ATTEMPTS + "...";
       return wllama.createChatCompletion({
-        messages: [
-          { role: "system", content: "You output daya web recipes as JSON." },
-          { role: "user", content: aiPrompt(description, errors) },
-        ],
-        max_tokens: 400,
-        temperature: 0.2,
+        messages: window.dayaCore.aiChatMessages(description, errors),
+        max_tokens: 300,
+        temperature: 0.1,
       }).then(function (response) {
         var reply = response.choices[0].message.content;
         var parsed = extractJson(reply);

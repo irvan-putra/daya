@@ -72,13 +72,19 @@ parser, parity-tested against fixtures in `tests/compose_fixtures.json`
 by `tests/browser_test_compose.py`), browser-provided AI (Chrome's
 built-in model API, feature-detected; today it exists only on some
 desktop Chrome installs, not on Android or iOS), and a small open model
-(SmolLM2-135M-Instruct, ~101 MB, Apache-2.0) running in the page via
+(Qwen2.5-0.5B-Instruct, ~469 MB, Apache-2.0) running in the page via
 wllama/WebAssembly - downloaded from Hugging Face only on an explicit
 tap, with the size shown first. Every route validates its output
 against the same web schema in the page before showing it; the AI
 routes retry at most 3 times and then show the validator's errors
-as-is. In-page model speed and output quality on phones are untested;
-the deterministic route is the reliable default. The compose page is
+as-is. The in-page model is chosen by real in-browser testing
+(2026-11-19): SmolLM2-135M (101 MB) was tried first and failed schema
+validation with two different prompts, while Qwen2.5-0.5B produced a
+valid recipe through the production page's own UI (one attempt, ~55 s
+of inference on a desktop CPU, single-thread wasm). That is one passing
+sample, not a reliability claim: speed and output quality on phones
+remain untested, and the deterministic route is the reliable default.
+Model revision and sha256 are pinned in the page source. The compose page is
 hand-written tooling: pages generated from recipes keep their
 self-contained, no-network property.
 
