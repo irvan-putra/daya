@@ -19,9 +19,11 @@ footer { color: #9aa5b1; font-size: 0.8rem; margin: 2rem 0 1rem; }
 <h2><a href="compose.html">Compose: words to a recipe</a></h2>
 <p>Describe an app in words; get a validated daya recipe (JSON) out. Routes:
 four offline methods (rules, grammar, typo-tolerant templates, a small Bayes
-classifier), browser AI (where the browser has a built-in model), a small
-model that runs in the page (about 219 MB, loads only on tap), and a manual
-route that copies a prompt for another chatbot and validates its pasted
+classifier), an experimental intent classifier (a ~27 MB neural model that
+only classifies; the offline methods still extract and validate), browser AI
+(where the browser has a built-in model), a small model that runs in the page
+(about 219 MB, loads only on tap), and a manual route that copies a prompt
+for another chatbot and validates its pasted
 answer. Tooling page, not generated output.</p>
 </div>
 <h1>daya examples</h1>

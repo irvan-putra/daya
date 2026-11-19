@@ -270,6 +270,88 @@ DRIVER = r"""
     report(false, "prompt box full value, no inner scroll", e.message);
   }
 
+  /* Classifier route, model-free parts (the 27 MB download is not part
+     of this suite; real-model evidence is gathered separately). */
+  try {
+    var ex1 = window.dayaClassifier.extractWithIntent(
+      "timer", 'a 5 minute timer for tea, called "Tea"',
+      function (e, t) { return window.dayaEngines.run(e, t); });
+    report(ex1.recipe.sections[0].type === "timer" && ex1.recipe.sections[0].seconds === 300,
+      "classifier extract timer via " + ex1.engine, JSON.stringify(ex1.recipe.sections[0]));
+    var ex2 = window.dayaClassifier.extractWithIntent(
+      "todo list", 'a todo list with items: rice, eggs, called "Groceries"',
+      function (e, t) { return window.dayaEngines.run(e, t); });
+    report(ex2.recipe.sections[0].type === "todo" && ex2.recipe.sections[0].items.length === 2,
+      "classifier extract todo via " + ex2.engine, JSON.stringify(ex2.recipe.sections[0]).slice(0, 120));
+  } catch (e) {
+    report(false, "classifier extraction", e.message);
+  }
+
+  /* Mismatch and unsupported intents fail honestly. */
+  try {
+    window.dayaClassifier.extractWithIntent("counter", 'a 5 minute timer for tea',
+      function (e, t) { return window.dayaEngines.run(e, t); });
+    report(false, "classifier mismatch refusal", "accepted a timer as a counter");
+  } catch (err) {
+    report(err.message.indexOf("counter") !== -1 && err.message.indexOf("no extractor produced") !== -1,
+      "classifier mismatch refusal", err.message.slice(0, 120));
+  }
+  try {
+    window.dayaClassifier.extractWithIntent("quiz", "a quiz about plants",
+      function (e, t) { return window.dayaEngines.run(e, t); });
+    report(false, "classifier unsupported intent", "built a quiz recipe");
+  } catch (err) {
+    report(err.message.indexOf("can only extract") !== -1,
+      "classifier unsupported intent", err.message.slice(0, 120));
+  }
+
+  /* Page glue: go without loading the classifier fails visibly. */
+  try {
+    document.getElementById("radio-classifier").checked = true;
+    document.getElementById("radio-classifier").dispatchEvent(new Event("change"));
+    var loadBtnVisible = !document.getElementById("load-classifier").hidden;
+    document.getElementById("go").click();
+    var h0 = document.getElementById("result-heading").textContent;
+    report(h0 === "Classifier not loaded" && loadBtnVisible,
+      "classifier route requires tap-to-load", h0);
+  } catch (e) {
+    report(false, "classifier route requires tap-to-load", e.message);
+  }
+
+  /* Page glue with a synchronously-stubbed classifier: intent is heard,
+     classical engines extract, validator still gates the output. */
+  function resolvedSync(v) {
+    return {
+      then: function (f) {
+        try {
+          var r = f(v);
+          return r && typeof r.then === "function" ? r : resolvedSync(r);
+        } catch (e) {
+          return { then: function () { return this; }, catch: function (cf) { cf(e); return this; } };
+        }
+      },
+      catch: function () { return this; }
+    };
+  }
+  try {
+    window.dayaClassifier.isLoaded = function () { return true; };
+    window.dayaClassifier.classify = function () {
+      return resolvedSync({ label: "timer", score: 0.97, labels: ["timer"], scores: [0.97] });
+    };
+    document.getElementById("description").value = 'a 5 minute timer for tea, called "Tea"';
+    document.getElementById("go").click();
+    var hc = document.getElementById("result-heading").textContent;
+    var pc = JSON.parse(document.getElementById("recipe-out").textContent);
+    var nc = document.getElementById("notes").textContent;
+    report(hc.indexOf("classifier") !== -1 && pc.sections[0].seconds === 300 &&
+           nc.indexOf("not a probability") !== -1,
+      "classifier route via DOM (stubbed model)", hc + " | " + nc.slice(0, 80));
+    document.getElementById("description").value = "";
+    document.querySelector('input[name="route"][value="deterministic"]').checked = true;
+  } catch (e) {
+    report(false, "classifier route via DOM (stubbed model)", e.message);
+  }
+
   /* The AI prompt carries two few-shot pairs (regression pin: the
      single-example prompt made a 360M model imitate the timer shape). */
   try {
@@ -325,10 +407,11 @@ def main():
         core = src.read()
     with open(os.path.join(workdir, "compose-core.js"), "w", encoding="utf-8") as fh:
         fh.write(core)
-    with open(os.path.join(ROOT, "docs", "compose-engines.js"), encoding="utf-8") as src:
-        engines = src.read()
-    with open(os.path.join(workdir, "compose-engines.js"), "w", encoding="utf-8") as fh:
-        fh.write(engines)
+    for name in ("compose-engines.js", "compose-classifier.js"):
+        with open(os.path.join(ROOT, "docs", name), encoding="utf-8") as src:
+            code = src.read()
+        with open(os.path.join(workdir, name), "w", encoding="utf-8") as fh:
+            fh.write(code)
     harness_path = os.path.join(workdir, "harness.html")
     with open(harness_path, "w", encoding="utf-8") as fh:
         fh.write(harness)

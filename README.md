@@ -65,9 +65,9 @@ Recognized phrasings (case-insensitive), one per sentence:
 Anything unrecognized is listed as a note and ignored; a description
 with no recognized sections fails with the list of supported phrasings.
 
-This is route 1 (deterministic) of three text-to-recipe routes. The
-`docs/compose.html` page (served at `/daya/compose.html`) offers all
-three in the browser. The deterministic side is not one method but a
+This is route 1 (deterministic) of five text-to-recipe routes. The
+`docs/compose.html` page (served at `/daya/compose.html`) offers all five
+in the browser. The deterministic side is not one method but a
 cascade of four offline engines, strictest first (the Snips NLU
 pattern: deterministic parser first, statistical fallback; per Snips'
 own write-up, deep models gave no gain over classical ones for this
@@ -94,7 +94,7 @@ match an unintended template, so the recipe deserves a read before
 building. The bayes number is a confidence score from a tiny in-page
 training sample, not a calibrated probability of correctness, and the
 fixture tests pin behavior on covered cases - they do not establish
-semantic quality beyond them. The other two routes:
+semantic quality beyond them. Two more routes:
 browser-provided AI (Chrome's
 built-in model API, feature-detected; today it exists only on some
 desktop Chrome installs, not on Android or iOS), and a small open model
@@ -119,7 +119,25 @@ on phones remain untested, and the deterministic route is the reliable
 default.
 Model revision and sha256 are pinned in the page source.
 
-A fourth, manual route needs no AI support in the browser at all: the
+A fourth, experimental route puts a small neural model in front of the
+classical engines instead of replacing them: a zero-shot text classifier
+(MobileBERT fine-tuned on MNLI, ~27 MB int8, Xenova/mobilebert-uncased-mnli
+via transformers.js, plus a ~3 MB runtime; downloaded from Hugging Face and
+cdn.jsdelivr.net only on an explicit tap) classifies the description's
+intent among timer / counter / todo list / checklist / quiz / text notes.
+The classical engines above then extract the details as usual, and an
+engine's recipe is accepted only when its section types match the
+classified intent; intents the engines cannot extract (quiz, text notes)
+fail with an honest refusal instead of a mis-extraction, and the same
+validator gates the final recipe. The model classifies only - it writes
+no JSON. Measured 2026-11-19 through the production page: model load
+about 3 s, three descriptions (a shopping list, a timer, a counter) each
+classified correctly (scores 0.44, 0.97, 0.98). That score is a zero-shot
+match score, not a probability of being right; three samples show the
+wire works, not that it is reliable, multi-part descriptions are
+unsupported, and speed on phones is untested.
+
+A fifth, manual route needs no AI support in the browser at all: the
 page builds a prompt (your description plus the schema and one example)
 for you to copy into any AI chatbot, and validates the answer you paste
 back against the same schema before showing it. Nothing is sent

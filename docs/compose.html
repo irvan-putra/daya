@@ -58,6 +58,20 @@ the recipe into a working page with <code>daya build recipe.json -o app.html</co
   <span class="status" id="browser-ai-status">Checking availability&hellip;</span></div>
 </label>
 <label class="route">
+  <input type="radio" name="route" value="classifier" id="radio-classifier">
+  <span class="name">Intent classifier (small neural model)</span>
+  <div class="detail">Downloads a small neural model (MobileBERT, about
+  27&nbsp;MB, plus a ~3&nbsp;MB runtime) and runs it here on your device. It
+  only classifies what your description asks for (timer, counter, list&hellip;);
+  the classical methods above still extract the details and validate the
+  result. Experimental: the classifier was tried on three descriptions (all
+  three classified correctly); extraction support is limited to timer,
+  counter and list sections. <span class="warn">Accuracy beyond those
+  samples and speed on phones are untested</span>. Nothing loads until you
+  tap the button below.
+  <span class="status" id="classifier-status"></span></div>
+</label>
+<label class="route">
   <input type="radio" name="route" value="wasm" id="radio-wasm">
   <span class="name">Small AI model in this page</span>
   <div class="detail">Downloads a small open model (SmolLM2-360M-Instruct, about
@@ -75,12 +89,14 @@ the recipe into a working page with <code>daya build recipe.json -o app.html</co
 <div class="card">
 <textarea id="description" placeholder='e.g. a 25 minute timer for focus, called "Focus", or: a shopping list with items: rice, eggs and coffee, called "Groceries"'></textarea>
 <p id="network-note" class="status">The deterministic route makes no network
-requests. The in-page model route downloads the model from huggingface.co and
-its runtime from cdn.jsdelivr.net (they see the download, not your words);
-your description is processed by the model running in this page.</p>
+requests. The classifier route downloads a ~30 MB model+runtime and the
+in-page model route downloads the model from huggingface.co and its runtime
+from cdn.jsdelivr.net (they see the download, not your words); your
+description is processed by the model running in this page.</p>
 <p>
 <button id="go">Make recipe</button>
 <button id="load-model" class="secondary" hidden>Load model (~219 MB, one time)</button>
+<button id="load-classifier" class="secondary" hidden>Load classifier (~30 MB, one time)</button>
 </p>
 <progress class="progress" id="model-progress" max="1" hidden></progress>
 </div>
@@ -111,6 +127,7 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
 </main>
 <script src="compose-core.js"></script>
 <script src="compose-engines.js"></script>
+<script src="compose-classifier.js"></script>
 <script>
 (function () {
   "use strict";
@@ -139,6 +156,9 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
     routeBrowserAi: document.getElementById("route-browser-ai"),
     radioBrowserAi: document.getElementById("radio-browser-ai"),
     radioWasm: document.getElementById("radio-wasm"),
+    radioClassifier: document.getElementById("radio-classifier"),
+    loadClassifier: document.getElementById("load-classifier"),
+    classifierStatus: document.getElementById("classifier-status"),
     resultCard: document.getElementById("result-card"),
     resultHeading: document.getElementById("result-heading"),
     notes: document.getElementById("notes"),
@@ -346,6 +366,8 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
       } catch (err) {
         showFailure("Not understood", [err.message || String(err)]);
       }
+    } else if (route === "classifier") {
+      runClassifier(description);
     } else if (route === "browser-ai") {
       runBrowserAi(description).catch(function (err) {
         showFailure("Browser AI failed", [String(err)]);
@@ -401,6 +423,58 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
       "your description. Review it before building.",
     ], parsed);
   });
+
+  /* Classifier route: small encoder model, tap-to-load like the wasm
+     route. The model classifies; classical engines extract. */
+  els.radioClassifier.addEventListener("change", function () {
+    if (els.radioClassifier.checked && !window.dayaClassifier.isLoaded()) {
+      els.loadClassifier.hidden = false;
+    }
+  });
+
+  els.loadClassifier.addEventListener("click", function () {
+    els.loadClassifier.disabled = true;
+    els.classifierStatus.textContent = "Loading runtime and model (~30 MB, one time)...";
+    window.dayaClassifier.load(function (msg) {
+      els.classifierStatus.textContent = msg;
+    }).then(function () {
+      els.classifierStatus.textContent =
+        "Classifier loaded; it is kept by the browser's cache for next time.";
+      els.loadClassifier.hidden = true;
+    }).catch(function (err) {
+      els.classifierStatus.textContent = "Classifier load failed: " + err;
+      els.loadClassifier.disabled = false;
+    });
+  });
+
+  function runClassifier(description) {
+    if (!window.dayaClassifier.isLoaded()) {
+      showFailure("Classifier not loaded", ["Tap 'Load classifier' first. The download is about 30 MB, one time."]);
+      return Promise.resolve();
+    }
+    els.classifierStatus.textContent = "Classifying...";
+    return window.dayaClassifier.classify(description).then(function (heard) {
+      var notes = [
+        "Classifier heard: '" + heard.label + "' (model score " +
+          heard.score.toFixed(2) + " - a zero-shot match score, not a probability of being right).",
+      ];
+      try {
+        var out = window.dayaClassifier.extractWithIntent(
+          heard.label, description,
+          function (engine, text) { return window.dayaEngines.run(engine, text); }
+        );
+        notes.push("Details extracted by the " + out.engine + " method; the model wrote no JSON.");
+        notes.push("Experimental route: review the recipe before building it.");
+        showResult("Recipe (classifier + " + out.engine + ")", notes, out.recipe);
+      } catch (err) {
+        showFailure("Understood the intent, not the details", notes.concat([err.message || String(err)]));
+      }
+      els.classifierStatus.textContent = "";
+    }).catch(function (err) {
+      els.classifierStatus.textContent = "";
+      showFailure("Classifier failed", [String(err)]);
+    });
+  }
 
   detectBrowserAi();
 })();
