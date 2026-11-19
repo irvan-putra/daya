@@ -39,10 +39,16 @@ the recipe into a working page with <code>daya build recipe.json -o app.html</co
 <div class="card">
 <label class="route">
   <input type="radio" name="route" value="deterministic" checked>
-  <span class="name">Deterministic</span>
-  <div class="detail">Rule-based, offline, instant, no download. Understands the
-  documented phrasings (timers, counters, todo lists, lists, text) and honestly
-  reports what it does not understand. Same words in, same recipe out.</div>
+  <span class="name">Offline methods (no AI)</span>
+  <div class="detail">Rule-based classical parsing, offline, instant, no download.
+  Honestly reports what it does not understand. Same words in, same recipe out.
+  <select id="engine" style="margin-top:0.4rem; font:inherit;">
+    <option value="auto" selected>Auto: strictest method first</option>
+    <option value="rules">Rules: exact documented phrasings</option>
+    <option value="grammar">Grammar parser: number words, flexible order</option>
+    <option value="template">Template matching: tolerates a typo</option>
+    <option value="bayes">Statistical (naive Bayes): guesses paraphrases</option>
+  </select></div>
 </label>
 <label class="route unavailable" id="route-browser-ai">
   <input type="radio" name="route" value="browser-ai" id="radio-browser-ai" disabled>
@@ -56,9 +62,9 @@ the recipe into a working page with <code>daya build recipe.json -o app.html</co
   <div class="detail">Downloads a small open model (Qwen2.5-0.5B-Instruct, about
   469&nbsp;MB, Apache-2.0) and runs it here on your device. It tries to
   understand free-form language beyond the documented phrasings. Experimental:
-  it passed one desktop smoke test (one valid recipe, about a minute), but
-  <span class="warn">speed and output quality on phones are untested and a
-  desktop minute will be longer on a phone</span>. Output is retried at most
+  it passed one desktop smoke test (one valid recipe, about a minute of
+  computing), but <span class="warn">speed and output quality on phones
+  are untested</span>. Output is retried at most
   3 times, then the validator's errors are shown as-is. Nothing loads until
   you tap the button below.
   <span class="status" id="wasm-status"></span></div>
@@ -89,6 +95,7 @@ your description is processed by the model running in this page.</p>
 tooling. The pages daya generates from recipes stay self-contained and offline.</footer>
 </main>
 <script src="compose-core.js"></script>
+<script src="compose-engines.js"></script>
 <script>
 (function () {
   "use strict";
@@ -308,8 +315,9 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
     els.resultCard.hidden = true;
     if (route === "deterministic") {
       try {
-        var out = window.dayaCore.describe(description);
-        showResult("Recipe (deterministic)", out.notes, out.recipe);
+        var engine = document.getElementById("engine").value;
+        var out = window.dayaEngines.run(engine, description);
+        showResult("Recipe (" + out.engine + ")", out.notes, out.recipe);
       } catch (err) {
         showFailure("Not understood", [err.message || String(err)]);
       }

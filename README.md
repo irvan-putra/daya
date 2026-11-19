@@ -67,9 +67,29 @@ with no recognized sections fails with the list of supported phrasings.
 
 This is route 1 (deterministic) of three text-to-recipe routes. The
 `docs/compose.html` page (served at `/daya/compose.html`) offers all
-three in the browser: the deterministic grammar (a JS port of this
-parser, parity-tested against fixtures in `tests/compose_fixtures.json`
-by `tests/browser_test_compose.py`), browser-provided AI (Chrome's
+three in the browser. The deterministic side is not one method but a
+cascade of four offline engines, strictest first (the Snips NLU
+pattern: deterministic parser first, statistical fallback; per Snips'
+own write-up, deep models gave no gain over classical ones for this
+kind of task - https://medium.com/snips-ai/an-introduction-to-snips-nlu-the-open-source-library-behind-snips-embedded-voice-platform-b12b1a60a41a):
+
+1. `rules` - the regex keyword parser (a JS port of `daya describe`,
+   parity-tested against fixtures in `tests/compose_fixtures.json`).
+2. `grammar` - a small recursive-descent parser: number words
+   ("twenty five minutes"), flexible word order ("timer for tea of 10
+   minutes").
+3. `template` - Chatito-style template/slot matching
+   (https://github.com/rodrigopivi/Chatito) that tolerates one typo per
+   word (including adjacent transpositions) and filler words.
+4. `bayes` - a multinomial naive Bayes intent classifier trained in the
+   page on samples generated from the same blueprints (no download),
+   with rule slot filling; it reports its confidence per sentence and
+   refuses to guess below a threshold.
+
+`auto` tries them strictest first and says which engine answered; when
+nothing matches, the error lists each method's reason. Every engine's
+output passes the same schema validation. The other two routes:
+browser-provided AI (Chrome's
 built-in model API, feature-detected; today it exists only on some
 desktop Chrome installs, not on Android or iOS), and a small open model
 (Qwen2.5-0.5B-Instruct, ~469 MB, Apache-2.0) running in the page via

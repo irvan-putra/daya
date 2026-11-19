@@ -88,6 +88,88 @@ DRIVER = r"""
     report(false, "compose page deterministic flow", e.message);
   }
 
+  /* Classical engine behavior (engines live only in the browser port, so
+     expectations are hand-written here rather than fixture-generated). */
+  function canon(value) {
+    if (value === null || typeof value !== "object") return JSON.stringify(value);
+    if (Array.isArray(value)) return "[" + value.map(canon).join(",") + "]";
+    var keys = Object.keys(value).sort();
+    return "{" + keys.map(function (k) { return JSON.stringify(k) + ":" + canon(value[k]); }).join(",") + "}";
+  }
+
+  var engineCases = [
+    { engine: "grammar", input: "twenty five minute timer for focus", check: function (r) {
+      return r.sections[0].type === "timer" && r.sections[0].seconds === 1500 && r.sections[0].label === "Focus"; } },
+    { engine: "grammar", input: "timer for tea of 10 minutes", check: function (r) {
+      return r.sections[0].type === "timer" && r.sections[0].seconds === 600 && r.sections[0].label === "Tea"; } },
+    { engine: "grammar", input: "a counter for push ups", check: function (r) {
+      return r.sections[0].type === "counter" && r.sections[0].label === "push ups"; } },
+    { engine: "grammar", input: "a todo list with items: rice, eggs", check: function (r) {
+      return r.sections[0].type === "todo" && r.sections[0].items.length === 2; } },
+    { engine: "template", input: "25 minute timre", check: function (r) {
+      return r.sections[0].type === "timer" && r.sections[0].seconds === 1500; } },
+    { engine: "template", input: "please make a counter for steps", check: function (r) {
+      return r.sections[0].type === "counter" && r.sections[0].label === "steps"; } },
+    { engine: "template", input: "shopping list with items rice, eggs and coffee", check: function (r) {
+      return r.sections[0].type === "todo" && r.sections[0].items.length === 3; } },
+    { engine: "bayes", input: "set a ten minute timer for study", check: function (r) {
+      return r.sections[0].type === "timer" && r.sections[0].seconds === 600; } },
+    { engine: "bayes", input: "track my pages", check: function (r) {
+      return r.sections[0].type === "counter"; } },
+    { engine: "auto", input: "a 25 minute timer for focus", check: function (r, out) {
+      return out.engine === "rules" && r.sections[0].seconds === 1500; } },
+    { engine: "auto", input: "twenty five minute timer", check: function (r, out) {
+      return out.engine === "grammar" && r.sections[0].seconds === 1500; } },
+    { engine: "auto", input: "25 minute timre", check: function (r, out) {
+      return out.engine === "template" && r.sections[0].seconds === 1500; } }
+  ];
+
+  engineCases.forEach(function (c, i) {
+    var name = "engine[" + i + "] " + c.engine + " " + JSON.stringify(c.input).slice(0, 45);
+    try {
+      var out = window.dayaEngines.run(c.engine, c.input);
+      var v = window.dayaCore.validateRecipe(out.recipe);
+      if (v.errors.length) {
+        report(false, name, "output failed validation: " + v.errors.join("; "));
+      } else {
+        report(c.check(out.recipe, out), name, canon(out.recipe).slice(0, 160) + " engine=" + out.engine);
+      }
+    } catch (err) {
+      report(false, name, "threw: " + err.message);
+    }
+  });
+
+  /* Bayes must admit low confidence instead of guessing. */
+  try {
+    window.dayaEngines.run("bayes", "quantum blockchain synergy");
+    report(false, "bayes low-confidence refusal", "parsed without error");
+  } catch (err) {
+    report(/confident|could not/.test(err.message), "bayes low-confidence refusal", err.message);
+  }
+
+  /* Auto cascade must list every method's failure when nothing matches. */
+  try {
+    window.dayaEngines.run("auto", "quantum blockchain synergy");
+    report(false, "auto failure lists methods", "parsed without error");
+  } catch (err) {
+    report(err.message.indexOf("rules") !== -1 && err.message.indexOf("bayes") !== -1,
+      "auto failure lists methods", err.message.slice(0, 160));
+  }
+
+  /* Engine picker through the page DOM. */
+  try {
+    document.getElementById("engine").value = "grammar";
+    document.getElementById("description").value = "twenty five minute timer, called Tea";
+    document.getElementById("go").click();
+    var heading2 = document.getElementById("result-heading").textContent;
+    var parsed2 = JSON.parse(document.getElementById("recipe-out").textContent);
+    report(heading2.indexOf("grammar") !== -1 && parsed2.sections[0].seconds === 1500,
+      "engine picker via DOM", heading2);
+    document.getElementById("engine").value = "auto";
+  } catch (e) {
+    report(false, "engine picker via DOM", e.message);
+  }
+
   /* No model/CDN network request may happen before the user taps load. */
   var resources = performance.getEntriesByType("resource").map(function (r) { return r.name; });
   var leaked = resources.filter(function (n) {
@@ -132,6 +214,10 @@ def main():
         core = src.read()
     with open(os.path.join(workdir, "compose-core.js"), "w", encoding="utf-8") as fh:
         fh.write(core)
+    with open(os.path.join(ROOT, "docs", "compose-engines.js"), encoding="utf-8") as src:
+        engines = src.read()
+    with open(os.path.join(workdir, "compose-engines.js"), "w", encoding="utf-8") as fh:
+        fh.write(engines)
     harness_path = os.path.join(workdir, "harness.html")
     with open(harness_path, "w", encoding="utf-8") as fh:
         fh.write(harness)
