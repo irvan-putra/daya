@@ -252,6 +252,24 @@ DRIVER = r"""
     report(false, "paste result carries shape-not-meaning note", e.message);
   }
 
+  /* The revealed prompt box holds the complete prompt (byte-exact) and
+     is grown to fit it: no inner scrolling, nothing truncated. */
+  try {
+    document.getElementById("description").value = "verify full prompt";
+    document.getElementById("copy-prompt").click();
+    var po3 = document.getElementById("prompt-out");
+    var full = window.dayaCore.chatbotPrompt("verify full prompt");
+    report(po3.value === full &&
+           po3.value.indexOf("You convert an app description") === 0 &&
+           po3.value.slice(-20).indexOf("verify full prompt") !== -1 &&
+           po3.scrollHeight <= po3.clientHeight + 6,
+      "prompt box full value, no inner scroll",
+      "len " + po3.value.length + "/" + full.length +
+      " scroll " + po3.scrollHeight + " vs client " + po3.clientHeight);
+  } catch (e) {
+    report(false, "prompt box full value, no inner scroll", e.message);
+  }
+
   /* The AI prompt carries two few-shot pairs (regression pin: the
      single-example prompt made a 360M model imitate the timer shape). */
   try {
