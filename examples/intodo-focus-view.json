@@ -1,0 +1,6 @@
+{
+  "domain": "intodo-view",
+  "title": "Focus",
+  "description": "Unfinished items only.",
+  "theme": { "accent": "indigo" }
+}

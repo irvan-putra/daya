@@ -51,6 +51,14 @@ The example recipes are published from `docs/`: `focus-timer.html`,
   cannot inject TOML. No icon support yet, generated apps keep state on
   the device (no webxdc sync), and the generated `.xdc` has not yet
   been validated inside a chat client.
+- `intodo-view` (proposal stage) — one focus-view page for the intodo
+  webxdc shared list. The page holds no state of its own: it renders
+  immutable snapshots from an owner-authored headless controller and
+  writes only through the controller's commands, so merge, sync and
+  restore semantics stay exactly the app's own. self_check rejects any
+  output referencing localStorage, webxdc, MergeDoc or sendUpdate. No
+  app uses this output yet; the controller contract is pending the
+  intodo owner's confirmation.
 
 More domains are planned (CLI tools, automations, app screens). Each
 domain is a small pack: schema, templates, checks.
@@ -108,6 +116,14 @@ restore and storage load/save) run in headless Chrome:
 
 ```sh
 python3 tests/browser_test.py
+```
+
+The intodo-view pack has its own browser suite against a mock
+controller (loading and ready states, rendering, add/done commands,
+markup-injection safety):
+
+```sh
+python3 tests/browser_test_view.py
 ```
 
 ## License
