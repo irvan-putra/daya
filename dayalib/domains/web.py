@@ -220,6 +220,7 @@ button:disabled { opacity: 0.55; cursor: default; }
 .daya-bad { color: #be123c; }
 .daya-timer { text-align: center; }
 .daya-timer-display { display: block; font-size: 2.25rem; font-weight: 700; font-variant-numeric: tabular-nums; margin: 0.5rem 0; }
+.daya-timer-reset { background: #fff; color: var(--accent); border: 1px solid var(--accent); margin-left: 0.5rem; }
 footer { text-align: center; color: #9aa5b1; font-size: 0.8rem; margin: 2rem 0 1rem; }
 """.strip()
 
@@ -262,27 +263,52 @@ document.addEventListener("click", function (event) {
   if (btn.classList.contains("daya-timer-btn")) {
     var box = btn.closest(".daya-timer");
     var display = box.querySelector(".daya-timer-display");
-    var left = parseInt(box.getAttribute("data-seconds"), 10);
+    var reset = box.querySelector(".daya-timer-reset");
     if (box._dayaRunning) {
+      clearInterval(box._dayaTimer);
+      box._dayaRunning = false;
+      btn.textContent = "Resume";
       return;
     }
+    if (box._dayaLeft == null) {
+      box._dayaLeft = parseInt(box.getAttribute("data-seconds"), 10);
+    }
     box._dayaRunning = true;
-    btn.disabled = true;
+    btn.textContent = "Pause";
+    reset.hidden = false;
     var tick = function () {
+      var left = box._dayaLeft;
       var m = Math.floor(left / 60);
       var s = left % 60;
       display.textContent = (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
       if (left <= 0) {
         clearInterval(box._dayaTimer);
         box._dayaRunning = false;
+        box._dayaLeft = null;
         display.textContent = "Done";
-        btn.disabled = false;
+        btn.textContent = "Start";
+        reset.hidden = true;
         return;
       }
-      left -= 1;
+      box._dayaLeft = left - 1;
     };
     tick();
     box._dayaTimer = setInterval(tick, 1000);
+    return;
+  }
+
+  if (btn.classList.contains("daya-timer-reset")) {
+    var rbox = btn.closest(".daya-timer");
+    clearInterval(rbox._dayaTimer);
+    rbox._dayaRunning = false;
+    rbox._dayaLeft = null;
+    var total = parseInt(rbox.getAttribute("data-seconds"), 10);
+    var rm = Math.floor(total / 60);
+    var rs = total % 60;
+    rbox.querySelector(".daya-timer-display").textContent =
+      (rm < 10 ? "0" : "") + rm + ":" + (rs < 10 ? "0" : "") + rs;
+    rbox.querySelector(".daya-timer-btn").textContent = "Start";
+    btn.hidden = true;
     return;
   }
 });
@@ -346,6 +372,7 @@ def _section_html(section):
                 _mmss(section["seconds"])
             ),
             '<button type="button" class="daya-timer-btn">Start</button>',
+            '<button type="button" class="daya-timer-reset" hidden>Reset</button>',
             "</section>",
         ]
 

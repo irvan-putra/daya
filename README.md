@@ -31,15 +31,36 @@ file that works offline.
 3. A valid recipe compiles through fixed, reviewed templates. Generated
    output passes a self-check before it is written.
 
+## Demo
+
+The two example recipes are published from `docs/`:
+`focus-timer.html` and `reading-quiz.html`.
+
 ## Domains
 
 - `web` — one self-contained HTML mini-app: styled text, lists,
-  counters, quizzes and timers. No links, no images, no custom code:
-  the only JavaScript is a fixed template, and every recipe string is
-  data that gets escaped before it reaches the page.
+  counters, quizzes and timers (with pause, resume and reset). No
+  links, no images, no custom code: the only JavaScript is a fixed
+  template, and every recipe string is data that gets escaped before
+  it reaches the page.
 
 More domains are planned (CLI tools, automations, app screens). Each
 domain is a small pack: schema, templates, checks.
+
+## Security
+
+Generated pages make no network requests and contain no links, images
+or forms. Recipe strings never enter the JavaScript block: the script
+is a fixed template and a test asserts the shipped script matches it
+byte for byte. Interactive behaviour is driven by `data-*` attributes
+holding validated whole numbers.
+
+Tested threat scope: HTML markup injection, attribute injection via
+quotes, `</script>` breakout, and oversized inputs, via explicit cases
+plus a 200-round seeded adversarial fuzz. JavaScript string injection
+and U+2028/U+2029 line-separator escapes do not apply because no recipe
+data reaches the script block. This is a tested scope statement, not an
+absolute guarantee.
 
 ## Honest limits
 
@@ -58,6 +79,13 @@ python3 -m unittest discover -s tests -v
 
 Tests cover validation, byte-for-byte determinism, escaping and script
 injection (including a seeded adversarial fuzz), bounds, and the CLI.
+
+Live-browser interaction tests (counter, quiz right and wrong, timer
+start/pause/resume/expiry/restart/reset) run in headless Chrome:
+
+```sh
+python3 tests/browser_test.py
+```
 
 ## License
 

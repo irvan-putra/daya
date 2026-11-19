@@ -41,6 +41,7 @@ class GenerateTests(unittest.TestCase):
         self.assertIn("25:00", page)  # 1500 seconds rendered mm:ss
         self.assertIn('data-answer="1"', page)
         self.assertIn('data-seconds="1500"', page)
+        self.assertIn('class="daya-timer-reset" hidden>Reset</button>', page)
         self.assertIn("#0f766e", page)  # teal accent
 
     def test_deterministic_bytes(self):
@@ -63,6 +64,32 @@ class GenerateTests(unittest.TestCase):
             "sections": [{"type": "text", "heading": "h", "body": "first\nsecond"}],
         }
         self.assertIn("first<br>\nsecond", build(recipe))
+
+
+class ScriptBlockTests(unittest.TestCase):
+    def test_script_block_is_exactly_the_fixed_template(self):
+        page = build(VALID)
+        marker = "<script>\n"
+        start = page.index(marker) + len(marker)
+        end = page.index("\n</script>")
+        self.assertEqual(page[start:end], web._JS)
+
+    def test_no_recipe_data_inside_script_block(self):
+        sneaky = 'line seps \u2028 and \u2029 and </script><script>alert(1)</script>'
+        recipe = {
+            "domain": "web",
+            "title": "t",
+            "sections": [{"type": "text", "heading": sneaky, "body": sneaky}],
+        }
+        page = build(recipe)
+        start = page.index("<script>\n")
+        end = page.index("\n</script>") + len("\n</script>")
+        script_block = page[start:end]
+        self.assertNotIn("alert(1)", script_block)
+        self.assertNotIn("\u2028", script_block)
+        self.assertNotIn("\u2029", script_block)
+        # the whole recipe string only survives in the escaped body region
+        self.assertIn(html.escape(sneaky, quote=True), page[:start])
 
 
 class SecurityTests(unittest.TestCase):
