@@ -31,6 +31,48 @@ file that works offline.
 3. A valid recipe compiles through fixed, reviewed templates. Generated
    output passes a self-check before it is written.
 
+## From words to a recipe: daya describe (route 1 of 3)
+
+`daya describe` turns a short plain-text description into a valid web
+recipe. It is a **bounded rule-based parser**: a fixed set of documented
+phrasings is recognized, anything else is reported as "not understood"
+instead of guessed, and the same text always yields the same recipe.
+No network, no AI service, no cost. The parsed recipe passes the same
+validation as a hand-written one before it is printed, so a description
+can never produce a recipe the schema would reject.
+
+```sh
+./daya describe 'a 25 minute timer for focus, called "Focus"'
+./daya describe 'a todo list with items: buy rice, call ana and book the train, called "Errands"' -o errands.json
+./daya build errands.json -o errands.html
+```
+
+Recognized phrasings (case-insensitive), one per sentence:
+
+- `... called "Name"` / `named` / `titled` — the page title
+- `description: ...` / `described as ...` — the description
+- a color name (`indigo`, `blue`, `violet`, `rose`, `green`, `slate`) —
+  the accent
+- `a 25 minute timer for X` / `countdown of 90 seconds` / `pomodoro`
+  (durations clamp to the schema's 5..3600 second range, with a note)
+- `a counter` / `a counter for X`
+- `a todo list` / `task list` / `shopping list ...`
+  (`with items: a, b and c` seeds the list; a deterministic storage key
+  is derived from the title)
+- `a list: a, b and c` — a static list
+- `text: ...` / `a note that says ...` — a text section
+
+Anything unrecognized is listed as a note and ignored; a description
+with no recognized sections fails with the list of supported phrasings.
+
+This is route 1 (deterministic) of three text-to-recipe routes under
+evaluation. Routes 2 (browser-provided AI) and 3 (a small model running
+in the page via WebAssembly) would understand free language instead of
+documented phrasings; they are being compared on download size, phone
+performance, output reliability and licensing before one is prototyped.
+Every route validates its output against the same schema before any
+code is generated.
+
 ## Demo
 
 The example recipes are published from `docs/`: `focus-timer.html`,
@@ -97,8 +139,10 @@ absolute guarantee.
   right result. A valid recipe can still be the wrong app.
 - Deterministic generation covers only what a domain schema describes.
   Anything outside it needs a new domain or a new schema version.
-- daya is not natural-language programming: the recipe is JSON with a
-  fixed schema, not free text.
+- `daya describe` is not natural-language understanding: it recognizes
+  the documented phrasings above and honestly reports the rest as not
+  understood. Free-language input is routes 2 and 3, still under
+  evaluation.
 - A generated todo list persists only in the browser where it was used;
   there is no sync between devices or people.
 - A generated `.xdc` has no icon yet, and its state stays on each

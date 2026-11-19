@@ -6,6 +6,7 @@ import json
 import sys
 
 from . import __version__
+from .describe import DescribeError, describe
 from .domains import DOMAINS
 from .recipe import RecipeError, load_recipe
 
@@ -68,6 +69,25 @@ def cmd_validate(args):
     return 0
 
 
+def cmd_describe(args):
+    text = " ".join(args.text)
+    try:
+        recipe, notes = describe(text)
+    except DescribeError as exc:
+        print("error: {}".format(exc), file=sys.stderr)
+        return 2
+    for note in notes:
+        print("note: {}".format(note), file=sys.stderr)
+    payload = json.dumps(recipe, indent=2, sort_keys=True) + "\n"
+    if args.output:
+        with open(args.output, "w", encoding="utf-8") as fh:
+            fh.write(payload)
+        print("wrote {} (validate with: daya validate {})".format(args.output, args.output))
+    else:
+        sys.stdout.write(payload)
+    return 0
+
+
 def cmd_domains(args):
     for name in sorted(DOMAINS):
         print("{}: {}".format(name, DOMAINS[name].DESCRIPTION))
@@ -107,6 +127,18 @@ def main(argv=None):
     validate = sub.add_parser("validate", help="check a recipe without generating code")
     validate.add_argument("recipe", help="path to a recipe JSON file")
     validate.set_defaults(func=cmd_validate)
+
+    describe_p = sub.add_parser(
+        "describe",
+        help=(
+            "turn a short plain-text description into a recipe JSON "
+            "(bounded rule-based parser: fixed documented phrasings, "
+            "deterministic, no network, no AI service)"
+        ),
+    )
+    describe_p.add_argument("text", nargs="+", help="the description")
+    describe_p.add_argument("-o", "--output", help="write the recipe JSON to this file")
+    describe_p.set_defaults(func=cmd_describe)
 
     domains = sub.add_parser("domains", help="list available domains")
     domains.set_defaults(func=cmd_domains)
