@@ -515,6 +515,15 @@
     '{"domain":"web","title":"Focus","theme":{"accent":"indigo"},' +
     '"sections":[{"type":"timer","label":"focus","seconds":1500}]}';
 
+  /* Second few-shot pair, added after a real test (2026-11-19): with only
+   * the timer example, SmolLM2-360M answered a shopping-list description
+   * with a schema-valid but wrong timer section - it imitated the only
+   * shape it had seen. A list example teaches the shape variance. */
+  var FEWSHOT2_USER = 'a todo list called "Chores" with items: laundry, dishes';
+  var FEWSHOT2_ASSISTANT =
+    '{"domain":"web","title":"Chores","theme":{"accent":"teal"},' +
+    '"sections":[{"type":"todo","heading":"Chores","storage_key":"chores","items":["laundry","dishes"]}]}';
+
   function aiChatMessages(description, errors) {
     var user = "App description: " + description;
     if (errors && errors.length) {
@@ -524,6 +533,8 @@
       { role: "system", content: SCHEMA_BRIEF },
       { role: "user", content: FEWSHOT_USER },
       { role: "assistant", content: FEWSHOT_ASSISTANT },
+      { role: "user", content: FEWSHOT2_USER },
+      { role: "assistant", content: FEWSHOT2_ASSISTANT },
       { role: "user", content: user },
     ];
   }

@@ -185,16 +185,33 @@ DRIVER = r"""
     report(false, "chatbot prompt content", e.message);
   }
 
-  /* Copy button puts exactly the built prompt on the clipboard seam. */
+  /* Show-prompt button reveals the prompt as selectable text and also
+     puts exactly the built prompt on the clipboard seam. */
   try {
     var copied = null;
     window.dayaCopyText = function (t) { copied = t; return Promise.resolve(); };
     document.getElementById("description").value = "a todo list called Chores";
+    var po = document.getElementById("prompt-out");
+    po.hidden = true;
     document.getElementById("copy-prompt").click();
-    report(copied === window.dayaCore.chatbotPrompt("a todo list called Chores"),
-      "copy prompt button", String(copied).slice(0, 100));
+    var expected = window.dayaCore.chatbotPrompt("a todo list called Chores");
+    report(copied === expected && po.hidden === false && po.value === expected &&
+           po.style.height !== "",
+      "show prompt button", String(copied).slice(0, 100));
   } catch (e) {
-    report(false, "copy prompt button", e.message);
+    report(false, "show prompt button", e.message);
+  }
+
+  /* Clipboard failure must not hide the prompt: it stays selectable. */
+  try {
+    window.dayaCopyText = function () { return Promise.reject(new Error("denied")); };
+    var po2 = document.getElementById("prompt-out");
+    po2.hidden = true; po2.value = "";
+    document.getElementById("copy-prompt").click();
+    report(po2.hidden === false && po2.value.indexOf("App description") !== -1,
+      "prompt visible without clipboard", po2.value.slice(0, 60));
+  } catch (e) {
+    report(false, "prompt visible without clipboard", e.message);
   }
 
   /* Paste-back validation through the page DOM. */
@@ -233,6 +250,17 @@ DRIVER = r"""
       "paste result carries shape-not-meaning note", r5.notes.slice(0, 120));
   } catch (e) {
     report(false, "paste result carries shape-not-meaning note", e.message);
+  }
+
+  /* The AI prompt carries two few-shot pairs (regression pin: the
+     single-example prompt made a 360M model imitate the timer shape). */
+  try {
+    var msgs = window.dayaCore.aiChatMessages("test description");
+    report(msgs.length === 6 && msgs[0].role === "system" &&
+           msgs[5].content.indexOf("test description") !== -1,
+      "ai prompt has two few-shot pairs", JSON.stringify(msgs.length));
+  } catch (e) {
+    report(false, "ai prompt has two few-shot pairs", e.message);
   }
 
   /* No model/CDN network request may happen before the user taps load. */

@@ -87,13 +87,14 @@ your description is processed by the model running in this page.</p>
 
 <div class="card">
 <p style="margin-top:0"><span style="font-weight:600">Manual route: another chatbot</span></p>
-<p class="status" style="color:#52606d">Copy a ready-made prompt - your
-description plus the daya recipe schema - into any AI chatbot, then paste
-its answer back here. The answer is validated against the same schema
+<p class="status" style="color:#52606d">Show a ready-made prompt - your
+description plus the daya recipe schema - to copy into any AI chatbot, then
+paste its answer back here. The answer is validated against the same schema
 before it is shown. Nothing is sent anywhere: copying and validating both
 happen inside this page.</p>
-<p><button id="copy-prompt" class="secondary">Copy prompt for a chatbot</button>
+<p><button id="copy-prompt" class="secondary">Show the prompt</button>
 <span class="status" id="copy-status"></span></p>
+<textarea id="prompt-out" readonly hidden></textarea>
 <textarea id="pasted" placeholder="Paste the chatbot's answer here"></textarea>
 <p style="margin-bottom:0"><button id="validate-pasted" class="secondary">Validate pasted answer</button></p>
 </div>
@@ -141,6 +142,7 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
     download: document.getElementById("download"),
     copyPrompt: document.getElementById("copy-prompt"),
     copyStatus: document.getElementById("copy-status"),
+    promptOut: document.getElementById("prompt-out"),
     pasted: document.getElementById("pasted"),
     validatePasted: document.getElementById("validate-pasted"),
   };
@@ -360,13 +362,16 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
 
   els.copyPrompt.addEventListener("click", function () {
     var prompt = window.dayaCore.chatbotPrompt(els.description.value);
+    els.promptOut.value = prompt;
+    els.promptOut.hidden = false;
+    /* Grow the box to fit the whole prompt: no inner scrolling, so a
+       long-press "select all" on a phone really gets everything. */
+    els.promptOut.style.height = "auto";
+    els.promptOut.style.height = (els.promptOut.scrollHeight + 4) + "px";
     window.dayaCopyText(prompt).then(function () {
-      els.copyStatus.textContent = "Prompt copied. Paste it into any chatbot.";
+      els.copyStatus.textContent = "Prompt shown below, and copied to the clipboard.";
     }).catch(function () {
-      els.copyStatus.textContent = "Clipboard unavailable; the prompt is shown below.";
-      showResult("Prompt for a chatbot", [
-        "Clipboard copy failed in this browser. Select and copy the text below by hand.",
-      ], prompt);
+      els.copyStatus.textContent = "Prompt shown below; select the text and copy it.";
     });
   });
 
