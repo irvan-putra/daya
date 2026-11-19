@@ -528,6 +528,21 @@
     ];
   }
 
+  /* Copy-paste route: a self-contained prompt for any external chatbot.
+     Built from the same schema brief and few-shot pair the in-page routes
+     use, so there is one source of truth. Copying is manual: the page
+     never talks to another chatbot itself. */
+  function chatbotPrompt(description) {
+    var desc = (description || "").trim();
+    if (!desc) desc = "<your app description here>";
+    return SCHEMA_BRIEF + "\n\n" +
+      "Example description: " + FEWSHOT_USER + "\n" +
+      "Example recipe:\n" + FEWSHOT_ASSISTANT + "\n\n" +
+      "Now convert this app description. Reply with the recipe JSON only: " +
+      "no markdown fences, no commentary, no explanation.\n" +
+      "App description: " + desc + "\n";
+  }
+
   function extractJson(text) {
     var start = text.indexOf("{");
     if (start === -1) return null;
@@ -561,6 +576,7 @@
     DescribeError: DescribeError,
     ACCENTS: ACCENTS,
     SCHEMA_BRIEF: SCHEMA_BRIEF,
+    chatbotPrompt: chatbotPrompt,
     extractJson: extractJson,
     aiPrompt: aiPrompt,
     aiChatMessages: aiChatMessages,

@@ -85,6 +85,19 @@ your description is processed by the model running in this page.</p>
 <progress class="progress" id="model-progress" max="1" hidden></progress>
 </div>
 
+<div class="card">
+<p style="margin-top:0"><span style="font-weight:600">Manual route: another chatbot</span></p>
+<p class="status" style="color:#52606d">Copy a ready-made prompt - your
+description plus the daya recipe schema - into any AI chatbot, then paste
+its answer back here. The answer is validated against the same schema
+before it is shown. Nothing is sent anywhere: copying and validating both
+happen inside this page.</p>
+<p><button id="copy-prompt" class="secondary">Copy prompt for a chatbot</button>
+<span class="status" id="copy-status"></span></p>
+<textarea id="pasted" placeholder="Paste the chatbot's answer here"></textarea>
+<p style="margin-bottom:0"><button id="validate-pasted" class="secondary">Validate pasted answer</button></p>
+</div>
+
 <div class="card" id="result-card" hidden>
 <h2 id="result-heading">Recipe</h2>
 <ul class="notes" id="notes"></ul>
@@ -126,6 +139,10 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
     notes: document.getElementById("notes"),
     recipeOut: document.getElementById("recipe-out"),
     download: document.getElementById("download"),
+    copyPrompt: document.getElementById("copy-prompt"),
+    copyStatus: document.getElementById("copy-status"),
+    pasted: document.getElementById("pasted"),
+    validatePasted: document.getElementById("validate-pasted"),
   };
   var lastRecipe = null;
 
@@ -142,7 +159,8 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
       li.textContent = note;
       els.notes.appendChild(li);
     });
-    els.recipeOut.textContent = recipe ? JSON.stringify(recipe, null, 2) : "";
+    els.recipeOut.textContent =
+      typeof recipe === "string" ? recipe : (recipe ? JSON.stringify(recipe, null, 2) : "");
     els.resultCard.hidden = false;
     lastRecipe = recipe;
   }
@@ -331,6 +349,48 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
         showFailure("In-page model failed", [String(err)]);
       });
     }
+  });
+
+  /* Manual route: copy a prompt for an external chatbot, paste its
+     answer back. The clipboard call is a named seam so tests can stub
+     it; the fallback shows the prompt as plain text to copy by hand. */
+  window.dayaCopyText = function (text) {
+    return navigator.clipboard.writeText(text);
+  };
+
+  els.copyPrompt.addEventListener("click", function () {
+    var prompt = window.dayaCore.chatbotPrompt(els.description.value);
+    window.dayaCopyText(prompt).then(function () {
+      els.copyStatus.textContent = "Prompt copied. Paste it into any chatbot.";
+    }).catch(function () {
+      els.copyStatus.textContent = "Clipboard unavailable; the prompt is shown below.";
+      showResult("Prompt for a chatbot", [
+        "Clipboard copy failed in this browser. Select and copy the text below by hand.",
+      ], prompt);
+    });
+  });
+
+  els.validatePasted.addEventListener("click", function () {
+    els.resultCard.hidden = true;
+    var parsed = window.dayaCore.extractJson(els.pasted.value);
+    if (!parsed) {
+      showFailure("No JSON found in the pasted answer", [
+        "The pasted text contains no JSON object. Ask the chatbot to reply " +
+        "with only the recipe JSON, and paste its whole answer.",
+      ]);
+      return;
+    }
+    var result = window.dayaCore.validateRecipe(parsed);
+    if (result.errors.length) {
+      showFailure("The pasted answer is not a valid recipe",
+        ["Schema validation errors:"].concat(result.errors));
+      return;
+    }
+    showResult("Recipe (chatbot paste)", [
+      "Pasted from another chatbot; validated against the web schema.",
+      "Validation checks the recipe's shape, not that the chatbot understood " +
+      "your description. Review it before building.",
+    ], parsed);
   });
 
   detectBrowserAi();

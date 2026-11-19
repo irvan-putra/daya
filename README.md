@@ -110,7 +110,17 @@ valid recipe through the production page's own UI (one attempt, ~55 s
 of inference on a desktop CPU, single-thread wasm). That is one passing
 sample, not a reliability claim: speed and output quality on phones
 remain untested, and the deterministic route is the reliable default.
-Model revision and sha256 are pinned in the page source. The compose page is
+Model revision and sha256 are pinned in the page source.
+
+A fourth, manual route needs no AI support in the browser at all: the
+page builds a prompt (your description plus the schema and one example)
+for you to copy into any AI chatbot, and validates the answer you paste
+back against the same schema before showing it. Nothing is sent
+anywhere by the page; the chatbot runs wherever you paste the prompt,
+and validation checks the recipe's shape, not that the chatbot
+understood the description.
+
+The compose page is
 hand-written tooling: pages generated from recipes keep their
 self-contained, no-network property.
 

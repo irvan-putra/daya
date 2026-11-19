@@ -170,6 +170,71 @@ DRIVER = r"""
     report(false, "engine picker via DOM", e.message);
   }
 
+  /* Manual chatbot route: prompt builder content. */
+  try {
+    var pr = window.dayaCore.chatbotPrompt('a counter for steps, called "Steps"');
+    report(pr.indexOf('"type":"timer"') !== -1 &&
+           pr.indexOf('a counter for steps') !== -1 &&
+           pr.indexOf("Example recipe") !== -1 &&
+           pr.indexOf("no markdown fences") !== -1,
+           "chatbot prompt content", pr.slice(0, 100));
+    var prEmpty = window.dayaCore.chatbotPrompt("   ");
+    report(prEmpty.indexOf("<your app description here>") !== -1,
+      "chatbot prompt empty description", prEmpty.slice(-60));
+  } catch (e) {
+    report(false, "chatbot prompt content", e.message);
+  }
+
+  /* Copy button puts exactly the built prompt on the clipboard seam. */
+  try {
+    var copied = null;
+    window.dayaCopyText = function (t) { copied = t; return Promise.resolve(); };
+    document.getElementById("description").value = "a todo list called Chores";
+    document.getElementById("copy-prompt").click();
+    report(copied === window.dayaCore.chatbotPrompt("a todo list called Chores"),
+      "copy prompt button", String(copied).slice(0, 100));
+  } catch (e) {
+    report(false, "copy prompt button", e.message);
+  }
+
+  /* Paste-back validation through the page DOM. */
+  var VALID_JSON = '{"domain":"web","title":"Steps","theme":{"accent":"teal"},' +
+    '"sections":[{"type":"counter","label":"steps","start":0}]}';
+  function pasteAndValidate(text) {
+    document.getElementById("pasted").value = text;
+    document.getElementById("validate-pasted").click();
+    return {
+      heading: document.getElementById("result-heading").textContent,
+      notes: document.getElementById("notes").textContent,
+      out: document.getElementById("recipe-out").textContent,
+    };
+  }
+  try {
+    var r1 = pasteAndValidate(VALID_JSON);
+    report(r1.heading === "Recipe (chatbot paste)" &&
+           JSON.parse(r1.out).title === "Steps",
+      "paste valid recipe", r1.heading);
+    var r2 = pasteAndValidate("Sure! Here is the recipe:\n```json\n" + VALID_JSON + "\n```\nHope this helps");
+    report(r2.heading === "Recipe (chatbot paste)" && JSON.parse(r2.out).title === "Steps",
+      "paste fenced recipe with prose", r2.heading);
+    var r3 = pasteAndValidate("I cannot help with that.");
+    report(r3.heading === "No JSON found in the pasted answer", "paste garbage", r3.heading);
+    var r4 = pasteAndValidate('{"domain":"web","title":42}');
+    report(r4.heading === "The pasted answer is not a valid recipe" && r4.notes.indexOf("title") !== -1,
+      "paste schema-invalid recipe", r4.heading + " | " + r4.notes.slice(0, 80));
+  } catch (e) {
+    report(false, "paste validation flow", e.message);
+  }
+
+  /* The manual route must not weaken validation: it is shape-only. */
+  try {
+    var r5 = pasteAndValidate(VALID_JSON);
+    report(r5.notes.indexOf("not that the chatbot understood") !== -1,
+      "paste result carries shape-not-meaning note", r5.notes.slice(0, 120));
+  } catch (e) {
+    report(false, "paste result carries shape-not-meaning note", e.message);
+  }
+
   /* No model/CDN network request may happen before the user taps load. */
   var resources = performance.getEntriesByType("resource").map(function (r) { return r.name; });
   var leaked = resources.filter(function (n) {
