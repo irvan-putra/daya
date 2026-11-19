@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>daya compose</title>
+<style>
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: #fafafa; color: #1f2933; line-height: 1.55; }
+main { max-width: 40rem; margin: 0 auto; padding: 1.25rem; }
+h1 { font-size: 1.6rem; margin-bottom: 0.25rem; }
+a { color: #4f46e5; }
+.card { background: #fff; border: 1px solid #e4e7eb; border-radius: 0.75rem; padding: 1rem 1.25rem; margin: 1rem 0; }
+.route { display: block; cursor: pointer; }
+.route input { margin-right: 0.5rem; }
+.route .name { font-weight: 600; }
+.route .detail { color: #52606d; font-size: 0.9rem; margin: 0.15rem 0 0 1.4rem; }
+.route.unavailable { opacity: 0.6; cursor: default; }
+textarea { width: 100%; box-sizing: border-box; min-height: 5rem; padding: 0.6rem; border: 1px solid #cbd2d9; border-radius: 0.5rem; font: inherit; }
+button { background: #4f46e5; color: #fff; border: 0; border-radius: 0.5rem; padding: 0.6rem 1.1rem; font: inherit; font-weight: 600; cursor: pointer; }
+button.secondary { background: #fff; color: #4f46e5; border: 1px solid #4f46e5; }
+button[disabled] { opacity: 0.5; cursor: default; }
+pre { background: #f5f3ff; border: 1px solid #e4e7eb; border-radius: 0.5rem; padding: 0.75rem; overflow-x: auto; font-size: 0.85rem; white-space: pre-wrap; word-break: break-word; }
+ul.notes { color: #52606d; font-size: 0.9rem; padding-left: 1.2rem; }
+.status { color: #7b8794; font-size: 0.85rem; }
+.warn { color: #b45309; }
+footer { color: #9aa5b1; font-size: 0.8rem; margin: 2rem 0 1rem; }
+.progress { width: 100%; }
+</style>
+</head>
+<body>
+<main>
+<h1>daya compose</h1>
+<p>Describe a small app in words; get a daya recipe (JSON) out. Every route
+validates its output against the same web schema before showing it. Build
+the recipe into a working page with <code>daya build recipe.json -o app.html</code>
+(<a href="https://github.com/irvan-putra/daya">daya on GitHub</a>).
+<a href="index.html">All daya examples</a></p>
+
+<div class="card">
+<label class="route">
+  <input type="radio" name="route" value="deterministic" checked>
+  <span class="name">Deterministic</span>
+  <div class="detail">Rule-based, offline, instant, no download. Understands the
+  documented phrasings (timers, counters, todo lists, lists, text) and honestly
+  reports what it does not understand. Same words in, same recipe out.</div>
+</label>
+<label class="route unavailable" id="route-browser-ai">
+  <input type="radio" name="route" value="browser-ai" id="radio-browser-ai" disabled>
+  <span class="name">Browser AI</span>
+  <div class="detail">Uses the AI model built into the browser, when one exists.
+  <span class="status" id="browser-ai-status">Checking availability&hellip;</span></div>
+</label>
+<label class="route">
+  <input type="radio" name="route" value="wasm" id="radio-wasm">
+  <span class="name">Small AI model in this page</span>
+  <div class="detail">Downloads a small open model (SmolLM2-135M-Instruct, about
+  101&nbsp;MB, Apache-2.0) and runs it here on your device. Understands free
+  language better than the deterministic route, but it is experimental:
+  <span class="warn">speed and output quality on phones are untested</span>,
+  and output is retried at most 3 times, then the validator's errors are
+  shown as-is. Nothing loads until you tap the button below.
+  <span class="status" id="wasm-status"></span></div>
+</label>
+</div>
+
+<div class="card">
+<textarea id="description" placeholder='e.g. a 25 minute timer for focus, called "Focus", or: a shopping list with items: rice, eggs and coffee, called "Groceries"'></textarea>
+<p id="network-note" class="status">The deterministic route makes no network
+requests. The in-page model route downloads the model from huggingface.co and
+its runtime from cdn.jsdelivr.net (they see the download, not your words);
+your description is processed by the model running in this page.</p>
+<p>
+<button id="go">Make recipe</button>
+<button id="load-model" class="secondary" hidden>Load model (~101 MB, one time)</button>
+</p>
+<progress class="progress" id="model-progress" max="1" hidden></progress>
+</div>
+
+<div class="card" id="result-card" hidden>
+<h2 id="result-heading">Recipe</h2>
+<ul class="notes" id="notes"></ul>
+<pre id="recipe-out"></pre>
+<p><button id="download" class="secondary">Download recipe.json</button></p>
+</div>
+
+<footer>Generated pages never use these routes: this compose page is hand-written
+tooling. The pages daya generates from recipes stay self-contained and offline.</footer>
+</main>
+<script src="compose-core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var MAX_ATTEMPTS = 3;
+  var WLLAMA_VERSION = "3.13.0";
+  var MODEL_URL = "https://huggingface.co/QuantFactory/SmolLM2-135M-Instruct-GGUF/resolve/476854d00ede130660aba430d15f9347ad2e7d0e/SmolLM2-135M-Instruct.Q4_K_M.gguf";
+  var MODEL_BYTES = 105454144;
+  var wllama = null;
+
+  var els = {
+    description: document.getElementById("description"),
+    go: document.getElementById("go"),
+    loadModel: document.getElementById("load-model"),
+    progress: document.getElementById("model-progress"),
+    wasmStatus: document.getElementById("wasm-status"),
+    browserAiStatus: document.getElementById("browser-ai-status"),
+    routeBrowserAi: document.getElementById("route-browser-ai"),
+    radioBrowserAi: document.getElementById("radio-browser-ai"),
+    radioWasm: document.getElementById("radio-wasm"),
+    resultCard: document.getElementById("result-card"),
+    resultHeading: document.getElementById("result-heading"),
+    notes: document.getElementById("notes"),
+    recipeOut: document.getElementById("recipe-out"),
+    download: document.getElementById("download"),
+  };
+  var lastRecipe = null;
+
+  function chosenRoute() {
+    var checked = document.querySelector('input[name="route"]:checked');
+    return checked ? checked.value : "deterministic";
+  }
+
+  function showResult(heading, notes, recipe) {
+    els.resultHeading.textContent = heading;
+    els.notes.innerHTML = "";
+    notes.forEach(function (note) {
+      var li = document.createElement("li");
+      li.textContent = note;
+      els.notes.appendChild(li);
+    });
+    els.recipeOut.textContent = recipe ? JSON.stringify(recipe, null, 2) : "";
+    els.resultCard.hidden = false;
+    lastRecipe = recipe;
+  }
+
+  function showFailure(heading, notes) {
+    showResult(heading, notes, null);
+  }
+
+  els.download.addEventListener("click", function () {
+    if (!lastRecipe) return;
+    var blob = new Blob([JSON.stringify(lastRecipe, null, 2) + "\n"], { type: "application/json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "recipe.json";
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  /* Route 2: browser-provided AI (Chrome's built-in LanguageModel API).
+     Detected, never assumed: today this API exists only on some desktop
+     Chrome installs, not on Android or iOS. */
+  function detectBrowserAi() {
+    if (!("LanguageModel" in window)) {
+      els.browserAiStatus.textContent =
+        "Not available in this browser. Today Chrome's built-in model exists " +
+        "only on some desktop Chrome installs (not on Android or iOS), so this " +
+        "route is expected to be unavailable on phones.";
+      return;
+    }
+    LanguageModel.availability().then(function (state) {
+      if (state === "available") {
+        els.radioBrowserAi.disabled = false;
+        els.routeBrowserAi.classList.remove("unavailable");
+        els.browserAiStatus.textContent = "Available on this device.";
+      } else if (state === "downloadable" || state === "downloading") {
+        els.radioBrowserAi.disabled = false;
+        els.routeBrowserAi.classList.remove("unavailable");
+        els.browserAiStatus.textContent =
+          "Available, but Chrome's model still needs to download (large, once).";
+      } else {
+        els.browserAiStatus.textContent =
+          "This browser has the API but reports the model as unavailable on this device.";
+      }
+    }).catch(function () {
+      els.browserAiStatus.textContent = "Availability check failed; route disabled.";
+    });
+  }
+
+  var SCHEMA_BRIEF =
+    "Output ONLY a JSON object for a daya web recipe, no prose, no markdown. " +
+    'Shape: {"domain":"web","title":"1-80 chars","description":"optional, max 280 chars",' +
+    '"theme":{"accent":"one of amber, green, indigo, rose, slate, teal"},' +
+    '"sections":[...]}. Section types: ' +
+    '{"type":"text","heading":"1-80","body":"1-2000"}; ' +
+    '{"type":"list","heading":"optional","items":["1-200 chars each, 1-50"]}; ' +
+    '{"type":"counter","label":"1-80","start":0}; ' +
+    '{"type":"quiz","question":"1-280","choices":["2-6 of max 120 chars"],"answer":0}; ' +
+    '{"type":"timer","label":"1-80","seconds":5-3600}; ' +
+    '{"type":"todo","heading":"optional","storage_key":"lowercase-letters-digits-hyphens-max-32, unique","items":["optional starter items"]}. ' +
+    "Only these fields, no others.";
+
+  function extractJson(text) {
+    var start = text.indexOf("{");
+    if (start === -1) return null;
+    var depth = 0;
+    for (var i = start; i < text.length; i++) {
+      if (text[i] === "{") depth++;
+      else if (text[i] === "}") {
+        depth--;
+        if (depth === 0) {
+          try {
+            return JSON.parse(text.slice(start, i + 1));
+          } catch (e) {
+            return null;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  function aiPrompt(description, errors) {
+    var prompt = SCHEMA_BRIEF + "\nApp description: " + description;
+    if (errors && errors.length) {
+      prompt += "\nYour previous JSON failed validation: " + errors.join("; ") + ". Fix it.";
+    }
+    return prompt;
+  }
+
+  function runBrowserAi(description) {
+    var notes = [];
+    var sessionPromise = LanguageModel.create();
+    var errors = null;
+    var attempt = 0;
+    function tryOnce() {
+      attempt++;
+      return sessionPromise.then(function (session) {
+        return session.prompt(aiPrompt(description, errors)).then(function (reply) {
+          var parsed = extractJson(reply);
+          if (!parsed) {
+            errors = ["the model reply contained no JSON object"];
+          } else {
+            var result = window.dayaCore.validateRecipe(parsed);
+            if (!result.errors.length) {
+              notes.push("Browser AI route, attempt " + attempt + " of " + MAX_ATTEMPTS + ".");
+              showResult("Recipe (browser AI)", notes, parsed);
+              return true;
+            }
+            errors = result.errors;
+          }
+          if (attempt >= MAX_ATTEMPTS) {
+            showFailure("Browser AI could not produce a valid recipe", [
+              "Tried " + MAX_ATTEMPTS + " times. Last validation errors:",
+            ].concat(errors));
+            return true;
+          }
+          return tryOnce();
+        });
+      });
+    }
+    return tryOnce();
+  }
+
+  /* Route 3: small model in the page via wllama (llama.cpp -> WebAssembly).
+     Nothing downloads until the user taps Load; size shown up front. */
+  els.radioWasm.addEventListener("change", function () {
+    if (els.radioWasm.checked && !wllama) els.loadModel.hidden = false;
+  });
+
+  els.loadModel.addEventListener("click", function () {
+    els.loadModel.disabled = true;
+    els.wasmStatus.textContent = "Loading runtime...";
+    els.progress.hidden = false;
+    els.progress.value = 0;
+    var base = "https://cdn.jsdelivr.net/npm/@wllama/wllama@" + WLLAMA_VERSION;
+    Promise.all([
+      import(base + "/esm/index.js"),
+      import(base + "/esm/wasm-from-cdn.js"),
+    ]).then(function (mods) {
+      var Wllama = mods[0].Wllama;
+      var WasmFromCDN = mods[1].default;
+      var instance = new Wllama(WasmFromCDN);
+      els.wasmStatus.textContent = "Downloading model (~101 MB, one time)...";
+      return instance.loadModelFromUrl(MODEL_URL, {
+        progressCallback: function (p) {
+          els.progress.value = p.total ? p.loaded / p.total : 0;
+          els.wasmStatus.textContent =
+            "Downloading model... " + Math.round((p.loaded / MODEL_BYTES) * 100) + "%";
+        },
+      }).then(function () {
+        wllama = instance;
+        els.progress.value = 1;
+        els.wasmStatus.textContent = "Model loaded; it is kept by the browser's cache for next time.";
+        els.loadModel.hidden = true;
+      });
+    }).catch(function (err) {
+      els.wasmStatus.textContent = "Model load failed: " + err;
+      els.loadModel.disabled = false;
+    });
+  });
+
+  function runWasm(description) {
+    if (!wllama) {
+      showFailure("Model not loaded", ["Tap 'Load model' first. The download is about 101 MB, one time."]);
+      return Promise.resolve();
+    }
+    var errors = null;
+    var attempt = 0;
+    function tryOnce() {
+      attempt++;
+      els.wasmStatus.textContent = "Generating, attempt " + attempt + " of " + MAX_ATTEMPTS + "...";
+      return wllama.createChatCompletion({
+        messages: [
+          { role: "system", content: "You output daya web recipes as JSON." },
+          { role: "user", content: aiPrompt(description, errors) },
+        ],
+        max_tokens: 400,
+        temperature: 0.2,
+      }).then(function (response) {
+        var reply = response.choices[0].message.content;
+        var parsed = extractJson(reply);
+        if (!parsed) {
+          errors = ["the model reply contained no JSON object"];
+        } else {
+          var result = window.dayaCore.validateRecipe(parsed);
+          if (!result.errors.length) {
+            showResult("Recipe (in-page model)", [
+              "In-page model route, attempt " + attempt + " of " + MAX_ATTEMPTS + ".",
+              "Experimental: review the recipe before building it.",
+            ], parsed);
+            els.wasmStatus.textContent = "";
+            return true;
+          }
+          errors = result.errors;
+        }
+        if (attempt >= MAX_ATTEMPTS) {
+          showFailure("The in-page model could not produce a valid recipe",
+            ["Tried " + MAX_ATTEMPTS + " times. Last validation errors:"].concat(errors));
+          els.wasmStatus.textContent = "";
+          return true;
+        }
+        return tryOnce();
+      });
+    }
+    return tryOnce();
+  }
+
+  els.go.addEventListener("click", function () {
+    var description = els.description.value;
+    var route = chosenRoute();
+    els.resultCard.hidden = true;
+    if (route === "deterministic") {
+      try {
+        var out = window.dayaCore.describe(description);
+        showResult("Recipe (deterministic)", out.notes, out.recipe);
+      } catch (err) {
+        showFailure("Not understood", [err.message || String(err)]);
+      }
+    } else if (route === "browser-ai") {
+      runBrowserAi(description).catch(function (err) {
+        showFailure("Browser AI failed", [String(err)]);
+      });
+    } else {
+      runWasm(description).catch(function (err) {
+        showFailure("In-page model failed", [String(err)]);
+      });
+    }
+  });
+
+  detectBrowserAi();
+})();
+</script>
+</body>
+</html>

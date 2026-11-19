@@ -19,6 +19,8 @@ import tempfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 
+from browser_test_helpers import find_chrome  # noqa: E402
+
 from dayalib.domains import web
 
 FIXTURE = {
@@ -285,12 +287,6 @@ DRIVER = r"""
 """
 
 
-def find_chrome():
-    for name in ("google-chrome", "google-chrome-stable", "chromium", "chromium-browser"):
-        path = shutil.which(name)
-        if path:
-            return path
-    return None
 
 
 def main():

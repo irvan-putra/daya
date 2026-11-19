@@ -1,0 +1,722 @@
+{
+  "describe_cases": [
+    {
+      "error": null,
+      "input": "a 25 minute timer for focus, called \"Focus\"",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "label": "focus",
+            "seconds": 1500,
+            "type": "timer"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "Focus"
+      }
+    },
+    {
+      "error": null,
+      "input": "countdown of 90 seconds",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "label": "Second timer",
+            "seconds": 90,
+            "type": "timer"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "My app"
+      }
+    },
+    {
+      "error": null,
+      "input": "pomodoro",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "label": "Focus",
+            "seconds": 1500,
+            "type": "timer"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "My app"
+      }
+    },
+    {
+      "error": null,
+      "input": "a 3 hour timer",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "label": "Hour timer",
+            "seconds": 3600,
+            "type": "timer"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "My app"
+      }
+    },
+    {
+      "error": null,
+      "input": "a 2 second timer",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "label": "Second timer",
+            "seconds": 5,
+            "type": "timer"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "My app"
+      }
+    },
+    {
+      "error": null,
+      "input": "timer of 10 minutes for tea",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "label": "tea",
+            "seconds": 600,
+            "type": "timer"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "My app"
+      }
+    },
+    {
+      "error": null,
+      "input": "a counter for push ups, called \"Gym\"",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "label": "push ups",
+            "start": 0,
+            "type": "counter"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "Gym"
+      }
+    },
+    {
+      "error": null,
+      "input": "a counter",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "label": "Count",
+            "start": 0,
+            "type": "counter"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "My app"
+      }
+    },
+    {
+      "error": null,
+      "input": "a todo list with items: buy rice, call ana and book the train, called \"Errands\"",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "heading": "Todo list",
+            "items": [
+              "buy rice",
+              "call ana",
+              "book the train"
+            ],
+            "storage_key": "errands-todo",
+            "type": "todo"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "Errands"
+      }
+    },
+    {
+      "error": null,
+      "input": "a todo list. another todo list, called 'Two lists'",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "heading": "Todo list",
+            "items": [],
+            "storage_key": "two-lists-todo",
+            "type": "todo"
+          },
+          {
+            "heading": "Todo list",
+            "items": [],
+            "storage_key": "two-lists-todo-2",
+            "type": "todo"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "Two lists"
+      }
+    },
+    {
+      "error": null,
+      "input": "my shopping list with items: rice, eggs",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "heading": "Shopping list",
+            "items": [
+              "rice",
+              "eggs"
+            ],
+            "storage_key": "my-app-todo",
+            "type": "todo"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "My app"
+      }
+    },
+    {
+      "error": null,
+      "input": "a list: one, two and three",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "heading": null,
+            "items": [
+              "one",
+              "two",
+              "three"
+            ],
+            "type": "list"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "My app"
+      }
+    },
+    {
+      "error": null,
+      "input": "a list of apples, pears",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "heading": null,
+            "items": [
+              "apples",
+              "pears"
+            ],
+            "type": "list"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "My app"
+      }
+    },
+    {
+      "error": null,
+      "input": "text: hello there, general kenobi",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "body": "hello there, general kenobi",
+            "heading": "Text",
+            "type": "text"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "My app"
+      }
+    },
+    {
+      "error": null,
+      "input": "a note that says drink water",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "body": "drink water",
+            "heading": "Note",
+            "type": "text"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "My app"
+      }
+    },
+    {
+      "error": null,
+      "input": "description: a calm timer. a 10 minute timer, called \"Tea\", green",
+      "recipe": {
+        "description": "a calm timer",
+        "domain": "web",
+        "sections": [
+          {
+            "label": "Minute timer",
+            "seconds": 600,
+            "type": "timer"
+          }
+        ],
+        "theme": {
+          "accent": "green"
+        },
+        "title": "Tea"
+      }
+    },
+    {
+      "error": null,
+      "input": "text: welcome. a counter. a list: a, b, called \"Multi\"",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "body": "welcome",
+            "heading": "Text",
+            "type": "text"
+          },
+          {
+            "label": "Count",
+            "start": 0,
+            "type": "counter"
+          },
+          {
+            "heading": null,
+            "items": [
+              "a",
+              "b"
+            ],
+            "type": "list"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "Multi"
+      }
+    },
+    {
+      "error": null,
+      "input": "a 25 minute timer for focus, called \"Focus\", description: a quiet pomodoro page, green",
+      "recipe": {
+        "description": "a quiet pomodoro page",
+        "domain": "web",
+        "sections": [
+          {
+            "label": "focus",
+            "seconds": 1500,
+            "type": "timer"
+          }
+        ],
+        "theme": {
+          "accent": "green"
+        },
+        "title": "Focus"
+      }
+    },
+    {
+      "error": null,
+      "input": "a TO-DO LIST with items: UPPER, lower, called \"Cases\"",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "heading": "To-do list",
+            "items": [
+              "UPPER",
+              "lower"
+            ],
+            "storage_key": "cases-todo",
+            "type": "todo"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "Cases"
+      }
+    },
+    {
+      "error": null,
+      "input": "a counter. quantum blockchain synergy",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "label": "Count",
+            "start": 0,
+            "type": "counter"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "My app"
+      }
+    },
+    {
+      "error": "no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a todo list with items: a, b and c\", \"a list: a, b\", \"text: some words\". Add a name with: called \"My app\".",
+      "input": "something completely different",
+      "recipe": null
+    },
+    {
+      "error": "the description is empty",
+      "input": "   ",
+      "recipe": null
+    },
+    {
+      "error": null,
+      "input": "errands with items \"quoted item\", plain item, called \"Q\"",
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "heading": "Errands",
+            "items": [
+              "quoted item",
+              "plain item"
+            ],
+            "storage_key": "q-todo",
+            "type": "todo"
+          }
+        ],
+        "theme": {
+          "accent": "indigo"
+        },
+        "title": "Q"
+      }
+    }
+  ],
+  "validate_cases": [
+    {
+      "errors": [],
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "label": "x",
+            "type": "counter"
+          }
+        ],
+        "title": "ok"
+      }
+    },
+    {
+      "errors": [
+        "title: must be a string",
+        "sections: must have 1..24 items, got 0"
+      ],
+      "recipe": {
+        "domain": "web",
+        "sections": []
+      }
+    },
+    {
+      "errors": [
+        "sections: must be a list"
+      ],
+      "recipe": {
+        "domain": "web",
+        "title": "no sections"
+      }
+    },
+    {
+      "errors": [
+        "sections[0].type: must be one of: text, list, counter, quiz, timer, todo"
+      ],
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "type": "video"
+          }
+        ],
+        "title": "bad type"
+      }
+    },
+    {
+      "errors": [
+        "sections[0]: unknown field 'x'"
+      ],
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "label": "x",
+            "type": "counter",
+            "x": 1
+          }
+        ],
+        "title": "unknown"
+      }
+    },
+    {
+      "errors": [
+        "sections[0].choices: must be a list of 2..6 choices"
+      ],
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "answer": 5,
+            "choices": [
+              "a"
+            ],
+            "question": "q",
+            "type": "quiz"
+          }
+        ],
+        "title": "bad quiz"
+      }
+    },
+    {
+      "errors": [
+        "sections[0].answer: is required"
+      ],
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "choices": [
+              "a",
+              "b"
+            ],
+            "question": "q",
+            "type": "quiz"
+          }
+        ],
+        "title": "no answer"
+      }
+    },
+    {
+      "errors": [
+        "sections[0].storage_key: must be 1..32 chars: lowercase letters, digits, hyphens, starting with a letter or digit (it becomes the browser storage key and must be unique per app)"
+      ],
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "storage_key": "BAD KEY!",
+            "type": "todo"
+          }
+        ],
+        "title": "bad key"
+      }
+    },
+    {
+      "errors": [
+        "sections[1].storage_key: duplicates an earlier todo section"
+      ],
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "storage_key": "same",
+            "type": "todo"
+          },
+          {
+            "storage_key": "same",
+            "type": "todo"
+          }
+        ],
+        "title": "dup keys"
+      }
+    },
+    {
+      "errors": [
+        "theme.accent: must be one of: amber, green, indigo, rose, slate, teal"
+      ],
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "label": "x",
+            "type": "counter"
+          }
+        ],
+        "theme": {
+          "accent": "purple"
+        },
+        "title": "bad accent"
+      }
+    },
+    {
+      "errors": [
+        "theme: must be an object"
+      ],
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "label": "x",
+            "type": "counter"
+          }
+        ],
+        "theme": "green",
+        "title": "theme not object"
+      }
+    },
+    {
+      "errors": [
+        "back.href: must be a relative .html path (no scheme, host, port or parent traversal)"
+      ],
+      "recipe": {
+        "back": {
+          "href": "https://evil.example/x.html",
+          "label": "x"
+        },
+        "domain": "web",
+        "sections": [
+          {
+            "label": "x",
+            "type": "counter"
+          }
+        ],
+        "title": "bad back"
+      }
+    },
+    {
+      "errors": [],
+      "recipe": {
+        "back": {
+          "href": "index.html",
+          "label": "home"
+        },
+        "domain": "web",
+        "sections": [
+          {
+            "label": "x",
+            "type": "counter"
+          }
+        ],
+        "title": "back ok"
+      }
+    },
+    {
+      "errors": [
+        "sections[0].seconds: must be between 5 and 3600, got 99999"
+      ],
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "label": "t",
+            "seconds": 99999,
+            "type": "timer"
+          }
+        ],
+        "title": "long timer"
+      }
+    },
+    {
+      "errors": [],
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "storage_key": "fine-key",
+            "type": "todo"
+          }
+        ],
+        "title": "todo no items ok"
+      }
+    },
+    {
+      "errors": [
+        "title: must be a string"
+      ],
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "label": "x",
+            "type": "counter"
+          }
+        ],
+        "title": 42
+      }
+    },
+    {
+      "errors": [
+        "sections[0].items: must be a list of 1..50 items"
+      ],
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "items": [],
+            "type": "list"
+          }
+        ],
+        "title": "list empty"
+      }
+    },
+    {
+      "errors": [
+        "sections[0].items[1]: must be a string"
+      ],
+      "recipe": {
+        "domain": "web",
+        "sections": [
+          {
+            "items": [
+              "ok",
+              5,
+              "also ok"
+            ],
+            "type": "list"
+          }
+        ],
+        "title": "item types"
+      }
+    }
+  ]
+}

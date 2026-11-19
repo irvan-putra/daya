@@ -65,13 +65,22 @@ Recognized phrasings (case-insensitive), one per sentence:
 Anything unrecognized is listed as a note and ignored; a description
 with no recognized sections fails with the list of supported phrasings.
 
-This is route 1 (deterministic) of three text-to-recipe routes under
-evaluation. Routes 2 (browser-provided AI) and 3 (a small model running
-in the page via WebAssembly) would understand free language instead of
-documented phrasings; they are being compared on download size, phone
-performance, output reliability and licensing before one is prototyped.
-Every route validates its output against the same schema before any
-code is generated.
+This is route 1 (deterministic) of three text-to-recipe routes. The
+`docs/compose.html` page (served at `/daya/compose.html`) offers all
+three in the browser: the deterministic grammar (a JS port of this
+parser, parity-tested against fixtures in `tests/compose_fixtures.json`
+by `tests/browser_test_compose.py`), browser-provided AI (Chrome's
+built-in model API, feature-detected; today it exists only on some
+desktop Chrome installs, not on Android or iOS), and a small open model
+(SmolLM2-135M-Instruct, ~101 MB, Apache-2.0) running in the page via
+wllama/WebAssembly - downloaded from Hugging Face only on an explicit
+tap, with the size shown first. Every route validates its output
+against the same web schema in the page before showing it; the AI
+routes retry at most 3 times and then show the validator's errors
+as-is. In-page model speed and output quality on phones are untested;
+the deterministic route is the reliable default. The compose page is
+hand-written tooling: pages generated from recipes keep their
+self-contained, no-network property.
 
 ## Demo
 
@@ -141,8 +150,8 @@ absolute guarantee.
   Anything outside it needs a new domain or a new schema version.
 - `daya describe` is not natural-language understanding: it recognizes
   the documented phrasings above and honestly reports the rest as not
-  understood. Free-language input is routes 2 and 3, still under
-  evaluation.
+  understood. Free-language input is the compose page's AI routes,
+  whose phone performance and output quality are untested.
 - A generated todo list persists only in the browser where it was used;
   there is no sync between devices or people.
 - A generated `.xdc` has no icon yet, and its state stays on each
