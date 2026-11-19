@@ -33,27 +33,36 @@ file that works offline.
 
 ## Demo
 
-The two example recipes are published from `docs/`:
-`focus-timer.html` and `reading-quiz.html`.
+The three example recipes are published from `docs/`:
+`focus-timer.html`, `reading-quiz.html` and `shared-list.html`.
 
 ## Domains
 
 - `web` — one self-contained HTML mini-app: styled text, lists,
-  counters, quizzes and timers (with pause, resume and reset). No
-  links, no images, no custom code: the only JavaScript is a fixed
-  template, and every recipe string is data that gets escaped before
-  it reaches the page.
+  counters, quizzes, timers (with pause, resume and reset) and todo
+  lists (add, tick done, archive instead of delete, restore; the list
+  persists in the browser's local storage). No links, no images, no
+  custom code: the only JavaScript is a fixed template, and every recipe
+  string is data that gets escaped before it reaches the page.
 
 More domains are planned (CLI tools, automations, app screens). Each
 domain is a small pack: schema, templates, checks.
 
+The `todo` section is the first piece aimed at an existing app: it
+models the core list behavior of
+[intodo](https://github.com/irvan-putra/intodo) (add, done, archive
+instead of delete) as a generated web companion. Applying generated
+code to an app remains a separate, reviewed step.
+
 ## Security
 
 Generated pages make no network requests and contain no links, images
-or forms. Recipe strings never enter the JavaScript block: the script
+or forms. Todo lists keep their state in the browser's local storage
+under the recipe's `storage_key`; nothing leaves the browser. Recipe
+strings never enter the JavaScript block: the script
 is a fixed template and a test asserts the shipped script matches it
 byte for byte. Interactive behaviour is driven by `data-*` attributes
-holding validated whole numbers.
+holding validated whole numbers or validated slugs.
 
 Tested threat scope: HTML markup injection, attribute injection via
 quotes, `</script>` breakout, and oversized inputs, via explicit cases
@@ -70,6 +79,8 @@ absolute guarantee.
   Anything outside it needs a new domain or a new schema version.
 - daya is not natural-language programming: the recipe is JSON with a
   fixed schema, not free text.
+- A generated todo list persists only in the browser where it was used;
+  there is no sync between devices or people.
 
 ## Development
 
@@ -81,7 +92,8 @@ Tests cover validation, byte-for-byte determinism, escaping and script
 injection (including a seeded adversarial fuzz), bounds, and the CLI.
 
 Live-browser interaction tests (counter, quiz right and wrong, timer
-start/pause/resume/expiry/restart/reset) run in headless Chrome:
+start/pause/resume/expiry/restart/reset, todo add/toggle/archive/
+restore and storage load/save) run in headless Chrome:
 
 ```sh
 python3 tests/browser_test.py

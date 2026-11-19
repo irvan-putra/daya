@@ -29,6 +29,12 @@ VALID = {
             "answer": 1,
         },
         {"type": "list", "heading": "Rules", "items": ["Phone away", "One task"]},
+        {
+            "type": "todo",
+            "heading": "Errands",
+            "storage_key": "valid-errands",
+            "items": ["Buy rice"],
+        },
     ],
 }
 
@@ -157,6 +163,88 @@ class SecurityTests(unittest.TestCase):
         self.assertTrue(any(e.startswith("sections: must have 1..24") for e in errors))
 
 
+class TodoTests(unittest.TestCase):
+    def recipe(self, section, title="t"):
+        return {"domain": "web", "title": title, "sections": [section]}
+
+    def test_todo_builds(self):
+        page = build(
+            self.recipe(
+                {
+                    "type": "todo",
+                    "heading": "This week",
+                    "storage_key": "my-app-list",
+                    "items": ["one", "two"],
+                }
+            )
+        )
+        self.assertIn('data-storage-key="my-app-list"', page)
+        self.assertIn("<h2>This week</h2>", page)
+        self.assertIn('<span class="daya-todo-text">one</span>', page)
+        self.assertIn('<form class="daya-todo-add">', page)
+        self.assertIn('class="daya-todo-archived" hidden', page)
+
+    def test_todo_minimal(self):
+        page = build(self.recipe({"type": "todo", "storage_key": "bare1"}))
+        self.assertIn('data-storage-key="bare1"', page)
+        self.assertNotIn("<h2>", page)
+
+    def test_todo_deterministic_bytes(self):
+        recipe = self.recipe(
+            {"type": "todo", "storage_key": "det1", "items": ["a", "b", "c"]}
+        )
+        self.assertEqual(build(recipe), build(recipe))
+
+    def test_todo_storage_key_required_and_slug(self):
+        for bad in (None, "", "Has Upper", "under_score", "-lead", "x" * 33, 7):
+            section = {"type": "todo"}
+            if bad is not None:
+                section["storage_key"] = bad
+            _model, errors = web.validate(self.recipe(section))
+            self.assertTrue(
+                any(e.startswith("sections[0].storage_key:") for e in errors),
+                "storage_key={!r} should fail".format(bad),
+            )
+
+    def test_todo_duplicate_storage_key_rejected(self):
+        recipe = {
+            "domain": "web",
+            "title": "t",
+            "sections": [
+                {"type": "todo", "storage_key": "same-key"},
+                {"type": "todo", "storage_key": "same-key"},
+            ],
+        }
+        _model, errors = web.validate(recipe)
+        self.assertIn("sections[1].storage_key: duplicates an earlier todo section", errors)
+
+    def test_todo_items_bounded(self):
+        for bad_items in (
+            "nope",
+            [""],
+            ["x" * 201],
+            [1],
+            ["ok"] * (web.MAX_TODO_SEED_ITEMS + 1),
+        ):
+            section = {"type": "todo", "storage_key": "b1", "items": bad_items}
+            _model, errors = web.validate(self.recipe(section))
+            self.assertTrue(errors, "items={!r} should fail".format(bad_items))
+
+    def test_todo_unknown_field_rejected(self):
+        section = {"type": "todo", "storage_key": "u1", "url": "https://x.example"}
+        _model, errors = web.validate(self.recipe(section))
+        self.assertIn("sections[0]: unknown field 'url'", errors)
+
+    def test_todo_item_escaped(self):
+        raw = '<img src=x onerror="alert(1)">'
+        page = build(
+            self.recipe({"type": "todo", "storage_key": "esc1", "items": [raw]})
+        )
+        self.assertNotIn(raw, page)
+        self.assertIn(html.escape(raw, quote=True), page)
+        self.assertEqual(page.count("<script>"), 1)
+
+
 class ValidateTests(unittest.TestCase):
     def test_missing_title(self):
         _model, errors = web.validate({"domain": "web", "sections": [{"type": "counter", "label": "x"}]})
@@ -166,7 +254,7 @@ class ValidateTests(unittest.TestCase):
         _model, errors = web.validate(
             {"domain": "web", "title": "t", "sections": [{"type": "video"}]}
         )
-        self.assertIn("sections[0].type: must be one of: text, list, counter, quiz, timer", errors)
+        self.assertIn("sections[0].type: must be one of: text, list, counter, quiz, timer, todo", errors)
 
     def test_quiz_answer_must_be_valid_index(self):
         recipe = {

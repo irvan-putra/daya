@@ -8,6 +8,10 @@ import unittest
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DAYA = os.path.join(ROOT, "daya")
 
+sys.path.insert(0, ROOT)
+
+from dayalib import __version__
+
 
 def run_daya(*args):
     return subprocess.run(
@@ -84,7 +88,7 @@ class CliTests(unittest.TestCase):
     def test_version(self):
         result = run_daya("--version")
         self.assertEqual(result.returncode, 0)
-        self.assertIn("0.1.0", result.stdout)
+        self.assertIn(__version__, result.stdout)
 
 
 if __name__ == "__main__":

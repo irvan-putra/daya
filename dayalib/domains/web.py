@@ -11,6 +11,7 @@ timestamps, no randomness, no network access: same recipe, same bytes.
 """
 
 import html
+import re
 
 from .. import __version__
 from ..recipe import Checker, check_int, check_no_unknown_keys, check_string
@@ -18,7 +19,8 @@ from ..recipe import Checker, check_int, check_no_unknown_keys, check_string
 DOMAIN = "web"
 DESCRIPTION = (
     "One self-contained HTML mini-app: styled text, lists, counters, "
-    "quizzes and timers. No links, images or custom code."
+    "quizzes, timers and persistent todo lists. No links, images or "
+    "custom code."
 )
 
 ACCENTS = {
@@ -33,7 +35,15 @@ DEFAULT_ACCENT = "indigo"
 
 MAX_SECTIONS = 24
 MAX_LIST_ITEMS = 50
-SECTION_TYPES = ("text", "list", "counter", "quiz", "timer")
+MAX_TODO_SEED_ITEMS = 50
+SECTION_TYPES = ("text", "list", "counter", "quiz", "timer", "todo")
+
+# A todo section keeps its state in the browser's localStorage under this
+# key, so it must be a restricted slug: lowercase letters, digits, hyphens.
+# It travels in an escaped data-* attribute; the fixed script only reads it
+# with getAttribute. Keys must be unique per generated app because pages on
+# one origin share localStorage.
+_STORAGE_KEY_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,31}$")
 
 _TOP_KEYS = {"domain", "title", "description", "theme", "sections"}
 
@@ -84,6 +94,16 @@ def validate(recipe):
             cleaned = _validate_section(check, section, "sections[{}]".format(i))
             if cleaned is not None:
                 model["sections"].append(cleaned)
+
+    seen_keys = set()
+    for i, cleaned in enumerate(model["sections"]):
+        if cleaned["type"] == "todo":
+            if cleaned["storage_key"] in seen_keys:
+                check.fail(
+                    "sections[{}].storage_key".format(i),
+                    "duplicates an earlier todo section",
+                )
+            seen_keys.add(cleaned["storage_key"])
 
     return model, check.errors
 
@@ -182,6 +202,51 @@ def _validate_section(check, section, path):
             return None
         return {"type": "timer", "label": label, "seconds": seconds}
 
+    if stype == "todo":
+        check_no_unknown_keys(
+            check, section, {"type", "heading", "storage_key", "items"}, path
+        )
+        heading = section.get("heading")
+        if heading is not None:
+            heading = check_string(check, heading, path + ".heading", 1, 80)
+        key = section.get("storage_key")
+        if not isinstance(key, str) or not _STORAGE_KEY_RE.match(key):
+            check.fail(
+                path + ".storage_key",
+                "must be 1..32 chars: lowercase letters, digits, hyphens, "
+                "starting with a letter or digit (it becomes the browser "
+                "storage key and must be unique per app)",
+            )
+            key = None
+        items = section.get("items", [])
+        clean_items = []
+        ok = True
+        if section.get("heading") is not None and heading is None:
+            ok = False
+        if not isinstance(items, list) or len(items) > MAX_TODO_SEED_ITEMS:
+            check.fail(
+                path + ".items",
+                "must be a list of 0..{} starter items".format(MAX_TODO_SEED_ITEMS),
+            )
+            ok = False
+        else:
+            for j, item in enumerate(items):
+                cleaned_item = check_string(
+                    check, item, "{}.items[{}]".format(path, j), 1, 200
+                )
+                if cleaned_item is None:
+                    ok = False
+                else:
+                    clean_items.append(cleaned_item)
+        if key is None or not ok:
+            return None
+        return {
+            "type": "todo",
+            "heading": heading,
+            "storage_key": key,
+            "items": clean_items,
+        }
+
     raise AssertionError("unhandled section type")  # pragma: no cover
 
 
@@ -221,6 +286,14 @@ button:disabled { opacity: 0.55; cursor: default; }
 .daya-timer { text-align: center; }
 .daya-timer-display { display: block; font-size: 2.25rem; font-weight: 700; font-variant-numeric: tabular-nums; margin: 0.5rem 0; }
 .daya-timer-reset { background: #fff; color: var(--accent); border: 1px solid var(--accent); margin-left: 0.5rem; }
+.daya-todo-add { display: flex; gap: 0.5rem; margin: 0.5rem 0; }
+.daya-todo-add input { flex: 1; font: inherit; padding: 0.5rem 0.75rem; border: 1px solid #cbd2d9; border-radius: 0.5rem; }
+.daya-todo ul { list-style: none; padding-left: 0; }
+.daya-todo li { display: flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0; border-bottom: 1px solid #f0f2f5; }
+.daya-todo-text { flex: 1; overflow-wrap: anywhere; }
+.daya-todo li.daya-done .daya-todo-text { text-decoration: line-through; color: #9aa5b1; }
+.daya-todo-toggle, .daya-todo-archive, .daya-todo-unarchive { background: #fff; color: var(--accent); border: 1px solid var(--accent); padding: 0.3rem 0.6rem; font-size: 0.85rem; }
+.daya-todo-archived { margin-top: 0.75rem; color: #52606d; }
 footer { text-align: center; color: #9aa5b1; font-size: 0.8rem; margin: 2rem 0 1rem; }
 """.strip()
 
@@ -311,7 +384,165 @@ document.addEventListener("click", function (event) {
     btn.hidden = true;
     return;
   }
+
+  if (
+    btn.classList.contains("daya-todo-toggle") ||
+    btn.classList.contains("daya-todo-archive")
+  ) {
+    var tbox = btn.closest(".daya-todo");
+    var tstate = tbox._dayaTodo;
+    if (!tstate) {
+      return;
+    }
+    var tidx = Array.prototype.indexOf.call(
+      tbox.querySelector(".daya-todo-items").children,
+      btn.closest("li")
+    );
+    if (tidx === -1) {
+      return;
+    }
+    if (btn.classList.contains("daya-todo-toggle")) {
+      tstate.items[tidx].done = !tstate.items[tidx].done;
+    } else {
+      tstate.archived.push(tstate.items.splice(tidx, 1)[0].text);
+    }
+    dayaTodoSave(tbox, tstate);
+    dayaTodoRender(tbox, tstate);
+    return;
+  }
+
+  if (btn.classList.contains("daya-todo-unarchive")) {
+    var ubox = btn.closest(".daya-todo");
+    var ustate = ubox._dayaTodo;
+    if (!ustate) {
+      return;
+    }
+    var uidx = Array.prototype.indexOf.call(
+      ubox.querySelector(".daya-todo-archived-items").children,
+      btn.closest("li")
+    );
+    if (uidx === -1) {
+      return;
+    }
+    var restored = ustate.archived.splice(uidx, 1)[0];
+    if (ustate.items.length < DAYA_TODO_MAX) {
+      ustate.items.push({ text: restored, done: false });
+    }
+    dayaTodoSave(ubox, ustate);
+    dayaTodoRender(ubox, ustate);
+    return;
+  }
 });
+
+var DAYA_TODO_MAX = 200;
+
+function dayaTodoRead(box) {
+  try {
+    var raw = window.localStorage.getItem(
+      box.getAttribute("data-storage-key")
+    );
+    if (raw) {
+      var data = JSON.parse(raw);
+      if (data && Array.isArray(data.items) && Array.isArray(data.archived)) {
+        return data;
+      }
+    }
+  } catch (e) {
+    // storage unavailable or corrupt: fall through to the seed items
+  }
+  return null;
+}
+
+function dayaTodoSave(box, state) {
+  try {
+    window.localStorage.setItem(
+      box.getAttribute("data-storage-key"),
+      JSON.stringify(state)
+    );
+  } catch (e) {
+    // storage full or unavailable: the list still works for this visit
+  }
+}
+
+function dayaTodoRow(text, done) {
+  var li = document.createElement("li");
+  if (done) {
+    li.className = "daya-done";
+  }
+  var span = document.createElement("span");
+  span.className = "daya-todo-text";
+  span.textContent = text;
+  var toggle = document.createElement("button");
+  toggle.type = "button";
+  toggle.className = "daya-todo-toggle";
+  toggle.textContent = done ? "Undo" : "Done";
+  var archive = document.createElement("button");
+  archive.type = "button";
+  archive.className = "daya-todo-archive";
+  archive.textContent = "Archive";
+  li.appendChild(span);
+  li.appendChild(toggle);
+  li.appendChild(archive);
+  return li;
+}
+
+function dayaTodoRender(box, state) {
+  var list = box.querySelector(".daya-todo-items");
+  list.textContent = "";
+  state.items.forEach(function (item) {
+    list.appendChild(dayaTodoRow(item.text, item.done));
+  });
+  var archivedList = box.querySelector(".daya-todo-archived-items");
+  archivedList.textContent = "";
+  state.archived.forEach(function (text) {
+    var li = document.createElement("li");
+    var span = document.createElement("span");
+    span.className = "daya-todo-text";
+    span.textContent = text;
+    var back = document.createElement("button");
+    back.type = "button";
+    back.className = "daya-todo-unarchive";
+    back.textContent = "Restore";
+    li.appendChild(span);
+    li.appendChild(back);
+    archivedList.appendChild(li);
+  });
+  box.querySelector(".daya-todo-archived-count").textContent = String(
+    state.archived.length
+  );
+  box.querySelector(".daya-todo-archived").hidden = state.archived.length === 0;
+}
+
+function dayaTodoInit(box) {
+  var state = dayaTodoRead(box);
+  if (!state) {
+    state = { items: [], archived: [] };
+    box.querySelectorAll(".daya-todo-items li").forEach(function (li) {
+      state.items.push({
+        text: li.querySelector(".daya-todo-text").textContent,
+        done: false,
+      });
+    });
+  }
+  box._dayaTodo = state;
+  dayaTodoRender(box, state);
+  box
+    .querySelector(".daya-todo-add")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+      var input = box.querySelector(".daya-todo-add input");
+      var text = input.value.trim().slice(0, 200);
+      if (!text || state.items.length >= DAYA_TODO_MAX) {
+        return;
+      }
+      state.items.push({ text: text, done: false });
+      input.value = "";
+      dayaTodoSave(box, state);
+      dayaTodoRender(box, state);
+    });
+}
+
+document.querySelectorAll(".daya-todo").forEach(dayaTodoInit);
 """.strip()
 
 
@@ -376,6 +607,44 @@ def _section_html(section):
             "</section>",
         ]
 
+    if stype == "todo":
+        lines = [
+            '<section class="daya-todo" data-storage-key="{}">'.format(
+                _esc(section["storage_key"])
+            )
+        ]
+        if section["heading"]:
+            lines.append("<h2>{}</h2>".format(_esc(section["heading"])))
+        lines.extend(
+            [
+                '<form class="daya-todo-add">',
+                '<input type="text" maxlength="200" required autocomplete="off"'
+                ' aria-label="New item">',
+                '<button type="submit">Add</button>',
+                "</form>",
+                '<ul class="daya-todo-items">',
+            ]
+        )
+        for item in section["items"]:
+            lines.append(
+                '<li><span class="daya-todo-text">{}</span>'
+                '<button type="button" class="daya-todo-toggle">Done</button>'
+                '<button type="button" class="daya-todo-archive">Archive</button>'
+                "</li>".format(_esc(item))
+            )
+        lines.extend(
+            [
+                "</ul>",
+                '<details class="daya-todo-archived" hidden>',
+                '<summary>Archived (<span class="daya-todo-archived-count">0</span>)'
+                "</summary>",
+                '<ul class="daya-todo-archived-items"></ul>',
+                "</details>",
+                "</section>",
+            ]
+        )
+        return lines
+
     raise AssertionError("unhandled section type")  # pragma: no cover
 
 
@@ -439,6 +708,10 @@ def _expected_strings(model):
             found.extend(_esc(choice) for choice in section["choices"])
         elif section["type"] == "timer":
             found.append(_esc(section["label"]))
+        elif section["type"] == "todo":
+            if section["heading"]:
+                found.append(_esc(section["heading"]))
+            found.extend(_esc(item) for item in section["items"])
     return found
 
 
@@ -490,6 +763,19 @@ def schema():
             "timer": {
                 "label": "string 1..80",
                 "seconds": "whole number, 5..3600",
+            },
+            "todo": {
+                "heading": "optional string 1..80",
+                "storage_key": (
+                    "1..32 chars: lowercase letters, digits, hyphens, starting "
+                    "with a letter or digit; the browser storage key, unique "
+                    "per app"
+                ),
+                "items": (
+                    "optional list of 0..{} starter item strings, each 1..200; "
+                    "the list is editable on the page (add, done, archive, "
+                    "restore) and persists in the browser".format(MAX_TODO_SEED_ITEMS)
+                ),
             },
         },
         "safety": (

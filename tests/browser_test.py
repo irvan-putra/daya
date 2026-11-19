@@ -40,8 +40,31 @@ FIXTURE = {
             "answer": 2,
         },
         {"type": "timer", "label": "short", "seconds": 5},
+        {
+            "type": "todo",
+            "heading": "errands",
+            "storage_key": "daya-test-a",
+            "items": ["seed item"],
+        },
+        {"type": "todo", "storage_key": "daya-test-b"},
     ],
 }
+
+# Runs before the page's own script: one storage key is pre-seeded so the
+# load path is tested, the other is left empty so the seed-item path is.
+SEEDER = r"""
+window.localStorage.clear();
+window.localStorage.setItem(
+  "daya-test-b",
+  JSON.stringify({
+    items: [
+      { text: "stored one", done: true },
+      { text: "stored two", done: false }
+    ],
+    archived: ["old one"]
+  })
+);
+"""
 
 DRIVER = r"""
 (function () {
@@ -92,6 +115,77 @@ DRIVER = r"""
     tbtn.click();
     ok("timer start -> button Pause", txt(tbtn) === "Pause", txt(tbtn));
     ok("timer start shows reset", treset.hidden === false, "hidden");
+  } catch (e) {
+    out.push("FAIL exception " + e.message);
+  }
+
+  try {
+    var todos = document.querySelectorAll(".daya-todo");
+    var ta = todos[0], tb = todos[1];
+    var aItems = function () {
+      return ta.querySelectorAll(".daya-todo-items li");
+    };
+    var aTexts = function () {
+      return Array.prototype.map.call(aItems(), function (li) {
+        return li.querySelector(".daya-todo-text").textContent;
+      }).join(",");
+    };
+
+    var bRows = tb.querySelectorAll(".daya-todo-items li");
+    ok("todo B loads stored items", bRows.length === 2, bRows.length);
+    ok("todo B stored done state kept",
+       bRows[0].getAttribute("class") === "daya-done", bRows[0].getAttribute("class"));
+    ok("todo B done row offers Undo",
+       txt(bRows[0].querySelector(".daya-todo-toggle")) === "Undo",
+       txt(bRows[0].querySelector(".daya-todo-toggle")));
+    ok("todo B archived count shown",
+       txt(tb.querySelector(".daya-todo-archived-count")) === "1",
+       txt(tb.querySelector(".daya-todo-archived-count")));
+    ok("todo B archived list unhidden",
+       tb.querySelector(".daya-todo-archived").hidden === false, "hidden");
+
+    ok("todo A starts from seed item", aTexts() === "seed item", aTexts());
+    ok("todo A archived area hidden while empty",
+       ta.querySelector(".daya-todo-archived").hidden === true, "visible");
+
+    var input = ta.querySelector(".daya-todo-add input");
+    input.value = "  buy milk  ";
+    ta.querySelector('.daya-todo-add button[type="submit"]').click();
+    ok("todo add appends trimmed item", aTexts() === "seed item,buy milk", aTexts());
+    ok("todo add clears input", input.value === "", input.value);
+
+    aItems()[0].querySelector(".daya-todo-toggle").click();
+    ok("todo toggle marks done",
+       aItems()[0].getAttribute("class") === "daya-done",
+       aItems()[0].getAttribute("class"));
+    aItems()[0].querySelector(".daya-todo-toggle").click();
+    ok("todo toggle again undoes",
+       aItems()[0].getAttribute("class") !== "daya-done",
+       aItems()[0].getAttribute("class"));
+
+    aItems()[0].querySelector(".daya-todo-archive").click();
+    ok("todo archive removes from list", aTexts() === "buy milk", aTexts());
+    ok("todo archive grows archived count",
+       txt(ta.querySelector(".daya-todo-archived-count")) === "1",
+       txt(ta.querySelector(".daya-todo-archived-count")));
+    ok("todo archived row keeps text",
+       txt(ta.querySelector(".daya-todo-archived-items .daya-todo-text")) === "seed item",
+       txt(ta.querySelector(".daya-todo-archived-items .daya-todo-text")));
+
+    ta.querySelector(".daya-todo-unarchive").click();
+    ok("todo restore returns item", aTexts() === "buy milk,seed item", aTexts());
+    ok("todo restore empties archive",
+       ta.querySelector(".daya-todo-archived").hidden === true, "visible");
+
+    var saved = JSON.parse(window.localStorage.getItem("daya-test-a"));
+    ok("todo state saved to storage",
+       saved && saved.items.length === 2 && saved.archived.length === 0 &&
+       saved.items[0].text === "buy milk" && saved.items[1].text === "seed item",
+       window.localStorage.getItem("daya-test-a"));
+
+    input.value = "   ";
+    ta.querySelector('.daya-todo-add button[type="submit"]').click();
+    ok("todo blank add ignored", aTexts() === "buy milk,seed item", aTexts());
   } catch (e) {
     out.push("FAIL exception " + e.message);
   }
@@ -156,7 +250,9 @@ def main():
         print("fixture recipe invalid: {}".format(errors), file=sys.stderr)
         return 2
     page = web.generate(model)
-    harness = page.replace("</body>", "<script>\n{}\n</script>\n</body>".format(DRIVER))
+    harness = page.replace(
+        "<body>", "<body>\n<script>\n{}\n</script>".format(SEEDER), 1
+    ).replace("</body>", "<script>\n{}\n</script>\n</body>".format(DRIVER))
 
     workdir = tempfile.mkdtemp()
     harness_path = os.path.join(workdir, "harness.html")
