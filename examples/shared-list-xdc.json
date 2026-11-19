@@ -1,0 +1,19 @@
+{
+  "domain": "webxdc",
+  "app": {
+    "name": "Shared errands",
+    "version": "0.1.0",
+    "source_code_url": "https://github.com/irvan-putra/daya"
+  },
+  "title": "Shared errands",
+  "description": "A small list you can actually keep: add items, tick them done, archive instead of delete.",
+  "theme": { "accent": "green" },
+  "sections": [
+    {
+      "type": "todo",
+      "heading": "This week",
+      "storage_key": "daya-xdc-shared-errands",
+      "items": ["Reply to the venue", "Buy rice", "Book the train"]
+    }
+  ]
+}

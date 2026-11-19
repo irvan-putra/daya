@@ -51,6 +51,22 @@ class CliTests(unittest.TestCase):
             b = fh.read()
         self.assertEqual(a, b)
 
+    def test_build_webxdc_writes_zip_bytes(self):
+        out = os.path.join(self.dir, "app.xdc")
+        recipe = self._write(
+            "mini.json",
+            {
+                "domain": "webxdc",
+                "app": {"name": "Mini", "version": "0.1.0"},
+                "title": "Mini",
+                "sections": [{"type": "counter", "label": "x"}],
+            },
+        )
+        result = run_daya("build", recipe, "-o", out)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        with open(out, "rb") as fh:
+            self.assertTrue(fh.read(2) == b"PK")
+
     def test_invalid_recipe_exit_2_with_paths(self):
         recipe = self._write("bad.json", {"domain": "web", "sections": []})
         result = run_daya("build", recipe, "-o", os.path.join(self.dir, "x.html"))

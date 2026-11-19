@@ -1,3 +1,3 @@
 """daya: deterministic code generation from small structured recipes."""
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"

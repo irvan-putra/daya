@@ -40,13 +40,13 @@ def cmd_build(args):
         for line in errors:
             print("error: {}: {}".format(args.recipe, line), file=sys.stderr)
         return 2
-    output_text = domain.generate(model)
+    output = domain.generate(model)
     try:
-        domain.self_check(output_text, model)
+        domain.self_check(output, model)
     except ValueError as exc:
         print("internal error: {}".format(exc), file=sys.stderr)
         return 1
-    payload = output_text.encode("utf-8")
+    payload = output if isinstance(output, bytes) else output.encode("utf-8")
     with open(args.output, "wb") as fh:
         fh.write(payload)
     digest = hashlib.sha256(payload).hexdigest()

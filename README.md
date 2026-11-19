@@ -81,6 +81,8 @@ absolute guarantee.
   fixed schema, not free text.
 - A generated todo list persists only in the browser where it was used;
   there is no sync between devices or people.
+- A generated `.xdc` has no icon yet, and its state stays on each
+  device: no webxdc sync, no shared state.
 
 ## Development
 
