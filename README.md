@@ -98,18 +98,23 @@ semantic quality beyond them. The other two routes:
 browser-provided AI (Chrome's
 built-in model API, feature-detected; today it exists only on some
 desktop Chrome installs, not on Android or iOS), and a small open model
-(Qwen2.5-0.5B-Instruct, ~469 MB, Apache-2.0) running in the page via
+(SmolLM2-360M-Instruct, ~271 MB, Apache-2.0) running in the page via
 wllama/WebAssembly - downloaded from Hugging Face only on an explicit
 tap, with the size shown first. Every route validates its output
 against the same web schema in the page before showing it; the AI
 routes retry at most 3 times and then show the validator's errors
 as-is. The in-page model is chosen by real in-browser testing
-(2026-11-19): SmolLM2-135M (101 MB) was tried first and failed schema
-validation with two different prompts, while Qwen2.5-0.5B produced a
-valid recipe through the production page's own UI (one attempt, ~55 s
-of inference on a desktop CPU, single-thread wasm). That is one passing
-sample, not a reliability claim: speed and output quality on phones
-remain untested, and the deterministic route is the reliable default.
+(2026-11-19, all through the production page's own UI, single-thread
+wasm on a desktop CPU): SmolLM2-135M (101 MB) answered a shopping-list
+description with a schema-valid but wrong timer section, with both the
+one-example and two-example prompts. Qwen2.5-0.5B (469 MB) produced the
+correct list section but was rejected for its download size.
+SmolLM2-360M (271 MB) imitated the wrong shape under the one-example
+prompt, then produced the correct todo section with all items once the
+prompt carried two examples (one attempt, ~96 s of inference). That is
+one passing sample, not a reliability claim: speed and output quality
+on phones remain untested, and the deterministic route is the reliable
+default.
 Model revision and sha256 are pinned in the page source.
 
 A fourth, manual route needs no AI support in the browser at all: the

@@ -60,11 +60,11 @@ the recipe into a working page with <code>daya build recipe.json -o app.html</co
 <label class="route">
   <input type="radio" name="route" value="wasm" id="radio-wasm">
   <span class="name">Small AI model in this page</span>
-  <div class="detail">Downloads a small open model (Qwen2.5-0.5B-Instruct, about
-  469&nbsp;MB, Apache-2.0) and runs it here on your device. It tries to
+  <div class="detail">Downloads a small open model (SmolLM2-360M-Instruct, about
+  271&nbsp;MB, Apache-2.0) and runs it here on your device. It tries to
   understand free-form language beyond the documented phrasings. Experimental:
-  it passed one desktop smoke test (one valid recipe, about a minute of
-  computing), but <span class="warn">speed and output quality on phones
+  it passed one desktop smoke test (one valid recipe, about a minute and a
+  half of computing), but <span class="warn">speed and output quality on phones
   are untested</span>. Output is retried at most
   3 times, then the validator's errors are shown as-is. Nothing loads until
   you tap the button below.
@@ -80,7 +80,7 @@ its runtime from cdn.jsdelivr.net (they see the download, not your words);
 your description is processed by the model running in this page.</p>
 <p>
 <button id="go">Make recipe</button>
-<button id="load-model" class="secondary" hidden>Load model (~469 MB, one time)</button>
+<button id="load-model" class="secondary" hidden>Load model (~271 MB, one time)</button>
 </p>
 <progress class="progress" id="model-progress" max="1" hidden></progress>
 </div>
@@ -116,13 +116,16 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
   "use strict";
   var MAX_ATTEMPTS = 3;
   var WLLAMA_VERSION = "3.13.0";
-  /* Qwen2.5-0.5B-Instruct Q4_K_M: chosen by real in-browser testing
-     (2026-11-19). SmolLM2-135M (101 MB) was tried first and failed
-     validation with two different prompts; this model produced a valid
-     recipe in one attempt. Revision and digest pinned. */
-  var MODEL_URL = "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/9217f5db79a29953eb74d5343926648285ec7e67/qwen2.5-0.5b-instruct-q4_k_m.gguf";
-  var MODEL_BYTES = 491400032;
-  var MODEL_SHA256 = "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db";
+  /* SmolLM2-360M-Instruct Q4_K_M: chosen by real in-browser testing
+     (2026-11-19). SmolLM2-135M (101 MB) failed outright (wrong section
+     type, even with the two-example prompt). Qwen2.5-0.5B (469 MB)
+     passed but the owner rejected the size. This model answered a
+     shopping-list description with the correct todo section through the
+     production page's own UI - one passing sample, not a reliability
+     claim. Revision and digest pinned. */
+  var MODEL_URL = "https://huggingface.co/bartowski/SmolLM2-360M-Instruct-GGUF/resolve/7be6f65f1db715fe5dc5a4634c0d459b4eed42ec/SmolLM2-360M-Instruct-Q4_K_M.gguf";
+  var MODEL_BYTES = 270590880;
+  var MODEL_SHA256 = "2fa3f013dcdd7b99f9b237717fa0b12d75bbb89984cc1274be1471a465bac9c2";
   var wllama = null;
 
   var els = {
@@ -268,7 +271,7 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
       var Wllama = mods[0].Wllama;
       var WasmFromCDN = mods[1].default;
       var instance = new Wllama(WasmFromCDN);
-      els.wasmStatus.textContent = "Downloading model (~469 MB, one time)...";
+      els.wasmStatus.textContent = "Downloading model (~271 MB, one time)...";
       return instance.loadModelFromUrl(MODEL_URL, {
         progressCallback: function (p) {
           els.progress.value = p.total ? p.loaded / p.total : 0;
@@ -289,7 +292,7 @@ tooling. The pages daya generates from recipes stay self-contained and offline.<
 
   function runWasm(description) {
     if (!wllama) {
-      showFailure("Model not loaded", ["Tap 'Load model' first. The download is about 469 MB, one time."]);
+      showFailure("Model not loaded", ["Tap 'Load model' first. The download is about 271 MB, one time."]);
       return Promise.resolve();
     }
     var errors = null;
