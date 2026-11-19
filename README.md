@@ -88,7 +88,13 @@ kind of task - https://medium.com/snips-ai/an-introduction-to-snips-nlu-the-open
 
 `auto` tries them strictest first and says which engine answered; when
 nothing matches, the error lists each method's reason. Every engine's
-output passes the same schema validation. The other two routes:
+output passes the same schema validation. Rules, grammar and template
+are exact only within their own grammars: an ambiguous description can
+match an unintended template, so the recipe deserves a read before
+building. The bayes number is a confidence score from a tiny in-page
+training sample, not a calibrated probability of correctness, and the
+fixture tests pin behavior on covered cases - they do not establish
+semantic quality beyond them. The other two routes:
 browser-provided AI (Chrome's
 built-in model API, feature-detected; today it exists only on some
 desktop Chrome installs, not on Android or iOS), and a small open model

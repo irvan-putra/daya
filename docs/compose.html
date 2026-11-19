@@ -15,6 +15,7 @@ a { color: #4f46e5; }
 .route .name { font-weight: 600; }
 .route .detail { color: #52606d; font-size: 0.9rem; margin: 0.15rem 0 0 1.4rem; }
 .route.unavailable { opacity: 0.6; cursor: default; }
+select { max-width: 100%; box-sizing: border-box; }
 textarea { width: 100%; box-sizing: border-box; min-height: 5rem; padding: 0.6rem; border: 1px solid #cbd2d9; border-radius: 0.5rem; font: inherit; }
 button { background: #4f46e5; color: #fff; border: 0; border-radius: 0.5rem; padding: 0.6rem 1.1rem; font: inherit; font-weight: 600; cursor: pointer; }
 button.secondary { background: #fff; color: #4f46e5; border: 1px solid #4f46e5; }
@@ -43,11 +44,11 @@ the recipe into a working page with <code>daya build recipe.json -o app.html</co
   <div class="detail">Rule-based classical parsing, offline, instant, no download.
   Honestly reports what it does not understand. Same words in, same recipe out.
   <select id="engine" style="margin-top:0.4rem; font:inherit;">
-    <option value="auto" selected>Auto: strictest method first</option>
-    <option value="rules">Rules: exact documented phrasings</option>
-    <option value="grammar">Grammar parser: number words, flexible order</option>
-    <option value="template">Template matching: tolerates a typo</option>
-    <option value="bayes">Statistical (naive Bayes): guesses paraphrases</option>
+    <option value="auto" selected>Auto: strictest first</option>
+    <option value="rules">Rules: documented phrasings</option>
+    <option value="grammar">Grammar: number words, order</option>
+    <option value="template">Template: typo tolerant</option>
+    <option value="bayes">Bayes: statistical guess + score</option>
   </select></div>
 </label>
 <label class="route unavailable" id="route-browser-ai">

@@ -677,10 +677,10 @@
       var probs = classify(model, tokens);
       var best = probs[0];
       if (best.p < CONFIDENCE_MIN) {
-        failed.push(sentence + " (best guess '" + best.intent + "' only " + Math.round(best.p * 100) + "% confident)");
+        failed.push(sentence + " (best guess '" + best.intent + "' scored only " + Math.round(best.p * 100) + "%); refusing to guess below " + Math.round(CONFIDENCE_MIN * 100) + "%");
         return;
       }
-      notes.push("'" + sentence.slice(0, 40) + "' -> intent '" + best.intent + "' (" + Math.round(best.p * 100) + "% confident, statistical guess)");
+      notes.push("'" + sentence.slice(0, 40) + "' -> intent '" + best.intent + "' (confidence score " + Math.round(best.p * 100) + "% - a model score from a tiny trained sample, not a calibrated probability of being right)");
       try {
         sections.push(bayesSlots(best.intent, sentence, meta, takenKeys, notes));
       } catch (e) {
