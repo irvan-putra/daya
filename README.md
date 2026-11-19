@@ -33,8 +33,9 @@ file that works offline.
 
 ## Demo
 
-The three example recipes are published from `docs/`:
-`focus-timer.html`, `reading-quiz.html` and `shared-list.html`.
+The example recipes are published from `docs/`: `focus-timer.html`,
+`reading-quiz.html` and `shared-list.html` as pages, plus
+`shared-list-v0.1.1.xdc`, the same list packaged as a mini-app zip.
 
 ## Domains
 
@@ -44,6 +45,12 @@ The three example recipes are published from `docs/`:
   persists in the browser's local storage). No links, no images, no
   custom code: the only JavaScript is a fixed template, and every recipe
   string is data that gets escaped before it reaches the page.
+- `webxdc` — wraps a `web` recipe into a complete `.xdc` mini-app (a
+  zip with `index.html` and `manifest.toml`), the file format DeltaChat
+  mini-apps use. Manifest strings are character-restricted so a recipe
+  cannot inject TOML. No icon support yet, generated apps keep state on
+  the device (no webxdc sync), and the generated `.xdc` has not yet
+  been validated inside a chat client.
 
 More domains are planned (CLI tools, automations, app screens). Each
 domain is a small pack: schema, templates, checks.
@@ -51,8 +58,10 @@ domain is a small pack: schema, templates, checks.
 The `todo` section is the first piece aimed at an existing app: it
 models the core list behavior of
 [intodo](https://github.com/irvan-putra/intodo) (add, done, archive
-instead of delete) as a generated web companion. Applying generated
-code to an app remains a separate, reviewed step.
+instead of delete) as a generated companion with its own independent
+storage. It is not an intodo data client: it does not read, write or
+sync intodo's lists. Applying generated code to an app remains a
+separate, reviewed step.
 
 ## Security
 

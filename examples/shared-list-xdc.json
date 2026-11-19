@@ -1,12 +1,12 @@
 {
   "domain": "webxdc",
   "app": {
-    "name": "Shared errands",
-    "version": "0.1.0",
+    "name": "Errands",
+    "version": "0.1.1",
     "source_code_url": "https://github.com/irvan-putra/daya"
   },
-  "title": "Shared errands",
-  "description": "A small list you can actually keep: add items, tick them done, archive instead of delete.",
+  "title": "Errands",
+  "description": "A small list you can actually keep: add items, tick them done, archive instead of delete. The list is stored only on this device. Nothing is shared or synced.",
   "theme": { "accent": "green" },
   "sections": [
     {

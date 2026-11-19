@@ -47,11 +47,16 @@ FIXTURE = {
             "items": ["seed item"],
         },
         {"type": "todo", "storage_key": "daya-test-b"},
+        {"type": "todo", "storage_key": "daya-test-c"},
     ],
 }
 
 # Runs before the page's own script: one storage key is pre-seeded so the
 # load path is tested, the other is left empty so the seed-item path is.
+# daya-test-b carries a legacy archived entry (a bare string, the 0.2.0/0.3.0
+# format) to check old stored data still loads.
+# daya-test-c is a full list (200 items) with one archived entry, for the
+# restore-at-capacity data-loss regression.
 SEEDER = r"""
 window.localStorage.clear();
 window.localStorage.setItem(
@@ -63,6 +68,14 @@ window.localStorage.setItem(
     ],
     archived: ["old one"]
   })
+);
+var bigItems = [];
+for (var i = 0; i < 200; i++) {
+  bigItems.push({ text: "bulk " + i, done: false });
+}
+window.localStorage.setItem(
+  "daya-test-c",
+  JSON.stringify({ items: bigItems, archived: [{ text: "archived one", done: true }] })
 );
 """
 
@@ -143,6 +156,47 @@ DRIVER = r"""
        txt(tb.querySelector(".daya-todo-archived-count")));
     ok("todo B archived list unhidden",
        tb.querySelector(".daya-todo-archived").hidden === false, "hidden");
+    ok("todo B legacy string archive entry renders",
+       txt(tb.querySelector(".daya-todo-archived-items .daya-todo-text")) === "old one",
+       txt(tb.querySelector(".daya-todo-archived-items .daya-todo-text")));
+
+    var bTexts = function () {
+      return Array.prototype.map.call(
+        tb.querySelectorAll(".daya-todo-items .daya-todo-text"),
+        function (s) { return s.textContent; }
+      ).join(",");
+    };
+    bRows[0].querySelector(".daya-todo-archive").click();
+    ok("todo B archive moves done item out",
+       bTexts() === "stored two", bTexts());
+    tb.querySelectorAll(".daya-todo-archived-items li")[1]
+      .querySelector(".daya-todo-unarchive").click();
+    var bRestored = tb.querySelectorAll(".daya-todo-items li");
+    ok("todo B restored item keeps done state",
+       bRestored.length === 2 &&
+         bRestored[1].getAttribute("class") === "daya-done" &&
+         txt(bRestored[1].querySelector(".daya-todo-text")) === "stored one",
+       bTexts());
+    tb.querySelector(".daya-todo-archived-items .daya-todo-unarchive").click();
+    ok("todo B legacy archived string restores as item",
+       bTexts().indexOf("old one") !== -1, bTexts());
+
+    var tc = todos[2];
+    ok("todo C full list loads", 
+       tc.querySelectorAll(".daya-todo-items li").length === 200,
+       tc.querySelectorAll(".daya-todo-items li").length);
+    tc.querySelector(".daya-todo-unarchive").click();
+    ok("todo C restore at capacity keeps archived entry",
+       txt(tc.querySelector(".daya-todo-archived-count")) === "1",
+       txt(tc.querySelector(".daya-todo-archived-count")));
+    ok("todo C active list stays at capacity",
+       tc.querySelectorAll(".daya-todo-items li").length === 200,
+       tc.querySelectorAll(".daya-todo-items li").length);
+    var cSaved = JSON.parse(window.localStorage.getItem("daya-test-c"));
+    ok("todo C archived entry still in storage",
+       cSaved && cSaved.archived.length === 1 &&
+         cSaved.archived[0].text === "archived one",
+       window.localStorage.getItem("daya-test-c").slice(-120));
 
     ok("todo A starts from seed item", aTexts() === "seed item", aTexts());
     ok("todo A archived area hidden while empty",

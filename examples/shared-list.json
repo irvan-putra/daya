@@ -1,13 +1,13 @@
 {
   "domain": "web",
-  "title": "Shared errands",
-  "description": "A small list you can actually keep: add items, tick them done, archive instead of delete. Saved in this browser, so it survives a reload.",
+  "title": "Errands",
+  "description": "A small list you can actually keep: add items, tick them done, archive instead of delete. The list is stored only in this browser, on this device. Nothing is shared or synced.",
   "theme": { "accent": "green" },
   "sections": [
     {
       "type": "text",
       "heading": "Why this page",
-      "body": "This is daya's first step toward generating code for an existing app: the core of a todo list (add, done, archive, restore) from one recipe section. No account, no server; the list lives in your browser."
+      "body": "This is daya's first step toward generating code for an existing app: the core of a todo list (add, done, archive, restore) from one recipe section. No account, no server; the list lives only in this browser."
     },
     {
       "type": "todo",

@@ -404,7 +404,7 @@ document.addEventListener("click", function (event) {
     if (btn.classList.contains("daya-todo-toggle")) {
       tstate.items[tidx].done = !tstate.items[tidx].done;
     } else {
-      tstate.archived.push(tstate.items.splice(tidx, 1)[0].text);
+      tstate.archived.push(tstate.items.splice(tidx, 1)[0]);
     }
     dayaTodoSave(tbox, tstate);
     dayaTodoRender(tbox, tstate);
@@ -424,10 +424,12 @@ document.addEventListener("click", function (event) {
     if (uidx === -1) {
       return;
     }
-    var restored = ustate.archived.splice(uidx, 1)[0];
-    if (ustate.items.length < DAYA_TODO_MAX) {
-      ustate.items.push({ text: restored, done: false });
+    if (ustate.items.length >= DAYA_TODO_MAX) {
+      // active list full: keep the archived entry, drop nothing
+      return;
     }
+    var restored = ustate.archived.splice(uidx, 1)[0];
+    ustate.items.push({ text: restored.text, done: restored.done });
     dayaTodoSave(ubox, ustate);
     dayaTodoRender(ubox, ustate);
     return;
@@ -444,6 +446,26 @@ function dayaTodoRead(box) {
     if (raw) {
       var data = JSON.parse(raw);
       if (data && Array.isArray(data.items) && Array.isArray(data.archived)) {
+        data.items = data.items
+          .filter(function (item) {
+            return item && typeof item.text === "string";
+          })
+          .map(function (item) {
+            return { text: item.text, done: item.done === true };
+          });
+        data.archived = data.archived
+          .filter(function (entry) {
+            return (
+              typeof entry === "string" ||
+              (entry && typeof entry.text === "string")
+            );
+          })
+          .map(function (entry) {
+            // daya 0.2.0/0.3.0 stored archived entries as bare strings
+            return typeof entry === "string"
+              ? { text: entry, done: false }
+              : { text: entry.text, done: entry.done === true };
+          });
         return data;
       }
     }
@@ -494,11 +516,11 @@ function dayaTodoRender(box, state) {
   });
   var archivedList = box.querySelector(".daya-todo-archived-items");
   archivedList.textContent = "";
-  state.archived.forEach(function (text) {
+  state.archived.forEach(function (entry) {
     var li = document.createElement("li");
     var span = document.createElement("span");
     span.className = "daya-todo-text";
-    span.textContent = text;
+    span.textContent = entry.text;
     var back = document.createElement("button");
     back.type = "button";
     back.className = "daya-todo-unarchive";
