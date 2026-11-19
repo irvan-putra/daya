@@ -72,6 +72,53 @@ class GenerateTests(unittest.TestCase):
         self.assertIn("first<br>\nsecond", build(recipe))
 
 
+class BackLinkTests(unittest.TestCase):
+    def test_back_link_renders(self):
+        recipe = dict(VALID, back={"href": "index.html", "label": "All examples"})
+        page = build(recipe)
+        self.assertIn(
+            '<p class="daya-back"><a href="index.html">All examples</a></p>', page
+        )
+
+    def test_back_href_must_be_relative_html(self):
+        for bad in (
+            "https://evil.example/x.html",
+            "//evil.example/x.html",
+            "../up.html",
+            "a/../b.html",
+            "index.html?x=1",
+            "index.htm",
+            "INDEX.HTML",
+            "",
+            5,
+        ):
+            recipe = dict(VALID, back={"href": bad, "label": "x"})
+            _model, errors = web.validate(recipe)
+            self.assertTrue(
+                any(e.startswith("back.href:") for e in errors),
+                "href={!r} should fail".format(bad),
+            )
+
+    def test_back_label_escaped(self):
+        raw = "<script>alert(1)</script>"
+        recipe = dict(VALID, back={"href": "index.html", "label": raw})
+        page = build(recipe)
+        self.assertNotIn(raw, page)
+        self.assertIn(html.escape(raw, quote=True), page)
+
+    def test_back_unknown_field(self):
+        recipe = dict(
+            VALID, back={"href": "index.html", "label": "x", "target": "_blank"}
+        )
+        _model, errors = web.validate(recipe)
+        self.assertIn("back: unknown field 'target'", errors)
+
+    def test_back_not_an_object(self):
+        recipe = dict(VALID, back="index.html")
+        _model, errors = web.validate(recipe)
+        self.assertIn("back: must be an object", errors)
+
+
 class ScriptBlockTests(unittest.TestCase):
     def test_script_block_is_exactly_the_fixed_template(self):
         page = build(VALID)

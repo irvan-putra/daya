@@ -2,14 +2,28 @@
   "domain": "web",
   "title": "Focus timer",
   "description": "One block of quiet work, then a break.",
-  "theme": { "accent": "teal" },
+  "theme": {
+    "accent": "teal"
+  },
   "sections": [
     {
       "type": "text",
       "heading": "How this works",
       "body": "Start the timer. Work until it says Done.\nThen stand up and drink some water."
     },
-    { "type": "timer", "label": "Focus block (25 minutes)", "seconds": 1500 },
-    { "type": "counter", "label": "Glass of water", "start": 0 }
-  ]
+    {
+      "type": "timer",
+      "label": "Focus block (25 minutes)",
+      "seconds": 1500
+    },
+    {
+      "type": "counter",
+      "label": "Glass of water",
+      "start": 0
+    }
+  ],
+  "back": {
+    "href": "index.html",
+    "label": "All daya examples"
+  }
 }

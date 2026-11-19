@@ -19,8 +19,8 @@ from ..recipe import Checker, check_int, check_no_unknown_keys, check_string
 DOMAIN = "web"
 DESCRIPTION = (
     "One self-contained HTML mini-app: styled text, lists, counters, "
-    "quizzes, timers and persistent todo lists. No links, images or "
-    "custom code."
+    "quizzes, timers and persistent todo lists. No images or custom "
+    "code; links limited to an optional validated relative back link."
 )
 
 ACCENTS = {
@@ -45,7 +45,12 @@ SECTION_TYPES = ("text", "list", "counter", "quiz", "timer", "todo")
 # one origin share localStorage.
 _STORAGE_KEY_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,31}$")
 
-_TOP_KEYS = {"domain", "title", "description", "theme", "sections"}
+_TOP_KEYS = {"domain", "title", "description", "theme", "back", "sections"}
+
+# Optional back link (used by the published examples): a relative .html
+# path only - no scheme, no host, no parent traversal. This is the one
+# exception to "no links"; the value is validated, never arbitrary.
+_BACK_HREF_RE = re.compile(r"^(?!.*(?:\.\.|//|:))[a-z0-9][a-z0-9./-]{0,60}\.html$")
 
 
 def validate(recipe):
@@ -80,6 +85,25 @@ def validate(recipe):
                 else:
                     accent = theme["accent"]
     model["accent"] = accent
+
+    if "back" in recipe:
+        back = recipe.get("back")
+        if not isinstance(back, dict):
+            check.fail("back", "must be an object")
+        else:
+            check_no_unknown_keys(check, back, {"href", "label"}, "back")
+            href = back.get("href")
+            href_ok = True
+            if not isinstance(href, str) or not _BACK_HREF_RE.match(href):
+                check.fail(
+                    "back.href",
+                    "must be a relative .html path (no scheme, host, port "
+                    "or parent traversal)",
+                )
+                href_ok = False
+            label = check_string(check, back.get("label"), "back.label", 1, 80)
+            if href_ok and label is not None:
+                model["back"] = {"href": href, "label": label}
 
     sections = recipe.get("sections")
     if not isinstance(sections, list):
@@ -294,6 +318,8 @@ button:disabled { opacity: 0.55; cursor: default; }
 .daya-todo li.daya-done .daya-todo-text { text-decoration: line-through; color: #9aa5b1; }
 .daya-todo-toggle, .daya-todo-archive, .daya-todo-unarchive { background: #fff; color: var(--accent); border: 1px solid var(--accent); padding: 0.3rem 0.6rem; font-size: 0.85rem; }
 .daya-todo-archived { margin-top: 0.75rem; color: #52606d; }
+.daya-back { font-size: 0.85rem; margin: 0 0 0.5rem; }
+.daya-back a { color: var(--accent); }
 footer { text-align: center; color: #9aa5b1; font-size: 0.8rem; margin: 2rem 0 1rem; }
 """.strip()
 
@@ -691,6 +717,12 @@ def generate(model):
     ]
     if model.get("description"):
         out.append('<p class="lede">{}</p>'.format(_esc_multiline(model["description"])))
+    if model.get("back"):
+        out.append(
+            '<p class="daya-back"><a href="{}">{}</a></p>'.format(
+                _esc(model["back"]["href"]), _esc(model["back"]["label"])
+            )
+        )
     for section in model["sections"]:
         out.extend(_section_html(section))
     out.extend(
@@ -713,6 +745,8 @@ def generate(model):
 def _expected_strings(model):
     """Every recipe string as it must appear in the output, fully escaped."""
     found = [_esc(model["title"])]
+    if model.get("back"):
+        found.append(_esc(model["back"]["label"]))
     if model.get("description"):
         found.append(_esc_multiline(model["description"]))
     for section in model["sections"]:
@@ -765,6 +799,10 @@ def schema():
             "title": "string, 1..80 characters",
             "description": "optional string, 1..280 characters",
             "theme": {"accent": "optional, one of: " + ", ".join(sorted(ACCENTS))},
+            "back": {
+                "href": "relative .html path only (validated: no scheme, host or '..')",
+                "label": "string 1..80",
+            },
             "sections": "list of 1..{} section objects".format(MAX_SECTIONS),
         },
         "section types": {
@@ -803,6 +841,7 @@ def schema():
         "safety": (
             "Recipe strings are data only: they are HTML-escaped, cannot add "
             "links, images, styles or scripts, and the generated page makes "
-            "no network requests."
+            "no network requests. The one link exception is the optional "
+            "'back' field: a validated relative .html path."
         ),
     }

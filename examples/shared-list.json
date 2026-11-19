@@ -2,7 +2,9 @@
   "domain": "web",
   "title": "Errands",
   "description": "A small list you can actually keep: add items, tick them done, archive instead of delete. The list is stored only in this browser, on this device. Nothing is shared or synced.",
-  "theme": { "accent": "green" },
+  "theme": {
+    "accent": "green"
+  },
   "sections": [
     {
       "type": "text",
@@ -13,7 +15,15 @@
       "type": "todo",
       "heading": "This week",
       "storage_key": "daya-demo-shared-errands",
-      "items": ["Reply to the venue", "Buy rice", "Book the train"]
+      "items": [
+        "Reply to the venue",
+        "Buy rice",
+        "Book the train"
+      ]
     }
-  ]
+  ],
+  "back": {
+    "href": "index.html",
+    "label": "All daya examples"
+  }
 }

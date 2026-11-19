@@ -2,7 +2,9 @@
   "domain": "web",
   "title": "Reading check",
   "description": "A short text, then two quick questions.",
-  "theme": { "accent": "indigo" },
+  "theme": {
+    "accent": "indigo"
+  },
   "sections": [
     {
       "type": "text",
@@ -12,19 +14,33 @@
     {
       "type": "quiz",
       "question": "What kind of roots does the dahlia have?",
-      "choices": ["Fibrous roots", "Tuberous roots", "Aerial roots"],
+      "choices": [
+        "Fibrous roots",
+        "Tuberous roots",
+        "Aerial roots"
+      ],
       "answer": 1
     },
     {
       "type": "quiz",
       "question": "When does the dahlia stop blooming?",
-      "choices": ["At the first frost", "At midsummer"],
+      "choices": [
+        "At the first frost",
+        "At midsummer"
+      ],
       "answer": 0
     },
     {
       "type": "list",
       "heading": "Remember",
-      "items": ["Tuberous roots", "Blooms until first frost"]
+      "items": [
+        "Tuberous roots",
+        "Blooms until first frost"
+      ]
     }
-  ]
+  ],
+  "back": {
+    "href": "index.html",
+    "label": "All daya examples"
+  }
 }

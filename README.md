@@ -73,9 +73,12 @@ separate, reviewed step.
 
 ## Security
 
-Generated pages make no network requests and contain no links, images
-or forms. Todo lists keep their state in the browser's local storage
-under the recipe's `storage_key`; nothing leaves the browser. Recipe
+Generated pages make no network requests and contain no images or
+forms. The one link exception is the optional `back` field: a relative
+`.html` path validated to exclude schemes, hosts and parent traversal
+(the published examples use it to link back to the index). Todo lists
+keep their state in the browser's local storage under the recipe's
+`storage_key`; nothing leaves the browser. Recipe
 strings never enter the JavaScript block: the script
 is a fixed template and a test asserts the shipped script matches it
 byte for byte. Interactive behaviour is driven by `data-*` attributes
