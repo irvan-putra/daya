@@ -48,9 +48,12 @@ _STORAGE_KEY_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,31}$")
 _TOP_KEYS = {"domain", "title", "description", "theme", "back", "sections"}
 
 # Optional back link (used by the published examples): a relative .html
-# path only - no scheme, no host, no parent traversal. This is the one
-# exception to "no links"; the value is validated, never arbitrary.
-_BACK_HREF_RE = re.compile(r"^(?!.*(?:\.\.|//|:))[a-z0-9][a-z0-9./-]{0,60}\.html$")
+# path only - no scheme, no host, no parent traversal - or the literal
+# "./" (the directory the page lives in, i.e. its index). This is the
+# one exception to "no links"; the value is validated, never arbitrary.
+_BACK_HREF_RE = re.compile(
+    r"^(\./|(?!.*(?:\.\.|//|:))[a-z0-9][a-z0-9./-]{0,60}\.html)$"
+)
 
 
 def validate(recipe):
@@ -97,8 +100,8 @@ def validate(recipe):
             if not isinstance(href, str) or not _BACK_HREF_RE.match(href):
                 check.fail(
                     "back.href",
-                    "must be a relative .html path (no scheme, host, port "
-                    "or parent traversal)",
+                    'must be a relative .html path (no scheme, host, port '
+                    'or parent traversal) or the literal "./"',
                 )
                 href_ok = False
             label = check_string(check, back.get("label"), "back.label", 1, 80)
@@ -800,7 +803,10 @@ def schema():
             "description": "optional string, 1..280 characters",
             "theme": {"accent": "optional, one of: " + ", ".join(sorted(ACCENTS))},
             "back": {
-                "href": "relative .html path only (validated: no scheme, host or '..')",
+                "href": (
+                    "relative .html path only (validated: no scheme, host "
+                    "or '..') or the literal './' for the directory index"
+                ),
                 "label": "string 1..80",
             },
             "sections": "list of 1..{} section objects".format(MAX_SECTIONS),

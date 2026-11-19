@@ -63,6 +63,8 @@ VALIDATE_RECIPES = [
     {"domain": "web", "title": "theme not object", "theme": "green", "sections": [{"type": "counter", "label": "x"}]},
     {"domain": "web", "title": "bad back", "back": {"href": "https://evil.example/x.html", "label": "x"}, "sections": [{"type": "counter", "label": "x"}]},
     {"domain": "web", "title": "back ok", "back": {"href": "index.html", "label": "home"}, "sections": [{"type": "counter", "label": "x"}]},
+    {"domain": "web", "title": "back dir", "back": {"href": "./", "label": "home"}, "sections": [{"type": "counter", "label": "x"}]},
+    {"domain": "web", "title": "back bad dir", "back": {"href": "../", "label": "home"}, "sections": [{"type": "counter", "label": "x"}]},
     {"domain": "web", "title": "long timer", "sections": [{"type": "timer", "label": "t", "seconds": 99999}]},
     {"domain": "web", "title": "todo no items ok", "sections": [{"type": "todo", "storage_key": "fine-key"}]},
     {"domain": "web", "title": 42, "sections": [{"type": "counter", "label": "x"}]},

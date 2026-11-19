@@ -606,7 +606,7 @@
     },
     {
       "errors": [
-        "back.href: must be a relative .html path (no scheme, host, port or parent traversal)"
+        "back.href: must be a relative .html path (no scheme, host, port or parent traversal) or the literal \"./\""
       ],
       "recipe": {
         "back": {
@@ -638,6 +638,42 @@
           }
         ],
         "title": "back ok"
+      }
+    },
+    {
+      "errors": [],
+      "recipe": {
+        "back": {
+          "href": "./",
+          "label": "home"
+        },
+        "domain": "web",
+        "sections": [
+          {
+            "label": "x",
+            "type": "counter"
+          }
+        ],
+        "title": "back dir"
+      }
+    },
+    {
+      "errors": [
+        "back.href: must be a relative .html path (no scheme, host, port or parent traversal) or the literal \"./\""
+      ],
+      "recipe": {
+        "back": {
+          "href": "../",
+          "label": "home"
+        },
+        "domain": "web",
+        "sections": [
+          {
+            "label": "x",
+            "type": "counter"
+          }
+        ],
+        "title": "back bad dir"
       }
     },
     {

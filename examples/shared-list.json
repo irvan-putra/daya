@@ -23,7 +23,7 @@
     }
   ],
   "back": {
-    "href": "index.html",
+    "href": "./",
     "label": "All daya examples"
   }
 }

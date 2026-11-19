@@ -80,6 +80,11 @@ class BackLinkTests(unittest.TestCase):
             '<p class="daya-back"><a href="index.html">All examples</a></p>', page
         )
 
+    def test_back_link_directory_index(self):
+        recipe = dict(VALID, back={"href": "./", "label": "All examples"})
+        page = build(recipe)
+        self.assertIn('<p class="daya-back"><a href="./">All examples</a></p>', page)
+
     def test_back_href_must_be_relative_html(self):
         for bad in (
             "https://evil.example/x.html",

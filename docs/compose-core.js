@@ -24,7 +24,7 @@
   var MAX_TODO_SEED_ITEMS = 50;
   var SECTION_TYPES = ["text", "list", "counter", "quiz", "timer", "todo"];
   var STORAGE_KEY_RE = /^[a-z0-9][a-z0-9-]{0,31}$/;
-  var BACK_HREF_RE = /^(?!.*(?:\.\.|\/\/|:))[a-z0-9][a-z0-9./-]{0,60}\.html$/;
+  var BACK_HREF_RE = /^(\.\/|(?!.*(?:\.\.|\/\/|:))[a-z0-9][a-z0-9./-]{0,60}\.html)$/;
 
   /* ---- validator (port of dayalib/domains/web.py validate) ---- */
 
@@ -259,7 +259,7 @@
         if (typeof href !== "string" || !BACK_HREF_RE.test(href)) {
           check.fail(
             "back.href",
-            "must be a relative .html path (no scheme, host, port or parent traversal)"
+            'must be a relative .html path (no scheme, host, port or parent traversal) or the literal "./"'
           );
           hrefOk = false;
         }
