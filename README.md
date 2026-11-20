@@ -257,6 +257,12 @@ markup-injection safety):
 python3 tests/browser_test_view.py
 ```
 
+## Related: text to speech (reference only)
+
+If Daya needs text to speech, [Piper](https://github.com/OHF-Voice/piper1-gpl) is a candidate local neural TTS engine. This is a reference only: no dependency, voice download or speech feature is added here.
+
+The engine is GPL-3.0-or-later. Voice models need a separate review: check the `MODEL_CARD` shipped with the exact voice copy and its training provenance before use or redistribution. See Piper's [voice licensing](https://github.com/OHF-Voice/piper1-gpl/blob/main/docs/LICENSING.md) and [commercial-use guidance](https://github.com/OHF-Voice/piper1-gpl/blob/main/docs/COMMERCIAL_USE.md). This pointer does not establish license compatibility or grant rights to any voice.
+
 ## License
 
 AGPL-3.0, see LICENSE.
