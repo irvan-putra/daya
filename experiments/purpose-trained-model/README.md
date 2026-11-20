@@ -98,9 +98,17 @@ route 13/18, 8/20. Full per-case rows: `results-heldout.json`,
 
 ## Honest limits
 
-- 45 held-out cases is small; treat percentages as directional, not
-  precise. The set should grow as real phrasings arrive (from public or
+- 45 held-out cases is small and agent-authored; treat percentages as
+  directional, not precise, and not independent external validation.
+  The set should grow as real phrasings arrive (from public or
   synthetic sources only, never private chats).
+- heldout.json v1 was a genuine held-out set for v0.1's single
+  evaluation. Because v0.2's proposals are informed by v0.1's known
+  failures on these exact 45 cases, the set is a development benchmark
+  from here on: version iterations measured against it are development
+  scores, not fresh held-out proof. Any future independent quality
+  claim needs a new, separately authored test set that no training,
+  tuning or failure analysis has touched.
 - The nb arms measure intent only and have no refusal mechanism; the
   engines are measured end-to-end, a harder task. The 97.1% is not
   comparable to the engines' 84.2% one-to-one.
@@ -152,9 +160,11 @@ Held-out results (the single evaluation run):
 - An abstention gate for the classifier route too: correct hears scored
   0.40-0.95 here, several wrong hears scored under 0.5, but "countdown
   of 90 seconds" scored 0.506, so a threshold needs care.
-- Slot-filler v0.2: title/accent meta handling, typo-tolerant units,
-  robustness on multi-clause sentences, fraction durations. Retrain and
-  re-evaluate heldout ONCE per version; tune only on synthetic valid.
+- Slot-filler v0.2 (paused 2026-11-20 after v0.1 completed the bounded
+  experiment): title/accent meta handling, typo-tolerant units,
+  robustness on multi-clause sentences, fraction durations. Tune only
+  on synthetic valid; heldout.json v1 reports development scores only
+  (see Honest limits).
 - Fix the cascade's out-of-scope guessing (finding 1), the colon-form
   todo heads (finding 3) and the half-hour misparse (finding 2) in the
   classical engines, with regression fixtures from heldout.json.
