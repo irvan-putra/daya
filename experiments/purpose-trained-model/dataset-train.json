@@ -1,0 +1,7177 @@
+{
+ "version": 2,
+ "generator": "generate_dataset.py (deterministic cross-product, no randomness)",
+ "samples": [
+  {
+   "text": "one second timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "one second countdown",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "one seconds timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "one seconds countdown",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "one minute timer",
+   "intent": "timer",
+   "seconds": 60
+  },
+  {
+   "text": "one minute countdown",
+   "intent": "timer",
+   "seconds": 60
+  },
+  {
+   "text": "one minutes timer",
+   "intent": "timer",
+   "seconds": 60
+  },
+  {
+   "text": "one minutes countdown",
+   "intent": "timer",
+   "seconds": 60
+  },
+  {
+   "text": "one hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "one hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "one hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "one hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "two second timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "two second countdown",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "two seconds timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "two seconds countdown",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "two minute timer",
+   "intent": "timer",
+   "seconds": 120
+  },
+  {
+   "text": "two minute countdown",
+   "intent": "timer",
+   "seconds": 120
+  },
+  {
+   "text": "two minutes timer",
+   "intent": "timer",
+   "seconds": 120
+  },
+  {
+   "text": "two minutes countdown",
+   "intent": "timer",
+   "seconds": 120
+  },
+  {
+   "text": "two hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "two hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "two hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "two hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "three second timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "three second countdown",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "three seconds timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "three seconds countdown",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "three minute timer",
+   "intent": "timer",
+   "seconds": 180
+  },
+  {
+   "text": "three minute countdown",
+   "intent": "timer",
+   "seconds": 180
+  },
+  {
+   "text": "three minutes timer",
+   "intent": "timer",
+   "seconds": 180
+  },
+  {
+   "text": "three minutes countdown",
+   "intent": "timer",
+   "seconds": 180
+  },
+  {
+   "text": "three hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "three hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "three hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "three hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "four second timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "four second countdown",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "four seconds timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "four seconds countdown",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "four minute timer",
+   "intent": "timer",
+   "seconds": 240
+  },
+  {
+   "text": "four minute countdown",
+   "intent": "timer",
+   "seconds": 240
+  },
+  {
+   "text": "four minutes timer",
+   "intent": "timer",
+   "seconds": 240
+  },
+  {
+   "text": "four minutes countdown",
+   "intent": "timer",
+   "seconds": 240
+  },
+  {
+   "text": "four hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "four hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "four hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "four hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "five second timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "five second countdown",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "five seconds timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "five seconds countdown",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "five minute timer",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "five minute countdown",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "five minutes timer",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "five minutes countdown",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "five hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "five hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "five hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "five hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "six second timer",
+   "intent": "timer",
+   "seconds": 6
+  },
+  {
+   "text": "six second countdown",
+   "intent": "timer",
+   "seconds": 6
+  },
+  {
+   "text": "six seconds timer",
+   "intent": "timer",
+   "seconds": 6
+  },
+  {
+   "text": "six seconds countdown",
+   "intent": "timer",
+   "seconds": 6
+  },
+  {
+   "text": "six minute timer",
+   "intent": "timer",
+   "seconds": 360
+  },
+  {
+   "text": "six minute countdown",
+   "intent": "timer",
+   "seconds": 360
+  },
+  {
+   "text": "six minutes timer",
+   "intent": "timer",
+   "seconds": 360
+  },
+  {
+   "text": "six minutes countdown",
+   "intent": "timer",
+   "seconds": 360
+  },
+  {
+   "text": "six hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "six hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "six hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "six hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "seven second timer",
+   "intent": "timer",
+   "seconds": 7
+  },
+  {
+   "text": "seven second countdown",
+   "intent": "timer",
+   "seconds": 7
+  },
+  {
+   "text": "seven seconds timer",
+   "intent": "timer",
+   "seconds": 7
+  },
+  {
+   "text": "seven seconds countdown",
+   "intent": "timer",
+   "seconds": 7
+  },
+  {
+   "text": "seven minute timer",
+   "intent": "timer",
+   "seconds": 420
+  },
+  {
+   "text": "seven minute countdown",
+   "intent": "timer",
+   "seconds": 420
+  },
+  {
+   "text": "seven minutes timer",
+   "intent": "timer",
+   "seconds": 420
+  },
+  {
+   "text": "seven minutes countdown",
+   "intent": "timer",
+   "seconds": 420
+  },
+  {
+   "text": "seven hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "seven hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "seven hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "seven hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "eight second timer",
+   "intent": "timer",
+   "seconds": 8
+  },
+  {
+   "text": "eight second countdown",
+   "intent": "timer",
+   "seconds": 8
+  },
+  {
+   "text": "eight seconds timer",
+   "intent": "timer",
+   "seconds": 8
+  },
+  {
+   "text": "eight seconds countdown",
+   "intent": "timer",
+   "seconds": 8
+  },
+  {
+   "text": "eight minute timer",
+   "intent": "timer",
+   "seconds": 480
+  },
+  {
+   "text": "eight minute countdown",
+   "intent": "timer",
+   "seconds": 480
+  },
+  {
+   "text": "eight minutes timer",
+   "intent": "timer",
+   "seconds": 480
+  },
+  {
+   "text": "eight minutes countdown",
+   "intent": "timer",
+   "seconds": 480
+  },
+  {
+   "text": "eight hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "eight hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "eight hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "eight hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "nine second timer",
+   "intent": "timer",
+   "seconds": 9
+  },
+  {
+   "text": "nine second countdown",
+   "intent": "timer",
+   "seconds": 9
+  },
+  {
+   "text": "nine seconds timer",
+   "intent": "timer",
+   "seconds": 9
+  },
+  {
+   "text": "nine seconds countdown",
+   "intent": "timer",
+   "seconds": 9
+  },
+  {
+   "text": "nine minute timer",
+   "intent": "timer",
+   "seconds": 540
+  },
+  {
+   "text": "nine minute countdown",
+   "intent": "timer",
+   "seconds": 540
+  },
+  {
+   "text": "nine minutes timer",
+   "intent": "timer",
+   "seconds": 540
+  },
+  {
+   "text": "nine minutes countdown",
+   "intent": "timer",
+   "seconds": 540
+  },
+  {
+   "text": "nine hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "nine hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "nine hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "nine hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "ten second timer",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "ten second countdown",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "ten seconds timer",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "ten seconds countdown",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "ten minute timer",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "ten minute countdown",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "ten minutes timer",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "ten minutes countdown",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "ten hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "ten hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "ten hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "ten hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "eleven second timer",
+   "intent": "timer",
+   "seconds": 11
+  },
+  {
+   "text": "eleven second countdown",
+   "intent": "timer",
+   "seconds": 11
+  },
+  {
+   "text": "eleven seconds timer",
+   "intent": "timer",
+   "seconds": 11
+  },
+  {
+   "text": "eleven seconds countdown",
+   "intent": "timer",
+   "seconds": 11
+  },
+  {
+   "text": "eleven minute timer",
+   "intent": "timer",
+   "seconds": 660
+  },
+  {
+   "text": "eleven minute countdown",
+   "intent": "timer",
+   "seconds": 660
+  },
+  {
+   "text": "eleven minutes timer",
+   "intent": "timer",
+   "seconds": 660
+  },
+  {
+   "text": "eleven minutes countdown",
+   "intent": "timer",
+   "seconds": 660
+  },
+  {
+   "text": "eleven hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "eleven hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "eleven hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "eleven hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "twelve second timer",
+   "intent": "timer",
+   "seconds": 12
+  },
+  {
+   "text": "twelve second countdown",
+   "intent": "timer",
+   "seconds": 12
+  },
+  {
+   "text": "twelve seconds timer",
+   "intent": "timer",
+   "seconds": 12
+  },
+  {
+   "text": "twelve seconds countdown",
+   "intent": "timer",
+   "seconds": 12
+  },
+  {
+   "text": "twelve minute timer",
+   "intent": "timer",
+   "seconds": 720
+  },
+  {
+   "text": "twelve minute countdown",
+   "intent": "timer",
+   "seconds": 720
+  },
+  {
+   "text": "twelve minutes timer",
+   "intent": "timer",
+   "seconds": 720
+  },
+  {
+   "text": "twelve minutes countdown",
+   "intent": "timer",
+   "seconds": 720
+  },
+  {
+   "text": "twelve hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "twelve hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "twelve hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "twelve hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "fifteen second timer",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "fifteen second countdown",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "fifteen seconds timer",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "fifteen seconds countdown",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "fifteen minute timer",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "fifteen minute countdown",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "fifteen minutes timer",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "fifteen minutes countdown",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "fifteen hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "fifteen hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "fifteen hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "fifteen hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "twenty second timer",
+   "intent": "timer",
+   "seconds": 20
+  },
+  {
+   "text": "twenty second countdown",
+   "intent": "timer",
+   "seconds": 20
+  },
+  {
+   "text": "twenty seconds timer",
+   "intent": "timer",
+   "seconds": 20
+  },
+  {
+   "text": "twenty seconds countdown",
+   "intent": "timer",
+   "seconds": 20
+  },
+  {
+   "text": "twenty minute timer",
+   "intent": "timer",
+   "seconds": 1200
+  },
+  {
+   "text": "twenty minute countdown",
+   "intent": "timer",
+   "seconds": 1200
+  },
+  {
+   "text": "twenty minutes timer",
+   "intent": "timer",
+   "seconds": 1200
+  },
+  {
+   "text": "twenty minutes countdown",
+   "intent": "timer",
+   "seconds": 1200
+  },
+  {
+   "text": "twenty hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "twenty hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "twenty hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "twenty hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "twenty five second timer",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "twenty five second countdown",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "twenty five seconds timer",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "twenty five seconds countdown",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "twenty five minute timer",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "twenty five minute countdown",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "twenty five minutes timer",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "twenty five minutes countdown",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "twenty five hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "twenty five hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "twenty five hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "twenty five hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "thirty second timer",
+   "intent": "timer",
+   "seconds": 30
+  },
+  {
+   "text": "thirty second countdown",
+   "intent": "timer",
+   "seconds": 30
+  },
+  {
+   "text": "thirty seconds timer",
+   "intent": "timer",
+   "seconds": 30
+  },
+  {
+   "text": "thirty seconds countdown",
+   "intent": "timer",
+   "seconds": 30
+  },
+  {
+   "text": "thirty minute timer",
+   "intent": "timer",
+   "seconds": 1800
+  },
+  {
+   "text": "thirty minute countdown",
+   "intent": "timer",
+   "seconds": 1800
+  },
+  {
+   "text": "thirty minutes timer",
+   "intent": "timer",
+   "seconds": 1800
+  },
+  {
+   "text": "thirty minutes countdown",
+   "intent": "timer",
+   "seconds": 1800
+  },
+  {
+   "text": "thirty hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "thirty hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "thirty hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "thirty hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "forty second timer",
+   "intent": "timer",
+   "seconds": 40
+  },
+  {
+   "text": "forty second countdown",
+   "intent": "timer",
+   "seconds": 40
+  },
+  {
+   "text": "forty seconds timer",
+   "intent": "timer",
+   "seconds": 40
+  },
+  {
+   "text": "forty seconds countdown",
+   "intent": "timer",
+   "seconds": 40
+  },
+  {
+   "text": "forty minute timer",
+   "intent": "timer",
+   "seconds": 2400
+  },
+  {
+   "text": "forty minute countdown",
+   "intent": "timer",
+   "seconds": 2400
+  },
+  {
+   "text": "forty minutes timer",
+   "intent": "timer",
+   "seconds": 2400
+  },
+  {
+   "text": "forty minutes countdown",
+   "intent": "timer",
+   "seconds": 2400
+  },
+  {
+   "text": "forty hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "forty hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "forty hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "forty hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "forty five second timer",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "forty five second countdown",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "forty five seconds timer",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "forty five seconds countdown",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "forty five minute timer",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "forty five minute countdown",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "forty five minutes timer",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "forty five minutes countdown",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "forty five hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "forty five hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "forty five hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "forty five hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "fifty second timer",
+   "intent": "timer",
+   "seconds": 50
+  },
+  {
+   "text": "fifty second countdown",
+   "intent": "timer",
+   "seconds": 50
+  },
+  {
+   "text": "fifty seconds timer",
+   "intent": "timer",
+   "seconds": 50
+  },
+  {
+   "text": "fifty seconds countdown",
+   "intent": "timer",
+   "seconds": 50
+  },
+  {
+   "text": "fifty minute timer",
+   "intent": "timer",
+   "seconds": 3000
+  },
+  {
+   "text": "fifty minute countdown",
+   "intent": "timer",
+   "seconds": 3000
+  },
+  {
+   "text": "fifty minutes timer",
+   "intent": "timer",
+   "seconds": 3000
+  },
+  {
+   "text": "fifty minutes countdown",
+   "intent": "timer",
+   "seconds": 3000
+  },
+  {
+   "text": "fifty hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "fifty hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "fifty hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "fifty hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "sixty second timer",
+   "intent": "timer",
+   "seconds": 60
+  },
+  {
+   "text": "sixty second countdown",
+   "intent": "timer",
+   "seconds": 60
+  },
+  {
+   "text": "sixty seconds timer",
+   "intent": "timer",
+   "seconds": 60
+  },
+  {
+   "text": "sixty seconds countdown",
+   "intent": "timer",
+   "seconds": 60
+  },
+  {
+   "text": "sixty minute timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "sixty minute countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "sixty minutes timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "sixty minutes countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "sixty hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "sixty hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "sixty hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "sixty hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "ninety second timer",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "ninety second countdown",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "ninety seconds timer",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "ninety seconds countdown",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "ninety minute timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "ninety minute countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "ninety minutes timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "ninety minutes countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "ninety hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "ninety hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "ninety hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "ninety hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "3 second timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "3 second countdown",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "3 seconds timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "3 seconds countdown",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "3 minute timer",
+   "intent": "timer",
+   "seconds": 180
+  },
+  {
+   "text": "3 minute countdown",
+   "intent": "timer",
+   "seconds": 180
+  },
+  {
+   "text": "3 minutes timer",
+   "intent": "timer",
+   "seconds": 180
+  },
+  {
+   "text": "3 minutes countdown",
+   "intent": "timer",
+   "seconds": 180
+  },
+  {
+   "text": "3 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "3 hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "3 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "3 hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "5 second timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "5 second countdown",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "5 seconds timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "5 seconds countdown",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "5 minute timer",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "5 minute countdown",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "5 minutes timer",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "5 minutes countdown",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "5 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "5 hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "5 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "5 hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "7 second timer",
+   "intent": "timer",
+   "seconds": 7
+  },
+  {
+   "text": "7 second countdown",
+   "intent": "timer",
+   "seconds": 7
+  },
+  {
+   "text": "7 seconds timer",
+   "intent": "timer",
+   "seconds": 7
+  },
+  {
+   "text": "7 seconds countdown",
+   "intent": "timer",
+   "seconds": 7
+  },
+  {
+   "text": "7 minute timer",
+   "intent": "timer",
+   "seconds": 420
+  },
+  {
+   "text": "7 minute countdown",
+   "intent": "timer",
+   "seconds": 420
+  },
+  {
+   "text": "7 minutes timer",
+   "intent": "timer",
+   "seconds": 420
+  },
+  {
+   "text": "7 minutes countdown",
+   "intent": "timer",
+   "seconds": 420
+  },
+  {
+   "text": "7 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "7 hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "7 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "7 hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "10 second timer",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "10 second countdown",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "10 seconds timer",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "10 seconds countdown",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "10 minute timer",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "10 minute countdown",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "10 minutes timer",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "10 minutes countdown",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "10 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "10 hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "10 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "10 hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "15 second timer",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "15 second countdown",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "15 seconds timer",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "15 seconds countdown",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "15 minute timer",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "15 minute countdown",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "15 minutes timer",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "15 minutes countdown",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "15 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "15 hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "15 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "15 hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "20 second timer",
+   "intent": "timer",
+   "seconds": 20
+  },
+  {
+   "text": "20 second countdown",
+   "intent": "timer",
+   "seconds": 20
+  },
+  {
+   "text": "20 seconds timer",
+   "intent": "timer",
+   "seconds": 20
+  },
+  {
+   "text": "20 seconds countdown",
+   "intent": "timer",
+   "seconds": 20
+  },
+  {
+   "text": "20 minute timer",
+   "intent": "timer",
+   "seconds": 1200
+  },
+  {
+   "text": "20 minute countdown",
+   "intent": "timer",
+   "seconds": 1200
+  },
+  {
+   "text": "20 minutes timer",
+   "intent": "timer",
+   "seconds": 1200
+  },
+  {
+   "text": "20 minutes countdown",
+   "intent": "timer",
+   "seconds": 1200
+  },
+  {
+   "text": "20 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "20 hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "20 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "20 hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "25 second timer",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "25 second countdown",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "25 seconds timer",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "25 seconds countdown",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "25 minute timer",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "25 minute countdown",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "25 minutes timer",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "25 minutes countdown",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "25 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "25 hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "25 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "25 hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "30 second timer",
+   "intent": "timer",
+   "seconds": 30
+  },
+  {
+   "text": "30 second countdown",
+   "intent": "timer",
+   "seconds": 30
+  },
+  {
+   "text": "30 seconds timer",
+   "intent": "timer",
+   "seconds": 30
+  },
+  {
+   "text": "30 seconds countdown",
+   "intent": "timer",
+   "seconds": 30
+  },
+  {
+   "text": "30 minute timer",
+   "intent": "timer",
+   "seconds": 1800
+  },
+  {
+   "text": "30 minute countdown",
+   "intent": "timer",
+   "seconds": 1800
+  },
+  {
+   "text": "30 minutes timer",
+   "intent": "timer",
+   "seconds": 1800
+  },
+  {
+   "text": "30 minutes countdown",
+   "intent": "timer",
+   "seconds": 1800
+  },
+  {
+   "text": "30 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "30 hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "30 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "30 hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "45 second timer",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "45 second countdown",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "45 seconds timer",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "45 seconds countdown",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "45 minute timer",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "45 minute countdown",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "45 minutes timer",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "45 minutes countdown",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "45 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "45 hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "45 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "45 hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "60 second timer",
+   "intent": "timer",
+   "seconds": 60
+  },
+  {
+   "text": "60 second countdown",
+   "intent": "timer",
+   "seconds": 60
+  },
+  {
+   "text": "60 seconds timer",
+   "intent": "timer",
+   "seconds": 60
+  },
+  {
+   "text": "60 seconds countdown",
+   "intent": "timer",
+   "seconds": 60
+  },
+  {
+   "text": "60 minute timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "60 minute countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "60 minutes timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "60 minutes countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "60 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "60 hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "60 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "60 hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "90 second timer",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "90 second countdown",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "90 seconds timer",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "90 seconds countdown",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "90 minute timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "90 minute countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "90 minutes timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "90 minutes countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "90 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "90 hour countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "90 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "90 hours countdown",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 3 second timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "countdown of 3 second",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "a 3 seconds timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "countdown of 3 seconds",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "a 3 minute timer",
+   "intent": "timer",
+   "seconds": 180
+  },
+  {
+   "text": "countdown of 3 minute",
+   "intent": "timer",
+   "seconds": 180
+  },
+  {
+   "text": "a 3 minutes timer",
+   "intent": "timer",
+   "seconds": 180
+  },
+  {
+   "text": "countdown of 3 minutes",
+   "intent": "timer",
+   "seconds": 180
+  },
+  {
+   "text": "a 3 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 3 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 3 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 3 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 5 second timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "countdown of 5 second",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "a 5 seconds timer",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "countdown of 5 seconds",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "a 5 minute timer",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "countdown of 5 minute",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "a 5 minutes timer",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "countdown of 5 minutes",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "a 5 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 5 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 5 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 5 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 7 second timer",
+   "intent": "timer",
+   "seconds": 7
+  },
+  {
+   "text": "countdown of 7 second",
+   "intent": "timer",
+   "seconds": 7
+  },
+  {
+   "text": "a 7 seconds timer",
+   "intent": "timer",
+   "seconds": 7
+  },
+  {
+   "text": "countdown of 7 seconds",
+   "intent": "timer",
+   "seconds": 7
+  },
+  {
+   "text": "a 7 minute timer",
+   "intent": "timer",
+   "seconds": 420
+  },
+  {
+   "text": "countdown of 7 minute",
+   "intent": "timer",
+   "seconds": 420
+  },
+  {
+   "text": "a 7 minutes timer",
+   "intent": "timer",
+   "seconds": 420
+  },
+  {
+   "text": "countdown of 7 minutes",
+   "intent": "timer",
+   "seconds": 420
+  },
+  {
+   "text": "a 7 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 7 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 7 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 7 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 10 second timer",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "countdown of 10 second",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "a 10 seconds timer",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "countdown of 10 seconds",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "a 10 minute timer",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "countdown of 10 minute",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "a 10 minutes timer",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "countdown of 10 minutes",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "a 10 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 10 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 10 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 10 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 15 second timer",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "countdown of 15 second",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "a 15 seconds timer",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "countdown of 15 seconds",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "a 15 minute timer",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "countdown of 15 minute",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "a 15 minutes timer",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "countdown of 15 minutes",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "a 15 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 15 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 15 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 15 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 20 second timer",
+   "intent": "timer",
+   "seconds": 20
+  },
+  {
+   "text": "countdown of 20 second",
+   "intent": "timer",
+   "seconds": 20
+  },
+  {
+   "text": "a 20 seconds timer",
+   "intent": "timer",
+   "seconds": 20
+  },
+  {
+   "text": "countdown of 20 seconds",
+   "intent": "timer",
+   "seconds": 20
+  },
+  {
+   "text": "a 20 minute timer",
+   "intent": "timer",
+   "seconds": 1200
+  },
+  {
+   "text": "countdown of 20 minute",
+   "intent": "timer",
+   "seconds": 1200
+  },
+  {
+   "text": "a 20 minutes timer",
+   "intent": "timer",
+   "seconds": 1200
+  },
+  {
+   "text": "countdown of 20 minutes",
+   "intent": "timer",
+   "seconds": 1200
+  },
+  {
+   "text": "a 20 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 20 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 20 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 20 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 25 second timer",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "countdown of 25 second",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "a 25 seconds timer",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "countdown of 25 seconds",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "a 25 minute timer",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "countdown of 25 minute",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "a 25 minutes timer",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "countdown of 25 minutes",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "a 25 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 25 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 25 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 25 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 30 second timer",
+   "intent": "timer",
+   "seconds": 30
+  },
+  {
+   "text": "countdown of 30 second",
+   "intent": "timer",
+   "seconds": 30
+  },
+  {
+   "text": "a 30 seconds timer",
+   "intent": "timer",
+   "seconds": 30
+  },
+  {
+   "text": "countdown of 30 seconds",
+   "intent": "timer",
+   "seconds": 30
+  },
+  {
+   "text": "a 30 minute timer",
+   "intent": "timer",
+   "seconds": 1800
+  },
+  {
+   "text": "countdown of 30 minute",
+   "intent": "timer",
+   "seconds": 1800
+  },
+  {
+   "text": "a 30 minutes timer",
+   "intent": "timer",
+   "seconds": 1800
+  },
+  {
+   "text": "countdown of 30 minutes",
+   "intent": "timer",
+   "seconds": 1800
+  },
+  {
+   "text": "a 30 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 30 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 30 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 30 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 45 second timer",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "countdown of 45 second",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "a 45 seconds timer",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "countdown of 45 seconds",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "a 45 minute timer",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "countdown of 45 minute",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "a 45 minutes timer",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "countdown of 45 minutes",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "a 45 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 45 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 45 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 45 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 60 second timer",
+   "intent": "timer",
+   "seconds": 60
+  },
+  {
+   "text": "countdown of 60 second",
+   "intent": "timer",
+   "seconds": 60
+  },
+  {
+   "text": "a 60 seconds timer",
+   "intent": "timer",
+   "seconds": 60
+  },
+  {
+   "text": "countdown of 60 seconds",
+   "intent": "timer",
+   "seconds": 60
+  },
+  {
+   "text": "a 60 minute timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 60 minute",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 60 minutes timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 60 minutes",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 60 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 60 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 60 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 60 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 90 second timer",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "countdown of 90 second",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "a 90 seconds timer",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "countdown of 90 seconds",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "a 90 minute timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 90 minute",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 90 minutes timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 90 minutes",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 90 hour timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 90 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 90 hours timer",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "countdown of 90 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "5 second timer for focus",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "set a 5 second timer for focus",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "timer for focus 5 second",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "10 seconds timer for focus",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "set a 10 seconds timer for focus",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "timer for focus 10 seconds",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "25 minute timer for focus",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "set a 25 minute timer for focus",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "timer for focus 25 minute",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "twenty five minutes timer for focus",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "set a twenty five minutes timer for focus",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "timer for focus twenty five minutes",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "forty five hour timer for focus",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a forty five hour timer for focus",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for focus forty five hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "ninety hours timer for focus",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a ninety hours timer for focus",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for focus ninety hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "fifteen second timer for tea",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "set a fifteen second timer for tea",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "timer for tea fifteen second",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "5 seconds timer for tea",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "set a 5 seconds timer for tea",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "timer for tea 5 seconds",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "10 minute timer for tea",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "set a 10 minute timer for tea",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "timer for tea 10 minute",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "25 minutes timer for tea",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "set a 25 minutes timer for tea",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "timer for tea 25 minutes",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "twenty five hour timer for tea",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a twenty five hour timer for tea",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for tea twenty five hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "forty five hours timer for tea",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a forty five hours timer for tea",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for tea forty five hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "ninety second timer for workout",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "set a ninety second timer for workout",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "timer for workout ninety second",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "fifteen seconds timer for workout",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "set a fifteen seconds timer for workout",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "timer for workout fifteen seconds",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "5 minute timer for workout",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "set a 5 minute timer for workout",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "timer for workout 5 minute",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "10 minutes timer for workout",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "set a 10 minutes timer for workout",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "timer for workout 10 minutes",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "25 hour timer for workout",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a 25 hour timer for workout",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for workout 25 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "twenty five hours timer for workout",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a twenty five hours timer for workout",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for workout twenty five hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "forty five second timer for study",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "set a forty five second timer for study",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "timer for study forty five second",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "ninety seconds timer for study",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "set a ninety seconds timer for study",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "timer for study ninety seconds",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "fifteen minute timer for study",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "set a fifteen minute timer for study",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "timer for study fifteen minute",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "5 minutes timer for study",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "set a 5 minutes timer for study",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "timer for study 5 minutes",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "10 hour timer for study",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a 10 hour timer for study",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for study 10 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "25 hours timer for study",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a 25 hours timer for study",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for study 25 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "twenty five second timer for break",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "set a twenty five second timer for break",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "timer for break twenty five second",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "forty five seconds timer for break",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "set a forty five seconds timer for break",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "timer for break forty five seconds",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "ninety minute timer for break",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a ninety minute timer for break",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for break ninety minute",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "fifteen minutes timer for break",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "set a fifteen minutes timer for break",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "timer for break fifteen minutes",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "5 hour timer for break",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a 5 hour timer for break",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for break 5 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "10 hours timer for break",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a 10 hours timer for break",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for break 10 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "25 second timer for reading",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "set a 25 second timer for reading",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "timer for reading 25 second",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "twenty five seconds timer for reading",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "set a twenty five seconds timer for reading",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "timer for reading twenty five seconds",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "forty five minute timer for reading",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "set a forty five minute timer for reading",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "timer for reading forty five minute",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "ninety minutes timer for reading",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a ninety minutes timer for reading",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for reading ninety minutes",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "fifteen hour timer for reading",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a fifteen hour timer for reading",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for reading fifteen hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "5 hours timer for reading",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a 5 hours timer for reading",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for reading 5 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "10 second timer for pasta",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "set a 10 second timer for pasta",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "timer for pasta 10 second",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "25 seconds timer for pasta",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "set a 25 seconds timer for pasta",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "timer for pasta 25 seconds",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "twenty five minute timer for pasta",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "set a twenty five minute timer for pasta",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "timer for pasta twenty five minute",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "forty five minutes timer for pasta",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "set a forty five minutes timer for pasta",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "timer for pasta forty five minutes",
+   "intent": "timer",
+   "seconds": 2700
+  },
+  {
+   "text": "ninety hour timer for pasta",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a ninety hour timer for pasta",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for pasta ninety hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "fifteen hours timer for pasta",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a fifteen hours timer for pasta",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for pasta fifteen hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "5 second timer for eggs",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "set a 5 second timer for eggs",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "timer for eggs 5 second",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "10 seconds timer for eggs",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "set a 10 seconds timer for eggs",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "timer for eggs 10 seconds",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "25 minute timer for eggs",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "set a 25 minute timer for eggs",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "timer for eggs 25 minute",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "twenty five minutes timer for eggs",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "set a twenty five minutes timer for eggs",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "timer for eggs twenty five minutes",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "forty five hour timer for eggs",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a forty five hour timer for eggs",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for eggs forty five hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "ninety hours timer for eggs",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a ninety hours timer for eggs",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for eggs ninety hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "fifteen second timer for laundry",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "set a fifteen second timer for laundry",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "timer for laundry fifteen second",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "5 seconds timer for laundry",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "set a 5 seconds timer for laundry",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "timer for laundry 5 seconds",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "10 minute timer for laundry",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "set a 10 minute timer for laundry",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "timer for laundry 10 minute",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "25 minutes timer for laundry",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "set a 25 minutes timer for laundry",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "timer for laundry 25 minutes",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "twenty five hour timer for laundry",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a twenty five hour timer for laundry",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for laundry twenty five hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "forty five hours timer for laundry",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a forty five hours timer for laundry",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for laundry forty five hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "ninety second timer for meditation",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "set a ninety second timer for meditation",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "timer for meditation ninety second",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "fifteen seconds timer for meditation",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "set a fifteen seconds timer for meditation",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "timer for meditation fifteen seconds",
+   "intent": "timer",
+   "seconds": 15
+  },
+  {
+   "text": "5 minute timer for meditation",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "set a 5 minute timer for meditation",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "timer for meditation 5 minute",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "10 minutes timer for meditation",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "set a 10 minutes timer for meditation",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "timer for meditation 10 minutes",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "25 hour timer for meditation",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a 25 hour timer for meditation",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for meditation 25 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "twenty five hours timer for meditation",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a twenty five hours timer for meditation",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for meditation twenty five hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "forty five second timer for nap",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "set a forty five second timer for nap",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "timer for nap forty five second",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "ninety seconds timer for nap",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "set a ninety seconds timer for nap",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "timer for nap ninety seconds",
+   "intent": "timer",
+   "seconds": 90
+  },
+  {
+   "text": "fifteen minute timer for nap",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "set a fifteen minute timer for nap",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "timer for nap fifteen minute",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "5 minutes timer for nap",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "set a 5 minutes timer for nap",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "timer for nap 5 minutes",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "10 hour timer for nap",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a 10 hour timer for nap",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for nap 10 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "25 hours timer for nap",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a 25 hours timer for nap",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for nap 25 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "twenty five second timer for stretching",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "set a twenty five second timer for stretching",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "timer for stretching twenty five second",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "forty five seconds timer for stretching",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "set a forty five seconds timer for stretching",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "timer for stretching forty five seconds",
+   "intent": "timer",
+   "seconds": 45
+  },
+  {
+   "text": "ninety minute timer for stretching",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a ninety minute timer for stretching",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for stretching ninety minute",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "fifteen minutes timer for stretching",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "set a fifteen minutes timer for stretching",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "timer for stretching fifteen minutes",
+   "intent": "timer",
+   "seconds": 900
+  },
+  {
+   "text": "5 hour timer for stretching",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a 5 hour timer for stretching",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for stretching 5 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "10 hours timer for stretching",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "set a 10 hours timer for stretching",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer for stretching 10 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 5 second countdown for focus",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "focus timer, 5 second",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "timer 5 second for focus",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "a 10 seconds countdown for focus",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "focus timer, 10 seconds",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "timer 10 seconds for focus",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "a 25 minute countdown for focus",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "focus timer, 25 minute",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "timer 25 minute for focus",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "a 5 seconds countdown for tea",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "tea timer, 5 seconds",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "timer 5 seconds for tea",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "a 10 minute countdown for tea",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "tea timer, 10 minute",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "timer 10 minute for tea",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "a 25 minutes countdown for tea",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "tea timer, 25 minutes",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "timer 25 minutes for tea",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "a 5 minute countdown for workout",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "workout timer, 5 minute",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "timer 5 minute for workout",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "a 10 minutes countdown for workout",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "workout timer, 10 minutes",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "timer 10 minutes for workout",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "a 25 hour countdown for workout",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "workout timer, 25 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer 25 hour for workout",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 5 minutes countdown for study",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "study timer, 5 minutes",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "timer 5 minutes for study",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "a 10 hour countdown for study",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "study timer, 10 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer 10 hour for study",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 25 hours countdown for study",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "study timer, 25 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer 25 hours for study",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 5 hour countdown for break",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "break timer, 5 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer 5 hour for break",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 10 hours countdown for break",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "break timer, 10 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer 10 hours for break",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 25 second countdown for break",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "break timer, 25 second",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "timer 25 second for break",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "a 5 hours countdown for reading",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "reading timer, 5 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer 5 hours for reading",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 10 second countdown for reading",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "reading timer, 10 second",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "timer 10 second for reading",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "a 25 seconds countdown for reading",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "reading timer, 25 seconds",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "timer 25 seconds for reading",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "a 5 second countdown for pasta",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "pasta timer, 5 second",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "timer 5 second for pasta",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "a 10 seconds countdown for pasta",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "pasta timer, 10 seconds",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "timer 10 seconds for pasta",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "a 25 minute countdown for pasta",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "pasta timer, 25 minute",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "timer 25 minute for pasta",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "a 5 seconds countdown for eggs",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "eggs timer, 5 seconds",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "timer 5 seconds for eggs",
+   "intent": "timer",
+   "seconds": 5
+  },
+  {
+   "text": "a 10 minute countdown for eggs",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "eggs timer, 10 minute",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "timer 10 minute for eggs",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "a 25 minutes countdown for eggs",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "eggs timer, 25 minutes",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "timer 25 minutes for eggs",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "a 5 minute countdown for laundry",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "laundry timer, 5 minute",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "timer 5 minute for laundry",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "a 10 minutes countdown for laundry",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "laundry timer, 10 minutes",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "timer 10 minutes for laundry",
+   "intent": "timer",
+   "seconds": 600
+  },
+  {
+   "text": "a 25 hour countdown for laundry",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "laundry timer, 25 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer 25 hour for laundry",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 5 minutes countdown for meditation",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "meditation timer, 5 minutes",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "timer 5 minutes for meditation",
+   "intent": "timer",
+   "seconds": 300
+  },
+  {
+   "text": "a 10 hour countdown for meditation",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "meditation timer, 10 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer 10 hour for meditation",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 25 hours countdown for meditation",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "meditation timer, 25 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer 25 hours for meditation",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 5 hour countdown for nap",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "nap timer, 5 hour",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer 5 hour for nap",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 10 hours countdown for nap",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "nap timer, 10 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer 10 hours for nap",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 25 second countdown for nap",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "nap timer, 25 second",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "timer 25 second for nap",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "a 5 hours countdown for stretching",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "stretching timer, 5 hours",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "timer 5 hours for stretching",
+   "intent": "timer",
+   "seconds": 3600
+  },
+  {
+   "text": "a 10 second countdown for stretching",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "stretching timer, 10 second",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "timer 10 second for stretching",
+   "intent": "timer",
+   "seconds": 10
+  },
+  {
+   "text": "a 25 seconds countdown for stretching",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "stretching timer, 25 seconds",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "timer 25 seconds for stretching",
+   "intent": "timer",
+   "seconds": 25
+  },
+  {
+   "text": "pomodoro",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "focus timer",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "a pomodoro timer",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "focus pomodoro",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "tea pomodoro",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "workout pomodoro",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "study pomodoro",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "break pomodoro",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "reading pomodoro",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "pasta pomodoro",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "eggs pomodoro",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "laundry pomodoro",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "meditation pomodoro",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "nap pomodoro",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "stretching pomodoro",
+   "intent": "timer",
+   "seconds": 1500
+  },
+  {
+   "text": "counter for push ups",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter for push ups",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter push ups",
+   "intent": "counter"
+  },
+  {
+   "text": "count push ups",
+   "intent": "counter"
+  },
+  {
+   "text": "count my push ups",
+   "intent": "counter"
+  },
+  {
+   "text": "track my push ups",
+   "intent": "counter"
+  },
+  {
+   "text": "track push ups",
+   "intent": "counter"
+  },
+  {
+   "text": "push ups counter",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter to count push ups",
+   "intent": "counter"
+  },
+  {
+   "text": "counter for steps",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter for steps",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter steps",
+   "intent": "counter"
+  },
+  {
+   "text": "count steps",
+   "intent": "counter"
+  },
+  {
+   "text": "count my steps",
+   "intent": "counter"
+  },
+  {
+   "text": "track my steps",
+   "intent": "counter"
+  },
+  {
+   "text": "track steps",
+   "intent": "counter"
+  },
+  {
+   "text": "steps counter",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter to count steps",
+   "intent": "counter"
+  },
+  {
+   "text": "counter for glasses of water",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter for glasses of water",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter glasses of water",
+   "intent": "counter"
+  },
+  {
+   "text": "count glasses of water",
+   "intent": "counter"
+  },
+  {
+   "text": "count my glasses of water",
+   "intent": "counter"
+  },
+  {
+   "text": "track my glasses of water",
+   "intent": "counter"
+  },
+  {
+   "text": "track glasses of water",
+   "intent": "counter"
+  },
+  {
+   "text": "glasses of water counter",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter to count glasses of water",
+   "intent": "counter"
+  },
+  {
+   "text": "counter for pages",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter for pages",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter pages",
+   "intent": "counter"
+  },
+  {
+   "text": "count pages",
+   "intent": "counter"
+  },
+  {
+   "text": "count my pages",
+   "intent": "counter"
+  },
+  {
+   "text": "track my pages",
+   "intent": "counter"
+  },
+  {
+   "text": "track pages",
+   "intent": "counter"
+  },
+  {
+   "text": "pages counter",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter to count pages",
+   "intent": "counter"
+  },
+  {
+   "text": "counter for laps",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter for laps",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter laps",
+   "intent": "counter"
+  },
+  {
+   "text": "count laps",
+   "intent": "counter"
+  },
+  {
+   "text": "count my laps",
+   "intent": "counter"
+  },
+  {
+   "text": "track my laps",
+   "intent": "counter"
+  },
+  {
+   "text": "track laps",
+   "intent": "counter"
+  },
+  {
+   "text": "laps counter",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter to count laps",
+   "intent": "counter"
+  },
+  {
+   "text": "counter for reps",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter for reps",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter reps",
+   "intent": "counter"
+  },
+  {
+   "text": "count reps",
+   "intent": "counter"
+  },
+  {
+   "text": "count my reps",
+   "intent": "counter"
+  },
+  {
+   "text": "track my reps",
+   "intent": "counter"
+  },
+  {
+   "text": "track reps",
+   "intent": "counter"
+  },
+  {
+   "text": "reps counter",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter to count reps",
+   "intent": "counter"
+  },
+  {
+   "text": "counter for cups of coffee",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter for cups of coffee",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter cups of coffee",
+   "intent": "counter"
+  },
+  {
+   "text": "count cups of coffee",
+   "intent": "counter"
+  },
+  {
+   "text": "count my cups of coffee",
+   "intent": "counter"
+  },
+  {
+   "text": "track my cups of coffee",
+   "intent": "counter"
+  },
+  {
+   "text": "track cups of coffee",
+   "intent": "counter"
+  },
+  {
+   "text": "cups of coffee counter",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter to count cups of coffee",
+   "intent": "counter"
+  },
+  {
+   "text": "counter for squats",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter for squats",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter squats",
+   "intent": "counter"
+  },
+  {
+   "text": "count squats",
+   "intent": "counter"
+  },
+  {
+   "text": "count my squats",
+   "intent": "counter"
+  },
+  {
+   "text": "track my squats",
+   "intent": "counter"
+  },
+  {
+   "text": "track squats",
+   "intent": "counter"
+  },
+  {
+   "text": "squats counter",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter to count squats",
+   "intent": "counter"
+  },
+  {
+   "text": "counter for chapters",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter for chapters",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter chapters",
+   "intent": "counter"
+  },
+  {
+   "text": "count chapters",
+   "intent": "counter"
+  },
+  {
+   "text": "count my chapters",
+   "intent": "counter"
+  },
+  {
+   "text": "track my chapters",
+   "intent": "counter"
+  },
+  {
+   "text": "track chapters",
+   "intent": "counter"
+  },
+  {
+   "text": "chapters counter",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter to count chapters",
+   "intent": "counter"
+  },
+  {
+   "text": "counter for kilometers",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter for kilometers",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter kilometers",
+   "intent": "counter"
+  },
+  {
+   "text": "count kilometers",
+   "intent": "counter"
+  },
+  {
+   "text": "count my kilometers",
+   "intent": "counter"
+  },
+  {
+   "text": "track my kilometers",
+   "intent": "counter"
+  },
+  {
+   "text": "track kilometers",
+   "intent": "counter"
+  },
+  {
+   "text": "kilometers counter",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter to count kilometers",
+   "intent": "counter"
+  },
+  {
+   "text": "counter for sit ups",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter for sit ups",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter sit ups",
+   "intent": "counter"
+  },
+  {
+   "text": "count sit ups",
+   "intent": "counter"
+  },
+  {
+   "text": "count my sit ups",
+   "intent": "counter"
+  },
+  {
+   "text": "track my sit ups",
+   "intent": "counter"
+  },
+  {
+   "text": "track sit ups",
+   "intent": "counter"
+  },
+  {
+   "text": "sit ups counter",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter to count sit ups",
+   "intent": "counter"
+  },
+  {
+   "text": "counter for burpees",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter for burpees",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter burpees",
+   "intent": "counter"
+  },
+  {
+   "text": "count burpees",
+   "intent": "counter"
+  },
+  {
+   "text": "count my burpees",
+   "intent": "counter"
+  },
+  {
+   "text": "track my burpees",
+   "intent": "counter"
+  },
+  {
+   "text": "track burpees",
+   "intent": "counter"
+  },
+  {
+   "text": "burpees counter",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter to count burpees",
+   "intent": "counter"
+  },
+  {
+   "text": "counter",
+   "intent": "counter"
+  },
+  {
+   "text": "a counter",
+   "intent": "counter"
+  },
+  {
+   "text": "todo list",
+   "intent": "todo"
+  },
+  {
+   "text": "a todo list",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "a todo list with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "my todo list with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "a todo list with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "my todo list with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "a todo list with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "my todo list with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "a todo list with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "my todo list with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "a todo list with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "my todo list with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "a todo list with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "my todo list with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "a todo list with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "my todo list with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "todo list: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "a todo list with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "my todo list with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list",
+   "intent": "todo"
+  },
+  {
+   "text": "a to-do list",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "a to-do list with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "my to-do list with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "a to-do list with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "my to-do list with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "a to-do list with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "my to-do list with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "a to-do list with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "my to-do list with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "a to-do list with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "my to-do list with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "a to-do list with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "my to-do list with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "a to-do list with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "my to-do list with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "to-do list: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "a to-do list with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "my to-do list with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "task list",
+   "intent": "todo"
+  },
+  {
+   "text": "a task list",
+   "intent": "todo"
+  },
+  {
+   "text": "task list with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "task list with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "task list: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "a task list with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "my task list with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "task list with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "task list with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "task list: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "a task list with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "my task list with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "task list with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "task list with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "task list: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "a task list with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "my task list with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "task list with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "task list with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "task list: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "a task list with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "my task list with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "task list with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "task list with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "task list: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "a task list with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "my task list with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "task list with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "task list with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "task list: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "a task list with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "my task list with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "task list with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "task list with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "task list: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "a task list with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "my task list with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "task list with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "task list with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "task list: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "a task list with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "my task list with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list",
+   "intent": "todo"
+  },
+  {
+   "text": "a shopping list",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "a shopping list with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "my shopping list with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "a shopping list with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "my shopping list with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "a shopping list with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "my shopping list with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "a shopping list with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "my shopping list with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "a shopping list with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "my shopping list with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "a shopping list with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "my shopping list with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "a shopping list with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "my shopping list with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "shopping list: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "a shopping list with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "my shopping list with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "errands",
+   "intent": "todo"
+  },
+  {
+   "text": "a errands",
+   "intent": "todo"
+  },
+  {
+   "text": "errands with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "errands with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "errands: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "a errands with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "my errands with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "errands with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "errands with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "errands: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "a errands with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "my errands with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "errands with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "errands with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "errands: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "a errands with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "my errands with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "errands with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "errands with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "errands: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "a errands with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "my errands with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "errands with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "errands with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "errands: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "a errands with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "my errands with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "errands with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "errands with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "errands: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "a errands with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "my errands with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "errands with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "errands with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "errands: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "a errands with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "my errands with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "errands with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "errands with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "errands: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "a errands with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "my errands with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list",
+   "intent": "todo"
+  },
+  {
+   "text": "a grocery list",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "a grocery list with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "my grocery list with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "a grocery list with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "my grocery list with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "a grocery list with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "my grocery list with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "a grocery list with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "my grocery list with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "a grocery list with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "my grocery list with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "a grocery list with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "my grocery list with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "a grocery list with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "my grocery list with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "grocery list: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "a grocery list with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "my grocery list with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries",
+   "intent": "todo"
+  },
+  {
+   "text": "a groceries",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "a groceries with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "my groceries with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "a groceries with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "my groceries with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "a groceries with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "my groceries with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "a groceries with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "my groceries with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "a groceries with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "my groceries with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "a groceries with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "my groceries with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "a groceries with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "my groceries with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "groceries: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "a groceries with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "my groceries with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist",
+   "intent": "todo"
+  },
+  {
+   "text": "a checklist",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "a checklist with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "my checklist with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "a checklist with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "my checklist with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "a checklist with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "my checklist with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "a checklist with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "my checklist with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "a checklist with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "my checklist with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "a checklist with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "my checklist with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "a checklist with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "my checklist with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "checklist: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "a checklist with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "my checklist with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list",
+   "intent": "todo"
+  },
+  {
+   "text": "a packing list",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "a packing list with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "my packing list with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "a packing list with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "my packing list with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "a packing list with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "my packing list with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "a packing list with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "my packing list with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "a packing list with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "my packing list with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "a packing list with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "my packing list with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "a packing list with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "my packing list with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "packing list: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "a packing list with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "my packing list with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list",
+   "intent": "todo"
+  },
+  {
+   "text": "a chore list",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "a chore list with items: buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "my chore list with buy milk, call ana",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "a chore list with items: rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "my chore list with rice, eggs and coffee",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "a chore list with items: book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "my chore list with book the train, reply to the venue and buy rice",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "a chore list with items: spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "my chore list with spinach, tofu and sambal",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "a chore list with items: passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "my chore list with passport, charger and socks",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "a chore list with items: water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "my chore list with water the plants and pay the bills",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "a chore list with items: bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "my chore list with bread, butter and jam",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "chore list: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "a chore list with items: vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "my chore list with vacuum the floor, mop and dust the shelves",
+   "intent": "todo"
+  },
+  {
+   "text": "list: buy milk, call ana",
+   "intent": "list"
+  },
+  {
+   "text": "a list of buy milk, call ana",
+   "intent": "list"
+  },
+  {
+   "text": "list of buy milk, call ana",
+   "intent": "list"
+  },
+  {
+   "text": "simple list buy milk, call ana",
+   "intent": "list"
+  },
+  {
+   "text": "a simple list of buy milk, call ana",
+   "intent": "list"
+  },
+  {
+   "text": "list buy milk, call ana",
+   "intent": "list"
+  },
+  {
+   "text": "list: rice, eggs and coffee",
+   "intent": "list"
+  },
+  {
+   "text": "a list of rice, eggs and coffee",
+   "intent": "list"
+  },
+  {
+   "text": "list of rice, eggs and coffee",
+   "intent": "list"
+  },
+  {
+   "text": "simple list rice, eggs and coffee",
+   "intent": "list"
+  },
+  {
+   "text": "a simple list of rice, eggs and coffee",
+   "intent": "list"
+  },
+  {
+   "text": "list rice, eggs and coffee",
+   "intent": "list"
+  },
+  {
+   "text": "list: book the train, reply to the venue and buy rice",
+   "intent": "list"
+  },
+  {
+   "text": "a list of book the train, reply to the venue and buy rice",
+   "intent": "list"
+  },
+  {
+   "text": "list of book the train, reply to the venue and buy rice",
+   "intent": "list"
+  },
+  {
+   "text": "simple list book the train, reply to the venue and buy rice",
+   "intent": "list"
+  },
+  {
+   "text": "a simple list of book the train, reply to the venue and buy rice",
+   "intent": "list"
+  },
+  {
+   "text": "list book the train, reply to the venue and buy rice",
+   "intent": "list"
+  },
+  {
+   "text": "list: spinach, tofu and sambal",
+   "intent": "list"
+  },
+  {
+   "text": "a list of spinach, tofu and sambal",
+   "intent": "list"
+  },
+  {
+   "text": "list of spinach, tofu and sambal",
+   "intent": "list"
+  },
+  {
+   "text": "simple list spinach, tofu and sambal",
+   "intent": "list"
+  },
+  {
+   "text": "a simple list of spinach, tofu and sambal",
+   "intent": "list"
+  },
+  {
+   "text": "list spinach, tofu and sambal",
+   "intent": "list"
+  },
+  {
+   "text": "list: passport, charger and socks",
+   "intent": "list"
+  },
+  {
+   "text": "a list of passport, charger and socks",
+   "intent": "list"
+  },
+  {
+   "text": "list of passport, charger and socks",
+   "intent": "list"
+  },
+  {
+   "text": "simple list passport, charger and socks",
+   "intent": "list"
+  },
+  {
+   "text": "a simple list of passport, charger and socks",
+   "intent": "list"
+  },
+  {
+   "text": "list passport, charger and socks",
+   "intent": "list"
+  },
+  {
+   "text": "list: water the plants and pay the bills",
+   "intent": "list"
+  },
+  {
+   "text": "a list of water the plants and pay the bills",
+   "intent": "list"
+  },
+  {
+   "text": "list of water the plants and pay the bills",
+   "intent": "list"
+  },
+  {
+   "text": "simple list water the plants and pay the bills",
+   "intent": "list"
+  },
+  {
+   "text": "a simple list of water the plants and pay the bills",
+   "intent": "list"
+  },
+  {
+   "text": "list water the plants and pay the bills",
+   "intent": "list"
+  },
+  {
+   "text": "list: bread, butter and jam",
+   "intent": "list"
+  },
+  {
+   "text": "a list of bread, butter and jam",
+   "intent": "list"
+  },
+  {
+   "text": "list of bread, butter and jam",
+   "intent": "list"
+  },
+  {
+   "text": "simple list bread, butter and jam",
+   "intent": "list"
+  },
+  {
+   "text": "a simple list of bread, butter and jam",
+   "intent": "list"
+  },
+  {
+   "text": "list bread, butter and jam",
+   "intent": "list"
+  },
+  {
+   "text": "list: vacuum the floor, mop and dust the shelves",
+   "intent": "list"
+  },
+  {
+   "text": "a list of vacuum the floor, mop and dust the shelves",
+   "intent": "list"
+  },
+  {
+   "text": "list of vacuum the floor, mop and dust the shelves",
+   "intent": "list"
+  },
+  {
+   "text": "simple list vacuum the floor, mop and dust the shelves",
+   "intent": "list"
+  },
+  {
+   "text": "a simple list of vacuum the floor, mop and dust the shelves",
+   "intent": "list"
+  },
+  {
+   "text": "list vacuum the floor, mop and dust the shelves",
+   "intent": "list"
+  },
+  {
+   "text": "list: call the bank, renew the license and email the landlord",
+   "intent": "list"
+  },
+  {
+   "text": "a list of call the bank, renew the license and email the landlord",
+   "intent": "list"
+  },
+  {
+   "text": "list of call the bank, renew the license and email the landlord",
+   "intent": "list"
+  },
+  {
+   "text": "simple list call the bank, renew the license and email the landlord",
+   "intent": "list"
+  },
+  {
+   "text": "a simple list of call the bank, renew the license and email the landlord",
+   "intent": "list"
+  },
+  {
+   "text": "list call the bank, renew the license and email the landlord",
+   "intent": "list"
+  },
+  {
+   "text": "list: toothbrush, towel and sunscreen",
+   "intent": "list"
+  },
+  {
+   "text": "a list of toothbrush, towel and sunscreen",
+   "intent": "list"
+  },
+  {
+   "text": "list of toothbrush, towel and sunscreen",
+   "intent": "list"
+  },
+  {
+   "text": "simple list toothbrush, towel and sunscreen",
+   "intent": "list"
+  },
+  {
+   "text": "a simple list of toothbrush, towel and sunscreen",
+   "intent": "list"
+  },
+  {
+   "text": "list toothbrush, towel and sunscreen",
+   "intent": "list"
+  },
+  {
+   "text": "list: apples, pears and oranges",
+   "intent": "list"
+  },
+  {
+   "text": "a list of apples, pears and oranges",
+   "intent": "list"
+  },
+  {
+   "text": "list of apples, pears and oranges",
+   "intent": "list"
+  },
+  {
+   "text": "simple list apples, pears and oranges",
+   "intent": "list"
+  },
+  {
+   "text": "a simple list of apples, pears and oranges",
+   "intent": "list"
+  },
+  {
+   "text": "list apples, pears and oranges",
+   "intent": "list"
+  },
+  {
+   "text": "list: red, green and blue",
+   "intent": "list"
+  },
+  {
+   "text": "a list of red, green and blue",
+   "intent": "list"
+  },
+  {
+   "text": "list of red, green and blue",
+   "intent": "list"
+  },
+  {
+   "text": "simple list red, green and blue",
+   "intent": "list"
+  },
+  {
+   "text": "a simple list of red, green and blue",
+   "intent": "list"
+  },
+  {
+   "text": "list red, green and blue",
+   "intent": "list"
+  },
+  {
+   "text": "list: one, two and three",
+   "intent": "list"
+  },
+  {
+   "text": "a list of one, two and three",
+   "intent": "list"
+  },
+  {
+   "text": "list of one, two and three",
+   "intent": "list"
+  },
+  {
+   "text": "simple list one, two and three",
+   "intent": "list"
+  },
+  {
+   "text": "a simple list of one, two and three",
+   "intent": "list"
+  },
+  {
+   "text": "list one, two and three",
+   "intent": "list"
+  },
+  {
+   "text": "list: salt, pepper and oil",
+   "intent": "list"
+  },
+  {
+   "text": "a list of salt, pepper and oil",
+   "intent": "list"
+  },
+  {
+   "text": "list of salt, pepper and oil",
+   "intent": "list"
+  },
+  {
+   "text": "simple list salt, pepper and oil",
+   "intent": "list"
+  },
+  {
+   "text": "a simple list of salt, pepper and oil",
+   "intent": "list"
+  },
+  {
+   "text": "list salt, pepper and oil",
+   "intent": "list"
+  },
+  {
+   "text": "list: shirts, pants and a jacket",
+   "intent": "list"
+  },
+  {
+   "text": "a list of shirts, pants and a jacket",
+   "intent": "list"
+  },
+  {
+   "text": "list of shirts, pants and a jacket",
+   "intent": "list"
+  },
+  {
+   "text": "simple list shirts, pants and a jacket",
+   "intent": "list"
+  },
+  {
+   "text": "a simple list of shirts, pants and a jacket",
+   "intent": "list"
+  },
+  {
+   "text": "list shirts, pants and a jacket",
+   "intent": "list"
+  },
+  {
+   "text": "list: email the landlord and schedule the dentist",
+   "intent": "list"
+  },
+  {
+   "text": "a list of email the landlord and schedule the dentist",
+   "intent": "list"
+  },
+  {
+   "text": "list of email the landlord and schedule the dentist",
+   "intent": "list"
+  },
+  {
+   "text": "simple list email the landlord and schedule the dentist",
+   "intent": "list"
+  },
+  {
+   "text": "a simple list of email the landlord and schedule the dentist",
+   "intent": "list"
+  },
+  {
+   "text": "list email the landlord and schedule the dentist",
+   "intent": "list"
+  },
+  {
+   "text": "text: hello there",
+   "intent": "text"
+  },
+  {
+   "text": "a note that says hello there",
+   "intent": "text"
+  },
+  {
+   "text": "intro: hello there",
+   "intent": "text"
+  },
+  {
+   "text": "note hello there",
+   "intent": "text"
+  },
+  {
+   "text": "note: hello there",
+   "intent": "text"
+  },
+  {
+   "text": "a note hello there",
+   "intent": "text"
+  },
+  {
+   "text": "text hello there",
+   "intent": "text"
+  },
+  {
+   "text": "text: welcome to the page",
+   "intent": "text"
+  },
+  {
+   "text": "a note that says welcome to the page",
+   "intent": "text"
+  },
+  {
+   "text": "intro: welcome to the page",
+   "intent": "text"
+  },
+  {
+   "text": "note welcome to the page",
+   "intent": "text"
+  },
+  {
+   "text": "note: welcome to the page",
+   "intent": "text"
+  },
+  {
+   "text": "a note welcome to the page",
+   "intent": "text"
+  },
+  {
+   "text": "text welcome to the page",
+   "intent": "text"
+  },
+  {
+   "text": "text: drink water often",
+   "intent": "text"
+  },
+  {
+   "text": "a note that says drink water often",
+   "intent": "text"
+  },
+  {
+   "text": "intro: drink water often",
+   "intent": "text"
+  },
+  {
+   "text": "note drink water often",
+   "intent": "text"
+  },
+  {
+   "text": "note: drink water often",
+   "intent": "text"
+  },
+  {
+   "text": "a note drink water often",
+   "intent": "text"
+  },
+  {
+   "text": "text drink water often",
+   "intent": "text"
+  },
+  {
+   "text": "text: about this app",
+   "intent": "text"
+  },
+  {
+   "text": "a note that says about this app",
+   "intent": "text"
+  },
+  {
+   "text": "intro: about this app",
+   "intent": "text"
+  },
+  {
+   "text": "note about this app",
+   "intent": "text"
+  },
+  {
+   "text": "note: about this app",
+   "intent": "text"
+  },
+  {
+   "text": "a note about this app",
+   "intent": "text"
+  },
+  {
+   "text": "text about this app",
+   "intent": "text"
+  },
+  {
+   "text": "text: remember to stretch",
+   "intent": "text"
+  },
+  {
+   "text": "a note that says remember to stretch",
+   "intent": "text"
+  },
+  {
+   "text": "intro: remember to stretch",
+   "intent": "text"
+  },
+  {
+   "text": "note remember to stretch",
+   "intent": "text"
+  },
+  {
+   "text": "note: remember to stretch",
+   "intent": "text"
+  },
+  {
+   "text": "a note remember to stretch",
+   "intent": "text"
+  },
+  {
+   "text": "text remember to stretch",
+   "intent": "text"
+  },
+  {
+   "text": "text: stand up every hour",
+   "intent": "text"
+  },
+  {
+   "text": "a note that says stand up every hour",
+   "intent": "text"
+  },
+  {
+   "text": "intro: stand up every hour",
+   "intent": "text"
+  },
+  {
+   "text": "note stand up every hour",
+   "intent": "text"
+  },
+  {
+   "text": "note: stand up every hour",
+   "intent": "text"
+  },
+  {
+   "text": "a note stand up every hour",
+   "intent": "text"
+  },
+  {
+   "text": "text stand up every hour",
+   "intent": "text"
+  },
+  {
+   "text": "text: take a deep breath",
+   "intent": "text"
+  },
+  {
+   "text": "a note that says take a deep breath",
+   "intent": "text"
+  },
+  {
+   "text": "intro: take a deep breath",
+   "intent": "text"
+  },
+  {
+   "text": "note take a deep breath",
+   "intent": "text"
+  },
+  {
+   "text": "note: take a deep breath",
+   "intent": "text"
+  },
+  {
+   "text": "a note take a deep breath",
+   "intent": "text"
+  },
+  {
+   "text": "text take a deep breath",
+   "intent": "text"
+  },
+  {
+   "text": "text: welcome to my page",
+   "intent": "text"
+  },
+  {
+   "text": "a note that says welcome to my page",
+   "intent": "text"
+  },
+  {
+   "text": "intro: welcome to my page",
+   "intent": "text"
+  },
+  {
+   "text": "note welcome to my page",
+   "intent": "text"
+  },
+  {
+   "text": "note: welcome to my page",
+   "intent": "text"
+  },
+  {
+   "text": "a note welcome to my page",
+   "intent": "text"
+  },
+  {
+   "text": "text welcome to my page",
+   "intent": "text"
+  },
+  {
+   "text": "text: breathe in, breathe out",
+   "intent": "text"
+  },
+  {
+   "text": "a note that says breathe in, breathe out",
+   "intent": "text"
+  },
+  {
+   "text": "intro: breathe in, breathe out",
+   "intent": "text"
+  },
+  {
+   "text": "note breathe in, breathe out",
+   "intent": "text"
+  },
+  {
+   "text": "note: breathe in, breathe out",
+   "intent": "text"
+  },
+  {
+   "text": "a note breathe in, breathe out",
+   "intent": "text"
+  },
+  {
+   "text": "text breathe in, breathe out",
+   "intent": "text"
+  },
+  {
+   "text": "text: made with daya",
+   "intent": "text"
+  },
+  {
+   "text": "a note that says made with daya",
+   "intent": "text"
+  },
+  {
+   "text": "intro: made with daya",
+   "intent": "text"
+  },
+  {
+   "text": "note made with daya",
+   "intent": "text"
+  },
+  {
+   "text": "note: made with daya",
+   "intent": "text"
+  },
+  {
+   "text": "a note made with daya",
+   "intent": "text"
+  },
+  {
+   "text": "text made with daya",
+   "intent": "text"
+  },
+  {
+   "text": "text: a tiny page for tiny tasks",
+   "intent": "text"
+  },
+  {
+   "text": "a note that says a tiny page for tiny tasks",
+   "intent": "text"
+  },
+  {
+   "text": "intro: a tiny page for tiny tasks",
+   "intent": "text"
+  },
+  {
+   "text": "note a tiny page for tiny tasks",
+   "intent": "text"
+  },
+  {
+   "text": "note: a tiny page for tiny tasks",
+   "intent": "text"
+  },
+  {
+   "text": "a note a tiny page for tiny tasks",
+   "intent": "text"
+  },
+  {
+   "text": "text a tiny page for tiny tasks",
+   "intent": "text"
+  },
+  {
+   "text": "text: start when ready",
+   "intent": "text"
+  },
+  {
+   "text": "a note that says start when ready",
+   "intent": "text"
+  },
+  {
+   "text": "intro: start when ready",
+   "intent": "text"
+  },
+  {
+   "text": "note start when ready",
+   "intent": "text"
+  },
+  {
+   "text": "note: start when ready",
+   "intent": "text"
+  },
+  {
+   "text": "a note start when ready",
+   "intent": "text"
+  },
+  {
+   "text": "text start when ready",
+   "intent": "text"
+  },
+  {
+   "text": "text: no account needed",
+   "intent": "text"
+  },
+  {
+   "text": "a note that says no account needed",
+   "intent": "text"
+  },
+  {
+   "text": "intro: no account needed",
+   "intent": "text"
+  },
+  {
+   "text": "note no account needed",
+   "intent": "text"
+  },
+  {
+   "text": "note: no account needed",
+   "intent": "text"
+  },
+  {
+   "text": "a note no account needed",
+   "intent": "text"
+  },
+  {
+   "text": "text no account needed",
+   "intent": "text"
+  },
+  {
+   "text": "text: everything stays in this browser",
+   "intent": "text"
+  },
+  {
+   "text": "a note that says everything stays in this browser",
+   "intent": "text"
+  },
+  {
+   "text": "intro: everything stays in this browser",
+   "intent": "text"
+  },
+  {
+   "text": "note everything stays in this browser",
+   "intent": "text"
+  },
+  {
+   "text": "note: everything stays in this browser",
+   "intent": "text"
+  },
+  {
+   "text": "a note everything stays in this browser",
+   "intent": "text"
+  },
+  {
+   "text": "text everything stays in this browser",
+   "intent": "text"
+  }
+ ]
+}

@@ -1,0 +1,566 @@
+{
+ "split": "heldout.json",
+ "engines": {
+  "rules": {
+   "engine": "rules",
+   "should_parse": 38,
+   "correct": 15,
+   "wrong_recipe": 1,
+   "refused": 22,
+   "should_refuse": 7,
+   "refuse_correct": 6,
+   "refuse_violated": 1,
+   "failures": [
+    {
+     "text": "a ten minute timer for eggs",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "timer for five minutes",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "a 90 second plank timer",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "please create a 5 minute break timer",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "pomodoro for studying",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "a 15 minite timer for tea",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "make me a todo list called \"Weekend\" with items: sleep in, brunch and laundry",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "a quiz about world capitals",
+     "got": "parsed [\"text\"]"
+    },
+    {
+     "text": "set a timer for 7 minutes so my pasta does not overcook",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "give me a timer, twenty minutes, for steeping tea",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "two hour timer for slow cooking",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "set an alarm for 10 minutes",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "half an hour timer for a nap",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "a coutner for steps",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "count how many push ups i do",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "i want to track my water intake",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "keep count of laps in the pool",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "track pages read each day",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "water tracker",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "my packing list: passport, charger and socks",
+     "got": "intents [\"list\"]"
+    },
+    {
+     "text": "todo: call the dentist, renew the passport",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "groceries: milk, eggs, spinach",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "chores: vacuum, mop and dust",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    },
+    {
+     "text": "reading list",
+     "got": "refused: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pomodoro\", \"a counter for X\", \"a to"
+    }
+   ],
+   "tiers": {
+    "core": {
+     "should_parse": 18,
+     "correct": 11
+    },
+    "stretch": {
+     "should_parse": 20,
+     "correct": 4
+    }
+   }
+  },
+  "grammar": {
+   "engine": "grammar",
+   "should_parse": 38,
+   "correct": 24,
+   "wrong_recipe": 1,
+   "refused": 13,
+   "should_refuse": 7,
+   "refuse_correct": 7,
+   "refuse_violated": 0,
+   "failures": [
+    {
+     "text": "pomodoro for studying",
+     "got": "refused: grammar engine could not parse: 'pomodoro for studying'"
+    },
+    {
+     "text": "a 15 minite timer for tea",
+     "got": "refused: grammar: timer without a duration"
+    },
+    {
+     "text": "a simple list of one, two and three",
+     "got": "refused: grammar engine could not parse: 'a simple list of one, two and three'"
+    },
+    {
+     "text": "set an alarm for 10 minutes",
+     "got": "refused: grammar engine could not parse: 'set an alarm for 10 minutes'"
+    },
+    {
+     "text": "half an hour timer for a nap",
+     "got": "seconds [3600] want [1800]"
+    },
+    {
+     "text": "a coutner for steps",
+     "got": "refused: grammar engine could not parse: 'a coutner for steps'"
+    },
+    {
+     "text": "count how many push ups i do",
+     "got": "refused: grammar engine could not parse: 'count how many push ups i do'"
+    },
+    {
+     "text": "i want to track my water intake",
+     "got": "refused: grammar engine could not parse: 'i want to track my water intake'"
+    },
+    {
+     "text": "keep count of laps in the pool",
+     "got": "refused: grammar engine could not parse: 'keep count of laps in the pool'"
+    },
+    {
+     "text": "track pages read each day",
+     "got": "refused: grammar engine could not parse: 'track pages read each day'"
+    },
+    {
+     "text": "water tracker",
+     "got": "refused: grammar engine could not parse: 'water tracker'"
+    },
+    {
+     "text": "my packing list: passport, charger and socks",
+     "got": "refused: grammar engine could not parse: 'my packing list: passport, charger and socks'"
+    },
+    {
+     "text": "chores: vacuum, mop and dust",
+     "got": "refused: grammar engine could not parse: 'chores: vacuum, mop and dust'"
+    },
+    {
+     "text": "reading list",
+     "got": "refused: grammar engine could not parse: 'reading list'"
+    }
+   ],
+   "tiers": {
+    "core": {
+     "should_parse": 18,
+     "correct": 15
+    },
+    "stretch": {
+     "should_parse": 20,
+     "correct": 9
+    }
+   }
+  },
+  "template": {
+   "engine": "template",
+   "should_parse": 38,
+   "correct": 9,
+   "wrong_recipe": 0,
+   "refused": 29,
+   "should_refuse": 7,
+   "refuse_correct": 7,
+   "refuse_violated": 0,
+   "failures": [
+    {
+     "text": "countdown of 90 seconds",
+     "got": "refused: template engine could not match: 'countdown of 90 seconds'"
+    },
+    {
+     "text": "timer for five minutes",
+     "got": "refused: template engine could not match: 'timer for five minutes'"
+    },
+    {
+     "text": "a 90 second plank timer",
+     "got": "refused: template engine could not match: 'a 90 second plank timer'"
+    },
+    {
+     "text": "please create a 5 minute break timer",
+     "got": "refused: template engine could not match: 'please create a 5 minute break timer'"
+    },
+    {
+     "text": "pomodoro for studying",
+     "got": "refused: template engine could not match: 'pomodoro for studying'"
+    },
+    {
+     "text": "a 15 minite timer for tea",
+     "got": "refused: template engine could not match: 'a 15 minite timer for tea'"
+    },
+    {
+     "text": "make me a todo list called \"Weekend\" with items: sleep in, brunch and laundry",
+     "got": "refused: template engine could not match: 'make me a todo list, brunch and laundry'"
+    },
+    {
+     "text": "a simple list of one, two and three",
+     "got": "refused: template engine could not match: 'a simple list of one, two and three'"
+    },
+    {
+     "text": "note: stand up every hour",
+     "got": "refused: template engine could not match: 'note: stand up every hour'"
+    },
+    {
+     "text": "a note that says stretch your legs",
+     "got": "refused: template engine could not match: 'a note that says stretch your legs'"
+    },
+    {
+     "text": "intro: this page helps you focus",
+     "got": "refused: template engine could not match: 'intro: this page helps you focus'"
+    },
+    {
+     "text": "text: morning routine. a 10 minute timer for stretching. a counter for push ups",
+     "got": "refused: template engine could not match: 'text: morning routine'"
+    },
+    {
+     "text": "set a timer for 7 minutes so my pasta does not overcook",
+     "got": "refused: template engine could not match: 'set a timer for 7 minutes so my pasta does not overcook'"
+    },
+    {
+     "text": "i need a 45 second countdown for plank holds",
+     "got": "refused: template engine could not match: 'i need a 45 second countdown for plank holds'"
+    },
+    {
+     "text": "give me a timer, twenty minutes, for steeping tea",
+     "got": "refused: template engine could not match: 'give me a timer, twenty minutes, for steeping tea'"
+    },
+    {
+     "text": "countdown timer for 20 minutes",
+     "got": "refused: template engine could not match: 'countdown timer for 20 minutes'"
+    },
+    {
+     "text": "set an alarm for 10 minutes",
+     "got": "refused: template engine could not match: 'set an alarm for 10 minutes'"
+    },
+    {
+     "text": "half an hour timer for a nap",
+     "got": "refused: template engine could not match: 'half an hour timer for a nap'"
+    },
+    {
+     "text": "count how many push ups i do",
+     "got": "refused: template engine could not match: 'count how many push ups i do'"
+    },
+    {
+     "text": "i want to track my water intake",
+     "got": "refused: template engine could not match: 'i want to track my water intake'"
+    },
+    {
+     "text": "keep count of laps in the pool",
+     "got": "refused: template engine could not match: 'keep count of laps in the pool'"
+    },
+    {
+     "text": "track pages read each day",
+     "got": "refused: template engine could not match: 'track pages read each day'"
+    },
+    {
+     "text": "water tracker",
+     "got": "refused: template engine could not match: 'water tracker'"
+    },
+    {
+     "text": "my packing list: passport, charger and socks",
+     "got": "refused: template engine could not match: 'my packing list: passport, charger and socks'"
+    },
+    {
+     "text": "todo: call the dentist, renew the passport",
+     "got": "refused: template engine could not match: 'todo: call the dentist, renew the passport'"
+    },
+    {
+     "text": "groceries: milk, eggs, spinach",
+     "got": "refused: template engine could not match: 'groceries: milk, eggs, spinach'"
+    },
+    {
+     "text": "chores: vacuum, mop and dust",
+     "got": "refused: template engine could not match: 'chores: vacuum, mop and dust'"
+    },
+    {
+     "text": "a note saying remember to breathe",
+     "got": "refused: template engine could not match: 'a note saying remember to breathe'"
+    },
+    {
+     "text": "reading list",
+     "got": "refused: template engine could not match: 'reading list'"
+    }
+   ],
+   "tiers": {
+    "core": {
+     "should_parse": 18,
+     "correct": 6
+    },
+    "stretch": {
+     "should_parse": 20,
+     "correct": 3
+    }
+   }
+  },
+  "bayes": {
+   "engine": "bayes",
+   "should_parse": 38,
+   "correct": 25,
+   "wrong_recipe": 7,
+   "refused": 6,
+   "should_refuse": 7,
+   "refuse_correct": 5,
+   "refuse_violated": 2,
+   "failures": [
+    {
+     "text": "countdown of 90 seconds",
+     "got": "intents [\"counter\"]"
+    },
+    {
+     "text": "pomodoro for studying",
+     "got": "intents [\"counter\"]"
+    },
+    {
+     "text": "a 15 minite timer for tea",
+     "got": "refused: bayes engine could not parse: 'a 15 minite timer for tea (bayes: timer intent but no duration found)'"
+    },
+    {
+     "text": "list: red, green, blue",
+     "got": "refused: bayes engine could not parse: 'list: red, , blue (best guess 'list' scored only 53%); refusing to guess below "
+    },
+    {
+     "text": "a video player for my clips",
+     "got": "parsed [\"counter\"]"
+    },
+    {
+     "text": "a map of jogja",
+     "got": "parsed [\"counter\"]"
+    },
+    {
+     "text": "set a timer for 7 minutes so my pasta does not overcook",
+     "got": "intents [\"counter\"]"
+    },
+    {
+     "text": "i need a 45 second countdown for plank holds",
+     "got": "intents [\"counter\"]"
+    },
+    {
+     "text": "two hour timer for slow cooking",
+     "got": "refused: bayes engine could not parse: 'two hour timer for slow cooking (best guess 'timer' scored only 53%); refusing "
+    },
+    {
+     "text": "half an hour timer for a nap",
+     "got": "seconds [3600] want [1800]"
+    },
+    {
+     "text": "my packing list: passport, charger and socks",
+     "got": "intents [\"list\"]"
+    },
+    {
+     "text": "todo: call the dentist, renew the passport",
+     "got": "refused: bayes engine could not parse: 'todo: call the dentist, renew the passport (best guess 'list' scored only 34%);"
+    },
+    {
+     "text": "groceries: milk, eggs, spinach",
+     "got": "intents [\"list\"]"
+    },
+    {
+     "text": "chores: vacuum, mop and dust",
+     "got": "refused: bayes engine could not parse: 'chores: vacuum, mop and dust (best guess 'list' scored only 55%); refusing to g"
+    },
+    {
+     "text": "reading list",
+     "got": "refused: bayes engine could not parse: 'reading list (best guess 'todo' scored only 39%); refusing to guess below 55%'"
+    }
+   ],
+   "tiers": {
+    "core": {
+     "should_parse": 18,
+     "correct": 14
+    },
+    "stretch": {
+     "should_parse": 20,
+     "correct": 11
+    }
+   }
+  },
+  "auto": {
+   "engine": "auto",
+   "should_parse": 38,
+   "correct": 32,
+   "wrong_recipe": 3,
+   "refused": 3,
+   "should_refuse": 7,
+   "refuse_correct": 4,
+   "refuse_violated": 3,
+   "failures": [
+    {
+     "text": "pomodoro for studying",
+     "got": "intents [\"counter\"]"
+    },
+    {
+     "text": "a 15 minite timer for tea",
+     "got": "refused: no offline method understood the description. Per method: rules: no recognizable sections. Supported phrasings"
+    },
+    {
+     "text": "a video player for my clips",
+     "got": "parsed [\"counter\"]"
+    },
+    {
+     "text": "a map of jogja",
+     "got": "parsed [\"counter\"]"
+    },
+    {
+     "text": "a quiz about world capitals",
+     "got": "parsed [\"text\"]"
+    },
+    {
+     "text": "half an hour timer for a nap",
+     "got": "seconds [3600] want [1800]"
+    },
+    {
+     "text": "my packing list: passport, charger and socks",
+     "got": "intents [\"list\"]"
+    },
+    {
+     "text": "chores: vacuum, mop and dust",
+     "got": "refused: no offline method understood the description. Per method: rules: no recognizable sections. Supported phrasings"
+    },
+    {
+     "text": "reading list",
+     "got": "refused: no offline method understood the description. Per method: rules: no recognizable sections. Supported phrasings"
+    }
+   ],
+   "tiers": {
+    "core": {
+     "should_parse": 18,
+     "correct": 16
+    },
+    "stretch": {
+     "should_parse": 20,
+     "correct": 16
+    }
+   }
+  }
+ },
+ "nb": {
+  "nb-full": {
+   "should_parse": 35,
+   "intent_correct": 34,
+   "per_intent": {
+    "timer": {
+     "n": 15,
+     "ok": 15
+    },
+    "todo": {
+     "n": 6,
+     "ok": 5
+    },
+    "counter": {
+     "n": 8,
+     "ok": 8
+    },
+    "list": {
+     "n": 2,
+     "ok": 2
+    },
+    "text": {
+     "n": 4,
+     "ok": 4
+    }
+   },
+   "misses": [
+    {
+     "text": "todo: call the dentist, renew the passport",
+     "want": "todo",
+     "got": "list"
+    }
+   ]
+  },
+  "nb-tiny": {
+   "should_parse": 35,
+   "intent_correct": 31,
+   "per_intent": {
+    "timer": {
+     "n": 15,
+     "ok": 13
+    },
+    "todo": {
+     "n": 6,
+     "ok": 4
+    },
+    "counter": {
+     "n": 8,
+     "ok": 8
+    },
+    "list": {
+     "n": 2,
+     "ok": 2
+    },
+    "text": {
+     "n": 4,
+     "ok": 4
+    }
+   },
+   "misses": [
+    {
+     "text": "pomodoro for studying",
+     "want": "timer",
+     "got": "counter"
+    },
+    {
+     "text": "set an alarm for 10 minutes",
+     "want": "timer",
+     "got": "counter"
+    },
+    {
+     "text": "my packing list: passport, charger and socks",
+     "want": "todo",
+     "got": "list"
+    },
+    {
+     "text": "groceries: milk, eggs, spinach",
+     "want": "todo",
+     "got": "list"
+    }
+   ]
+  }
+ },
+ "nb_train": {
+  "full": 1579,
+  "tiny": 200
+ }
+}

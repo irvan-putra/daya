@@ -225,6 +225,13 @@ absolute guarantee.
 - A generated `.xdc` has no icon yet, and its state stays on each
   device: no webxdc sync, no shared state.
 
+## Experiments
+
+Offline experiments live in `experiments/`. The first one,
+`experiments/purpose-trained-model/`, measures how well the text-to-recipe
+routes handle hand-written paraphrases and whether a small purpose-trained
+model is worth building (synthetic data only, no shipped-code changes).
+
 ## Development
 
 ```sh

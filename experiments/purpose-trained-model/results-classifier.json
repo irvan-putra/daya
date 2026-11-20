@@ -1,0 +1,875 @@
+{
+ "summary": {
+  "should_parse": 38,
+  "correct": 21,
+  "declined_design": 2,
+  "wrong": 2,
+  "refused": 13,
+  "should_refuse": 7,
+  "refuse_correct": 7,
+  "refuse_violated": 0,
+  "tiers": {
+   "core": {
+    "n": 18,
+    "ok": 13
+   },
+   "stretch": {
+    "n": 20,
+    "ok": 8
+   }
+  },
+  "label_accuracy": {
+   "n": 35,
+   "ok": 30,
+   "per_intent": {
+    "timer": {
+     "n": 15,
+     "ok": 14
+    },
+    "todo": {
+     "n": 6,
+     "ok": 4
+    },
+    "counter": {
+     "n": 8,
+     "ok": 8
+    },
+    "list": {
+     "n": 2,
+     "ok": 2
+    },
+    "text": {
+     "n": 4,
+     "ok": 2
+    }
+   }
+  }
+ },
+ "rows": [
+  {
+   "text": "a 25 minute timer for focus, called \"Focus\", green",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "timer"
+   ],
+   "intents_any": null,
+   "wantSeconds": [
+    1500
+   ],
+   "label": "timer",
+   "score": 0.947,
+   "outcome": {
+    "types": [
+     "timer"
+    ],
+    "engine": "rules",
+    "seconds": [
+     1500
+    ]
+   }
+  },
+  {
+   "text": "countdown of 90 seconds",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "timer"
+   ],
+   "intents_any": null,
+   "wantSeconds": [
+    90
+   ],
+   "label": "timer",
+   "score": 0.506,
+   "outcome": {
+    "types": [
+     "timer"
+    ],
+    "engine": "rules",
+    "seconds": [
+     90
+    ]
+   }
+  },
+  {
+   "text": "a ten minute timer for eggs",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "timer"
+   ],
+   "intents_any": null,
+   "wantSeconds": [
+    600
+   ],
+   "label": "timer",
+   "score": 0.902,
+   "outcome": {
+    "types": [
+     "timer"
+    ],
+    "engine": "grammar",
+    "seconds": [
+     600
+    ]
+   }
+  },
+  {
+   "text": "timer for five minutes",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "timer"
+   ],
+   "intents_any": null,
+   "wantSeconds": [
+    300
+   ],
+   "label": "timer",
+   "score": 0.811,
+   "outcome": {
+    "types": [
+     "timer"
+    ],
+    "engine": "grammar",
+    "seconds": [
+     300
+    ]
+   }
+  },
+  {
+   "text": "a 90 second plank timer",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "timer"
+   ],
+   "intents_any": null,
+   "wantSeconds": [
+    90
+   ],
+   "label": "timer",
+   "score": 0.899,
+   "outcome": {
+    "types": [
+     "timer"
+    ],
+    "engine": "grammar",
+    "seconds": [
+     90
+    ]
+   }
+  },
+  {
+   "text": "please create a 5 minute break timer",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "timer"
+   ],
+   "intents_any": null,
+   "wantSeconds": [
+    300
+   ],
+   "label": "timer",
+   "score": 0.936,
+   "outcome": {
+    "types": [
+     "timer"
+    ],
+    "engine": "grammar",
+    "seconds": [
+     300
+    ]
+   }
+  },
+  {
+   "text": "pomodoro for studying",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "timer"
+   ],
+   "intents_any": null,
+   "wantSeconds": [
+    1500
+   ],
+   "label": "counter",
+   "score": 0.377,
+   "outcome": {
+    "declined": "classifier heard 'counter' but no extractor produced it (rules: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"p"
+   }
+  },
+  {
+   "text": "a 15 minite timer for tea",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "timer"
+   ],
+   "intents_any": null,
+   "wantSeconds": [
+    900
+   ],
+   "label": "timer",
+   "score": 0.924,
+   "outcome": {
+    "declined": "classifier heard 'timer' but no extractor produced it (rules: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pom"
+   }
+  },
+  {
+   "text": "shopping list with items: spinach, tofu and sambal",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "todo"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "checklist",
+   "score": 0.73,
+   "outcome": {
+    "types": [
+     "todo"
+    ],
+    "engine": "rules",
+    "seconds": []
+   }
+  },
+  {
+   "text": "make me a todo list called \"Weekend\" with items: sleep in, brunch and laundry",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "todo"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "todo list",
+   "score": 0.891,
+   "outcome": {
+    "types": [
+     "todo"
+    ],
+    "engine": "grammar",
+    "seconds": []
+   }
+  },
+  {
+   "text": "a counter for days without sugar",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "counter"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "counter",
+   "score": 0.987,
+   "outcome": {
+    "types": [
+     "counter"
+    ],
+    "engine": "rules",
+    "seconds": []
+   }
+  },
+  {
+   "text": "can you build a counter for my gym reps",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "counter"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "counter",
+   "score": 0.943,
+   "outcome": {
+    "types": [
+     "counter"
+    ],
+    "engine": "rules",
+    "seconds": []
+   }
+  },
+  {
+   "text": "list: red, green, blue",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "list"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "todo list",
+   "score": 0.464,
+   "outcome": {
+    "types": [
+     "list"
+    ],
+    "engine": "rules",
+    "seconds": []
+   }
+  },
+  {
+   "text": "a simple list of one, two and three",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "list"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "todo list",
+   "score": 0.4,
+   "outcome": {
+    "types": [
+     "list"
+    ],
+    "engine": "rules",
+    "seconds": []
+   }
+  },
+  {
+   "text": "note: stand up every hour",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "text"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "todo list",
+   "score": 0.273,
+   "outcome": {
+    "declined": "classifier heard 'todo list' but no extractor produced it (rules produced text; grammar produced text; template: template engine could not m"
+   }
+  },
+  {
+   "text": "a note that says stretch your legs",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "text"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "text notes",
+   "score": 0.566,
+   "outcome": {
+    "declined": "classifier heard 'text notes', but this route can only extract timer, counter and list sections so far - no recipe was built"
+   }
+  },
+  {
+   "text": "intro: this page helps you focus",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "text"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "counter",
+   "score": 0.335,
+   "outcome": {
+    "declined": "classifier heard 'counter' but no extractor produced it (rules produced text; grammar produced text; template: template engine could not mat"
+   }
+  },
+  {
+   "text": "text: morning routine. a 10 minute timer for stretching. a counter for push ups",
+   "tier": "core",
+   "refuse": false,
+   "intents": [
+    "text",
+    "timer",
+    "counter"
+   ],
+   "intents_any": null,
+   "wantSeconds": [
+    600
+   ],
+   "label": "counter",
+   "score": 0.52,
+   "outcome": {
+    "types": [
+     "text",
+     "timer",
+     "counter"
+    ],
+    "engine": "rules",
+    "seconds": [
+     600
+    ]
+   }
+  },
+  {
+   "text": "egg timer",
+   "tier": "core",
+   "refuse": true,
+   "intents": null,
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "timer",
+   "score": 0.771,
+   "outcome": {
+    "declined": "classifier heard 'timer' but no extractor produced it (rules: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pom"
+   }
+  },
+  {
+   "text": "a video player for my clips",
+   "tier": "core",
+   "refuse": true,
+   "intents": null,
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "counter",
+   "score": 0.615,
+   "outcome": {
+    "declined": "classifier heard 'counter' but no extractor produced it (rules: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"p"
+   }
+  },
+  {
+   "text": "a map of jogja",
+   "tier": "core",
+   "refuse": true,
+   "intents": null,
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "todo list",
+   "score": 0.505,
+   "outcome": {
+    "declined": "classifier heard 'todo list' but no extractor produced it (rules: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", "
+   }
+  },
+  {
+   "text": "something completely different",
+   "tier": "core",
+   "refuse": true,
+   "intents": null,
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "counter",
+   "score": 0.432,
+   "outcome": {
+    "declined": "classifier heard 'counter' but no extractor produced it (rules: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"p"
+   }
+  },
+  {
+   "text": "a quiz about world capitals",
+   "tier": "core",
+   "refuse": true,
+   "intents": null,
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "quiz",
+   "score": 0.911,
+   "outcome": {
+    "declined": "classifier heard 'quiz', but this route can only extract timer, counter and list sections so far - no recipe was built"
+   }
+  },
+  {
+   "text": "remind me to call mom",
+   "tier": "core",
+   "refuse": true,
+   "intents": null,
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "counter",
+   "score": 0.49,
+   "outcome": {
+    "declined": "classifier heard 'counter' but no extractor produced it (rules: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"p"
+   }
+  },
+  {
+   "text": "timer 10 menit buat masak",
+   "tier": "core",
+   "refuse": true,
+   "intents": null,
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "timer",
+   "score": 0.835,
+   "outcome": {
+    "declined": "classifier heard 'timer' but no extractor produced it (rules: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pom"
+   }
+  },
+  {
+   "text": "set a timer for 7 minutes so my pasta does not overcook",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "timer"
+   ],
+   "intents_any": null,
+   "wantSeconds": [
+    420
+   ],
+   "label": "timer",
+   "score": 0.951,
+   "outcome": {
+    "types": [
+     "timer"
+    ],
+    "engine": "grammar",
+    "seconds": [
+     420
+    ]
+   }
+  },
+  {
+   "text": "i need a 45 second countdown for plank holds",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "timer"
+   ],
+   "intents_any": null,
+   "wantSeconds": [
+    45
+   ],
+   "label": "timer",
+   "score": 0.524,
+   "outcome": {
+    "types": [
+     "timer"
+    ],
+    "engine": "rules",
+    "seconds": [
+     45
+    ]
+   }
+  },
+  {
+   "text": "give me a timer, twenty minutes, for steeping tea",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "timer"
+   ],
+   "intents_any": null,
+   "wantSeconds": [
+    1200
+   ],
+   "label": "timer",
+   "score": 0.876,
+   "outcome": {
+    "types": [
+     "timer"
+    ],
+    "engine": "grammar",
+    "seconds": [
+     1200
+    ]
+   }
+  },
+  {
+   "text": "countdown timer for 20 minutes",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "timer"
+   ],
+   "intents_any": null,
+   "wantSeconds": [
+    1200
+   ],
+   "label": "timer",
+   "score": 0.899,
+   "outcome": {
+    "types": [
+     "timer"
+    ],
+    "engine": "rules",
+    "seconds": [
+     1200
+    ]
+   }
+  },
+  {
+   "text": "two hour timer for slow cooking",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "timer"
+   ],
+   "intents_any": null,
+   "wantSeconds": [
+    3600
+   ],
+   "label": "timer",
+   "score": 0.877,
+   "outcome": {
+    "types": [
+     "timer"
+    ],
+    "engine": "grammar",
+    "seconds": [
+     3600
+    ]
+   }
+  },
+  {
+   "text": "set an alarm for 10 minutes",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "timer"
+   ],
+   "intents_any": null,
+   "wantSeconds": [
+    600
+   ],
+   "label": "timer",
+   "score": 0.599,
+   "outcome": {
+    "declined": "classifier heard 'timer' but no extractor produced it (rules: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"pom"
+   }
+  },
+  {
+   "text": "half an hour timer for a nap",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "timer"
+   ],
+   "intents_any": null,
+   "wantSeconds": [
+    1800
+   ],
+   "label": "timer",
+   "score": 0.835,
+   "outcome": {
+    "types": [
+     "timer"
+    ],
+    "engine": "grammar",
+    "seconds": [
+     3600
+    ]
+   }
+  },
+  {
+   "text": "a coutner for steps",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "counter"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "counter",
+   "score": 0.458,
+   "outcome": {
+    "types": [
+     "counter"
+    ],
+    "engine": "template",
+    "seconds": []
+   }
+  },
+  {
+   "text": "count how many push ups i do",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "counter"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "counter",
+   "score": 0.533,
+   "outcome": {
+    "declined": "classifier heard 'counter' but no extractor produced it (rules: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"p"
+   }
+  },
+  {
+   "text": "i want to track my water intake",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "counter"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "counter",
+   "score": 0.289,
+   "outcome": {
+    "declined": "classifier heard 'counter' but no extractor produced it (rules: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"p"
+   }
+  },
+  {
+   "text": "keep count of laps in the pool",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "counter"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "counter",
+   "score": 0.402,
+   "outcome": {
+    "declined": "classifier heard 'counter' but no extractor produced it (rules: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"p"
+   }
+  },
+  {
+   "text": "track pages read each day",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "counter"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "counter",
+   "score": 0.552,
+   "outcome": {
+    "declined": "classifier heard 'counter' but no extractor produced it (rules: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"p"
+   }
+  },
+  {
+   "text": "water tracker",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "counter"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "counter",
+   "score": 0.591,
+   "outcome": {
+    "declined": "classifier heard 'counter' but no extractor produced it (rules: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"p"
+   }
+  },
+  {
+   "text": "my packing list: passport, charger and socks",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "todo"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "checklist",
+   "score": 0.433,
+   "outcome": {
+    "types": [
+     "list"
+    ],
+    "engine": "rules",
+    "seconds": []
+   }
+  },
+  {
+   "text": "todo: call the dentist, renew the passport",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "todo"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "todo list",
+   "score": 0.351,
+   "outcome": {
+    "types": [
+     "todo"
+    ],
+    "engine": "grammar",
+    "seconds": []
+   }
+  },
+  {
+   "text": "groceries: milk, eggs, spinach",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "todo"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "counter",
+   "score": 0.576,
+   "outcome": {
+    "declined": "classifier heard 'counter' but no extractor produced it (rules: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"p"
+   }
+  },
+  {
+   "text": "chores: vacuum, mop and dust",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "todo"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "counter",
+   "score": 0.68,
+   "outcome": {
+    "declined": "classifier heard 'counter' but no extractor produced it (rules: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"p"
+   }
+  },
+  {
+   "text": "a note saying remember to breathe",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": [
+    "text"
+   ],
+   "intents_any": null,
+   "wantSeconds": null,
+   "label": "text notes",
+   "score": 0.66,
+   "outcome": {
+    "declined": "classifier heard 'text notes', but this route can only extract timer, counter and list sections so far - no recipe was built"
+   }
+  },
+  {
+   "text": "a list of things to pack: passport and charger",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": null,
+   "intents_any": [
+    [
+     "list"
+    ],
+    [
+     "todo"
+    ]
+   ],
+   "wantSeconds": null,
+   "label": "todo list",
+   "score": 0.514,
+   "outcome": {
+    "types": [
+     "list"
+    ],
+    "engine": "rules",
+    "seconds": []
+   }
+  },
+  {
+   "text": "reading list",
+   "tier": "stretch",
+   "refuse": false,
+   "intents": null,
+   "intents_any": [
+    [
+     "list"
+    ],
+    [
+     "todo"
+    ]
+   ],
+   "wantSeconds": null,
+   "label": "counter",
+   "score": 0.412,
+   "outcome": {
+    "declined": "classifier heard 'counter' but no extractor produced it (rules: no recognizable sections. Supported phrasings: \"a 25 minute timer for X\", \"p"
+   }
+  }
+ ]
+}
