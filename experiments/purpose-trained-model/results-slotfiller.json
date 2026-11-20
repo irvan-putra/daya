@@ -1,0 +1,91 @@
+{
+ "should_parse": 38,
+ "correct": 31,
+ "wrong": 4,
+ "refused": 3,
+ "should_refuse": 7,
+ "refuse_correct": 2,
+ "refuse_violated": 5,
+ "tiers": {
+  "core": {
+   "n": 18,
+   "ok": 16
+  },
+  "stretch": {
+   "n": 20,
+   "ok": 15
+  }
+ },
+ "failures": [
+  {
+   "text": "a 15 minite timer for tea",
+   "got": "refused"
+  },
+  {
+   "text": "make me a todo list called \"Weekend\" with items: sleep in, brunch and laundry",
+   "got": [
+    "list"
+   ],
+   "secs": []
+  },
+  {
+   "text": "a video player for my clips",
+   "got": [
+    "counter"
+   ]
+  },
+  {
+   "text": "a map of jogja",
+   "got": [
+    "counter"
+   ]
+  },
+  {
+   "text": "something completely different",
+   "got": [
+    "counter"
+   ]
+  },
+  {
+   "text": "a quiz about world capitals",
+   "got": [
+    "text"
+   ]
+  },
+  {
+   "text": "remind me to call mom",
+   "got": [
+    "list"
+   ]
+  },
+  {
+   "text": "set a timer for 7 minutes so my pasta does not overcook",
+   "got": "refused"
+  },
+  {
+   "text": "half an hour timer for a nap",
+   "got": "refused"
+  },
+  {
+   "text": "todo: call the dentist, renew the passport",
+   "got": [
+    "list"
+   ],
+   "secs": []
+  },
+  {
+   "text": "groceries: milk, eggs, spinach",
+   "got": [
+    "counter"
+   ],
+   "secs": []
+  },
+  {
+   "text": "chores: vacuum, mop and dust",
+   "got": [
+    "list"
+   ],
+   "secs": []
+  }
+ ]
+}

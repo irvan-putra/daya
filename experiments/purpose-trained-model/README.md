@@ -5,7 +5,7 @@ Question: can a small model trained for daya's narrow recipe intents beat
 hand-written paraphrases, using synthetic-only data, free compute and no
 model download?
 
-Status: **step 1 done** — dataset, held-out set and baselines measured.
+Status: **step 2 started** — baselines measured (below), slot filler v0.1 trained and evaluated (next section).
 No shipped code, route or download changed; this directory is offline
 tooling and its results, nothing else.
 
@@ -113,14 +113,48 @@ route 13/18, 8/20. Full per-case rows: `results-heldout.json`,
   Classification speed here is not a phone-speed measurement.
 - Nothing here changed shipped code, routes or downloads.
 
+## Purpose-trained slot filler v0.1 (2026-11-20, second sitting)
+
+`slot_filler.py` trains a naive Bayes intent classifier plus a per-token
+perceptron slot tagger on slot-annotated synthetic data
+(`dataset-slots-train.json`, 865 samples). A disjoint-vocabulary synthetic
+validation split (`dataset-slots-valid.json`, 561 samples: unseen timer
+labels, counter labels, item sets and text bodies) drove the ONE tuning
+decision (epoch count, 12, at validation span F1 0.908). `heldout.json`
+was evaluated exactly once for this model version and stays
+evaluation-only. Training takes ~1.5 s with the Python standard library
+alone; no downloads, no accounts.
+
+Held-out results (the single evaluation run):
+
+- End-to-end: 31/38 (core 16/18, stretch 15/20). Same range as the auto
+  cascade (32/38) and ahead of every single classical engine, with no
+  hand-written rules for slots.
+- Refusal: 2/7. The model has NO abstention mechanism: the classifier
+  always picks an intent and the tagger fills it, so "a map of jogja"
+  still becomes a counter. Until an abstention gate exists, this
+  direction cannot replace the cascade's honest "not understood"; it
+  would have to sit behind one.
+- Measured gaps from the failure list: no title/accent handling
+  ('called "Weekend"' flipped todo to list), typo'd units refuse
+  ("minite"), longer multi-clause sentences lose the duration slots
+  ("set a timer for 7 minutes so my pasta does not overcook"),
+  fraction durations are out of vocabulary ("half an hour").
+- v0.1 lesson: B/I tags collapsed the tagger (runaway I- weights on
+  global features; validation F1 ~0.10); type-only run tags fixed it
+  (0.908). The journey is in git history, not hidden.
+
 ## Next steps (proposals, not started)
 
-- Purpose-trained slot filler (intent + duration/items/label) trained
-  on the synthetic split and evaluated on held-out, running free
-  (candidates: CRF-style tagger, tiny seq2seq).
-- An abstention gate for the classifier route: correct hears scored
+- Abstention for the purpose-trained route: intent-score margin plus a
+  slot-coverage check (a timer with no duration slots must refuse).
+  Without it the slot filler stays an experiment (refusal 2/7).
+- An abstention gate for the classifier route too: correct hears scored
   0.40-0.95 here, several wrong hears scored under 0.5, but "countdown
   of 90 seconds" scored 0.506, so a threshold needs care.
+- Slot-filler v0.2: title/accent meta handling, typo-tolerant units,
+  robustness on multi-clause sentences, fraction durations. Retrain and
+  re-evaluate heldout ONCE per version; tune only on synthetic valid.
 - Fix the cascade's out-of-scope guessing (finding 1), the colon-form
   todo heads (finding 3) and the half-hour misparse (finding 2) in the
   classical engines, with regression fixtures from heldout.json.
