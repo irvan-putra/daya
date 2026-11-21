@@ -266,3 +266,7 @@ The engine is GPL-3.0-or-later. Voice models need a separate review: check the `
 ## License
 
 AGPL-3.0, see LICENSE.
+
+## Model reference
+
+[Models so far in Kaji](https://vanipy.com/kaji/models/) compares named classifier and generator artifacts, sizes, licenses and runtime limits, including Inkling 2 Mini. Catalog only; existing routes and research notes are unchanged.
