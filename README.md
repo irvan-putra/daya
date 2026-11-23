@@ -4,6 +4,9 @@ Deterministic code generator: a chatbot (or a person) writes a small
 structured recipe, daya validates it and compiles it into working code.
 Same recipe in, byte-identical code out.
 
+Live: <https://vanipy.com/daya/> (examples and the compose page at
+`/daya/compose.html`, served from `docs/`).
+
 The idea: a chatbot that cannot write code can still fill in a small
 structured form. Deterministic tools do the rest. Validation reports
 every problem with a field path, so the chatbot can fix its recipe and
@@ -187,7 +190,7 @@ The `todo` section is the first piece aimed at an existing app: it
 models the core list behavior of
 [tindak](https://github.com/irvan-putra/tindak) (add, done, archive
 instead of delete) as a generated companion with its own independent
-storage. It is not an tindak data client: it does not read, write or
+storage. It is not a tindak data client: it does not read, write or
 sync tindak's lists. Applying generated code to an app remains a
 separate, reviewed step.
 
