@@ -5,9 +5,10 @@ Question: can a small model trained for daya's narrow recipe intents beat
 hand-written paraphrases, using synthetic-only data, free compute and no
 model download?
 
-Status: **step 2 started** — baselines measured (below), slot filler v0.1 trained and evaluated (next section).
-No shipped code, route or download changed; this directory is offline
-tooling and its results, nothing else.
+Status: **step 3 completed** — baselines measured, slot filler v0.1 trained,
+abstention gate added (no retraining) and both arms measured once on a
+fresh held-out set (bottom section). No shipped code, route or download
+changed; this directory is offline tooling and its results, nothing else.
 
 Approved scope (WhatsApp 2026-11-19, "yes, add all as options"):
 synthetic-only data, no paid compute, no new accounts, no private data,
@@ -152,11 +153,75 @@ Held-out results (the single evaluation run):
   global features; validation F1 ~0.10); type-only run tags fixed it
   (0.908). The journey is in git history, not hidden.
 
+## Abstention gate + fresh held-out v2 (2026-11-23, third sitting)
+
+v0.1's blocking gap was refusal (2/7): the model always picks an intent.
+`eval_abstain.py` adds a decision layer on the FROZEN v0.1 weights — no
+retraining, no model swap:
+
+1. explained-token coverage: every token must be a stopword or carry a
+   non-O slot tag; refuse below 0.5 coverage (rule fixed a priori)
+2. naive-Bayes top-posterior threshold theta, the ONE numeric knob
+3. refuse when no token carries any slot evidence
+4. partial timer slots (number without unit or vice versa) refuse, because
+   a silently wrong duration is worse than a refusal (finding 2)
+
+theta was calibrated ONLY on synthetic data: dataset-slots-valid.json
+(should accept) plus `calib-refuse.json`, 20 agent-authored out-of-scope
+probes (tuning data, never evaluation). Sweep in
+`results-abstain-calibration.json`; chosen theta 0.7 (valid accept 97.3%,
+probe refuse 90%, Youden J 0.873).
+
+`heldout-v2.json` is a NEW hand-authored set (46 cases: 18 core, 18
+stretch, 10 should-refuse), disjoint from v1 and from both synthetic
+splits. Both arms were evaluated on it exactly once
+(`results-abstain-v2.json`); the cascade comparison is
+`results-cascade-v2.json`.
+
+| arm (held-out v2)               | end-to-end correct | refusal P / R | gen-acc on accepted |
+| ------------------------------- | ------------------ | ------------- | ------------------- |
+| raw slot filler v0.1            | 75.0% (27/36; core 16/18, stretch 11/18) | 0.40 / 0.20 | 81.8% |
+| **gated slot filler v0.1**      | **69.4% (25/36; core 15/18, stretch 10/18)** | **0.54 / 0.70** | **83.3%** |
+| auto cascade (what the page runs) | 75.0% (27/36; core 15/18, stretch 12/18) | 0.63 / 0.50 | 79.4% |
+
+## Findings (step 3)
+
+9. **The raw v0.1 model confirmed its abstention gap on fresh cases:**
+   2/10 correct refusals (recall 0.20); it turned "a stopwatch for my
+   runs", "wake me at 6am", "play some lofi music" and "asdf qwer zxcv"
+   into counters. This reproduces v1's 2/7 on independently written
+   inputs, so the gap is a model property, not a v1 artifact.
+10. **A decision-layer gate fixed most of it without retraining:**
+    refusal recall 0.20 → 0.70 and generation accuracy on accepted inputs
+    rose 81.8% → 83.3%, at the cost of 3 wrongly refused should-parse
+    cases (precision 0.54): "list: alpha, beta, gamma" and two stretch
+    cases. Refusals are honest failures; invented apps are silent ones.
+11. **The gate and the cascade refuse differently:** the cascade refused
+    5/10 (its bayes fallback still guesses on unrelated text), the gated
+    model 7/10; their misses overlap little, so a cascade-of-last-resort
+    or union gate could do better than either.
+12. **Remaining gate violations are NB-prior artifacts:** the 3 cases that
+    still invented apps ("directions to the airport" → text, "a photo
+    gallery for my holiday pictures" → counter, "something fun for the
+    weekend" → counter) all-score out-of-vocabulary words smoothest
+    toward high-token-count intents. A purpose-trained model needs an
+    explicit out-of-scope class or OOV-aware scoring, not just
+    thresholds.
+
+## Honest limits (step 3 additions)
+
+- heldout-v2.json shares v1's authorship limit: the author had read v1's
+  failure analysis, and these 46 cases are now development-contaminated
+  for any future iteration. The NEXT quality claim needs a third set.
+- The calibration probe set is 20 agent-authored out-of-scope sentences;
+  theta=0.7 is tuned on it, so probe_refuse 90% is a tuning-set number.
+- The gate's coverage stopword list is English-only by construction.
+
 ## Next steps (proposals, not started)
 
-- Abstention for the purpose-trained route: intent-score margin plus a
-  slot-coverage check (a timer with no duration slots must refuse).
-  Without it the slot filler stays an experiment (refusal 2/7).
+- Abstention v2: an explicit out-of-scope training class (finding 12) and
+  a union of the gate with the grammar engine's refusals (finding 11).
+  Tune only on synthetic data; measure on a third fresh held-out set.
 - An abstention gate for the classifier route too: correct hears scored
   0.40-0.95 here, several wrong hears scored under 0.5, but "countdown
   of 90 seconds" scored 0.506, so a threshold needs care.

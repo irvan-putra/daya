@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "description": "Out-of-scope probe set for CALIBRATING the abstention gate (tuning data, not evaluation). Paired with dataset-slots-valid.json (in-scope, should accept) to pick the gate's one numeric threshold. Disjoint from heldout-v2.json; never used to report quality.",
+  "cases": [
+    {"text": "a calendar for my meetings"},
+    {"text": "weather forecast for tomorrow"},
+    {"text": "translate this to french"},
+    {"text": "call my mom"},
+    {"text": "order a pizza"},
+    {"text": "what time is it"},
+    {"text": "a calculator for tips"},
+    {"text": "play the news"},
+    {"text": "book a flight to singapore"},
+    {"text": "turn on the lights"},
+    {"text": "blah blah blah"},
+    {"text": "help me with my homework"},
+    {"text": "a spreadsheet for expenses"},
+    {"text": "set an alarm for tomorrow morning"},
+    {"text": "sing a song"},
+    {"text": "open the door"},
+    {"text": "gizmo frobnicate"},
+    {"text": "email my boss"},
+    {"text": "a whiteboard for sketching"},
+    {"text": "tell me a joke"}
+  ]
+}

@@ -1,0 +1,259 @@
+{
+ "heldout": "heldout-v2.json",
+ "model": "model-slotfiller.json (frozen v0.1)",
+ "gate": {
+  "theta": 0.7,
+  "coverage_min": 0.5,
+  "calibration": {
+   "theta": 0.7,
+   "valid_accept": 0.9733,
+   "probe_refuse": 0.9,
+   "youden_j": 0.8733
+  }
+ },
+ "arms": {
+  "raw_v0_1": {
+   "should_parse": 36,
+   "correct": 27,
+   "wrong": 6,
+   "refused": 3,
+   "should_refuse": 10,
+   "refuse_correct": 2,
+   "refuse_violated": 8,
+   "tiers": {
+    "core": {
+     "n": 18,
+     "ok": 16
+    },
+    "stretch": {
+     "n": 18,
+     "ok": 11
+    }
+   },
+   "failures": [
+    {
+     "text": "checklist: tickets, passport and hotel booking",
+     "got": [
+      "list"
+     ],
+     "secs": []
+    },
+    {
+     "text": "intro: plan your day. a 10 minute timer for reading. groceries: milk and bread",
+     "got": [
+      "text",
+      "timer",
+      "list"
+     ],
+     "secs": [
+      600
+     ]
+    },
+    {
+     "text": "i need a timer for 6 minutes to brew tea",
+     "got": "refused"
+    },
+    {
+     "text": "set a timer, 15 minutes, for the pizza in the oven",
+     "got": [
+      "counter"
+     ],
+     "secs": []
+    },
+    {
+     "text": "an hour and a half timer for roasting chicken",
+     "got": "refused"
+    },
+    {
+     "text": "focus timer for deep work",
+     "got": "refused"
+    },
+    {
+     "text": "packing for the trip: tent, torch and rope",
+     "got": [
+      "counter"
+     ],
+     "secs": []
+    },
+    {
+     "text": "a list of ideas for the birthday party",
+     "got": [
+      "counter"
+     ],
+     "secs": []
+    },
+    {
+     "text": "write down: the wifi password is on the fridge",
+     "got": [
+      "counter"
+     ],
+     "secs": []
+    },
+    {
+     "text": "a stopwatch for my runs",
+     "got": [
+      "counter"
+     ]
+    },
+    {
+     "text": "wake me at 6am",
+     "got": [
+      "counter"
+     ]
+    },
+    {
+     "text": "play some lofi music",
+     "got": [
+      "counter"
+     ]
+    },
+    {
+     "text": "directions to the airport",
+     "got": [
+      "text"
+     ]
+    },
+    {
+     "text": "a photo gallery for my holiday pictures",
+     "got": [
+      "counter"
+     ]
+    },
+    {
+     "text": "a quiz about indonesian history",
+     "got": [
+      "text"
+     ]
+    },
+    {
+     "text": "something fun for the weekend",
+     "got": [
+      "counter"
+     ]
+    },
+    {
+     "text": "asdf qwer zxcv",
+     "got": [
+      "counter"
+     ]
+    }
+   ],
+   "abstention": {
+    "tp": 2,
+    "fp": 3,
+    "fn": 8,
+    "tn": 33,
+    "precision": 0.4,
+    "recall": 0.2,
+    "generation_accuracy_on_accepted": 0.8182
+   }
+  },
+  "gated_v0_1": {
+   "should_parse": 36,
+   "correct": 25,
+   "wrong": 5,
+   "refused": 6,
+   "should_refuse": 10,
+   "refuse_correct": 7,
+   "refuse_violated": 3,
+   "tiers": {
+    "core": {
+     "n": 18,
+     "ok": 15
+    },
+    "stretch": {
+     "n": 18,
+     "ok": 10
+    }
+   },
+   "failures": [
+    {
+     "text": "checklist: tickets, passport and hotel booking",
+     "got": [
+      "list"
+     ],
+     "secs": []
+    },
+    {
+     "text": "list: alpha, beta, gamma",
+     "got": "refused"
+    },
+    {
+     "text": "intro: plan your day. a 10 minute timer for reading. groceries: milk and bread",
+     "got": "refused"
+    },
+    {
+     "text": "i need a timer for 6 minutes to brew tea",
+     "got": "refused"
+    },
+    {
+     "text": "set a timer, 15 minutes, for the pizza in the oven",
+     "got": [
+      "counter"
+     ],
+     "secs": []
+    },
+    {
+     "text": "an hour and a half timer for roasting chicken",
+     "got": "refused"
+    },
+    {
+     "text": "focus timer for deep work",
+     "got": "refused"
+    },
+    {
+     "text": "things to buy: batteries, tape and glue",
+     "got": "refused"
+    },
+    {
+     "text": "packing for the trip: tent, torch and rope",
+     "got": [
+      "counter"
+     ],
+     "secs": []
+    },
+    {
+     "text": "a list of ideas for the birthday party",
+     "got": [
+      "counter"
+     ],
+     "secs": []
+    },
+    {
+     "text": "write down: the wifi password is on the fridge",
+     "got": [
+      "counter"
+     ],
+     "secs": []
+    },
+    {
+     "text": "directions to the airport",
+     "got": [
+      "text"
+     ]
+    },
+    {
+     "text": "a photo gallery for my holiday pictures",
+     "got": [
+      "counter"
+     ]
+    },
+    {
+     "text": "something fun for the weekend",
+     "got": [
+      "counter"
+     ]
+    }
+   ],
+   "abstention": {
+    "tp": 7,
+    "fp": 6,
+    "fn": 3,
+    "tn": 30,
+    "precision": 0.5385,
+    "recall": 0.7,
+    "generation_accuracy_on_accepted": 0.8333
+   }
+  }
+ }
+}

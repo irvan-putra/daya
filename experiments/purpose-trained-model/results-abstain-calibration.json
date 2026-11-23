@@ -1,0 +1,65 @@
+{
+ "sweep": [
+  {
+   "theta": 0.3,
+   "valid_accept": 0.9982,
+   "probe_refuse": 0.0,
+   "youden_j": -0.0018
+  },
+  {
+   "theta": 0.4,
+   "valid_accept": 0.9982,
+   "probe_refuse": 0.0,
+   "youden_j": -0.0018
+  },
+  {
+   "theta": 0.5,
+   "valid_accept": 0.9982,
+   "probe_refuse": 0.45,
+   "youden_j": 0.4482
+  },
+  {
+   "theta": 0.6,
+   "valid_accept": 0.9786,
+   "probe_refuse": 0.6,
+   "youden_j": 0.5786
+  },
+  {
+   "theta": 0.7,
+   "valid_accept": 0.9733,
+   "probe_refuse": 0.9,
+   "youden_j": 0.8733
+  },
+  {
+   "theta": 0.8,
+   "valid_accept": 0.9091,
+   "probe_refuse": 0.9,
+   "youden_j": 0.8091
+  },
+  {
+   "theta": 0.9,
+   "valid_accept": 0.7772,
+   "probe_refuse": 0.95,
+   "youden_j": 0.7272
+  },
+  {
+   "theta": 0.95,
+   "valid_accept": 0.7362,
+   "probe_refuse": 1.0,
+   "youden_j": 0.7362
+  },
+  {
+   "theta": 0.99,
+   "valid_accept": 0.6346,
+   "probe_refuse": 1.0,
+   "youden_j": 0.6346
+  }
+ ],
+ "chosen": {
+  "theta": 0.7,
+  "valid_accept": 0.9733,
+  "probe_refuse": 0.9,
+  "youden_j": 0.8733
+ },
+ "note": "theta picked by Youden J on synthetic valid + calibration probes only; ties break to higher valid accept, then lower theta"
+}
