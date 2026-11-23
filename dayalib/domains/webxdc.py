@@ -1,7 +1,7 @@
 """The webxdc domain: a recipe becomes a complete .xdc mini-app.
 
 A .xdc is a zip with an index.html and a manifest.toml, the format
-DeltaChat mini-apps use (our intodo shared list is one). This pack
+DeltaChat mini-apps use (our tindak shared list is one). This pack
 wraps the web domain: the recipe's page fields validate and generate
 through the web pack unchanged, and the "app" object adds the manifest
 fields. The result drops straight into a chat client's "publish mini

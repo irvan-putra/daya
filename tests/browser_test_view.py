@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Live-browser interaction tests for daya's intodo-view domain.
+"""Live-browser interaction tests for daya's tindak-view domain.
 
 Builds a focus-view page, injects a MOCK controller (test-only double of
 the owner-authored js/itd-controller.js contract: snapshot/subscribe/
@@ -19,11 +19,11 @@ import tempfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 
-from dayalib.domains import intodo_view as view
+from dayalib.domains import tindak_view as view
 from tests.browser_test import find_chrome
 
 FIXTURE = {
-    "domain": "intodo-view",
+    "domain": "tindak-view",
     "title": "Focus",
     "description": "Unfinished items only.",
 }

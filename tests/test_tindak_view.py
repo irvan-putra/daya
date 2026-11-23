@@ -1,11 +1,11 @@
 import html
 import unittest
 
-from dayalib.domains import intodo_view as view
+from dayalib.domains import tindak_view as view
 
 
 VALID = {
-    "domain": "intodo-view",
+    "domain": "tindak-view",
     "title": "Focus",
     "description": "Unfinished items only.",
     "theme": {"accent": "green"},
@@ -33,7 +33,7 @@ class GenerateTests(unittest.TestCase):
         self.assertEqual(build(VALID), build(VALID))
 
     def test_description_optional(self):
-        recipe = {"domain": "intodo-view", "title": "t"}
+        recipe = {"domain": "tindak-view", "title": "t"}
         page = build(recipe)
         self.assertNotIn('<p class="lede">', page)
 
@@ -54,7 +54,7 @@ class GenerateTests(unittest.TestCase):
 
     def test_recipe_strings_escaped(self):
         raw = '<img src=x onerror="alert(1)">'
-        page = build({"domain": "intodo-view", "title": raw})
+        page = build({"domain": "tindak-view", "title": raw})
         self.assertNotIn(raw, page)
         self.assertIn(html.escape(raw, quote=True), page)
 
@@ -74,19 +74,19 @@ class ValidateTests(unittest.TestCase):
     def test_missing_title(self):
         self.assertIn(
             "title: must be a string",
-            self.errors({"domain": "intodo-view"}),
+            self.errors({"domain": "tindak-view"}),
         )
 
     def test_unknown_fields_rejected(self):
         errors = self.errors(
-            {"domain": "intodo-view", "title": "t", "storage_key": "x", "sections": []}
+            {"domain": "tindak-view", "title": "t", "storage_key": "x", "sections": []}
         )
         self.assertIn("recipe: unknown field 'storage_key'", errors)
         self.assertIn("recipe: unknown field 'sections'", errors)
 
     def test_accent_rules(self):
         errors = self.errors(
-            {"domain": "intodo-view", "title": "t", "theme": {"accent": "neon"}}
+            {"domain": "tindak-view", "title": "t", "theme": {"accent": "neon"}}
         )
         self.assertTrue(any(e.startswith("theme.accent:") for e in errors))
 

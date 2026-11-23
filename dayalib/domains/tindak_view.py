@@ -1,8 +1,8 @@
-"""The intodo-view domain: a recipe becomes one view page for the intodo
+"""The tindak-view domain: a recipe becomes one view page for the tindak
 shared-list webxdc app.
 
 PROPOSAL STAGE: no app uses this output yet. The page is generated
-against a controller contract that the intodo owner authors and owns:
+against a controller contract that the tindak owner authors and owns:
 a headless controller script (contract name js/itd-controller.js,
 global window.ItdController) shared by the existing UI and generated
 views, exposing:
@@ -31,15 +31,15 @@ from .. import __version__
 from ..recipe import Checker, check_no_unknown_keys, check_string
 from . import web
 
-DOMAIN = "intodo-view"
+DOMAIN = "tindak-view"
 DESCRIPTION = (
-    "One focus-view page for the intodo webxdc shared list, rendered "
+    "One focus-view page for the tindak webxdc shared list, rendered "
     "against the owner's headless controller. Proposal stage."
 )
 
 _TOP_KEYS = {"domain", "title", "description", "theme"}
 
-# Contract constants, pending the intodo owner's confirmation.
+# Contract constants, pending the tindak owner's confirmation.
 CONTROLLER_SRC = "js/itd-controller.js"
 CONTROLLER_GLOBAL = "ItdController"
 FULL_VIEW_HREF = "index.html"
@@ -255,12 +255,12 @@ def self_check(page, model):
 
 
 def schema():
-    """A plain-JSON description of the intodo-view recipe format."""
+    """A plain-JSON description of the tindak-view recipe format."""
     return {
-        "domain": "intodo-view",
+        "domain": "tindak-view",
         "description": DESCRIPTION,
         "fields": {
-            "domain": 'the string "intodo-view"',
+            "domain": 'the string "tindak-view"',
             "title": "string, 1..80 characters",
             "description": "optional string, 1..280 characters",
             "theme": {"accent": "optional, one of: " + ", ".join(sorted(web.ACCENTS))},

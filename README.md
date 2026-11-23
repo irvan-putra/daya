@@ -169,24 +169,26 @@ The example recipes are published from `docs/`: `focus-timer.html`,
   cannot inject TOML. No icon support yet, generated apps keep state on
   the device (no webxdc sync), and the generated `.xdc` has not yet
   been validated inside a chat client.
-- `intodo-view` (proposal stage) — one focus-view page for the intodo
+- `tindak-view` (proposal stage) — one focus-view page for the tindak
   webxdc shared list. The page holds no state of its own: it renders
   immutable snapshots from an owner-authored headless controller and
   writes only through the controller's commands, so merge, sync and
   restore semantics stay exactly the app's own. self_check rejects any
   output referencing localStorage, webxdc, MergeDoc or sendUpdate. No
   app uses this output yet; the controller contract is pending the
-  intodo owner's confirmation.
+  tindak owner's confirmation. Renamed from `intodo-view` on
+  2026-11-23: recipes saved with the old domain string no longer load;
+  re-save them as `tindak-view`.
 
 More domains are planned (CLI tools, automations, app screens). Each
 domain is a small pack: schema, templates, checks.
 
 The `todo` section is the first piece aimed at an existing app: it
 models the core list behavior of
-[intodo](https://github.com/irvan-putra/intodo) (add, done, archive
+[tindak](https://github.com/irvan-putra/tindak) (add, done, archive
 instead of delete) as a generated companion with its own independent
-storage. It is not an intodo data client: it does not read, write or
-sync intodo's lists. Applying generated code to an app remains a
+storage. It is not an tindak data client: it does not read, write or
+sync tindak's lists. Applying generated code to an app remains a
 separate, reviewed step.
 
 ## Security
@@ -249,7 +251,7 @@ restore and storage load/save) run in headless Chrome:
 python3 tests/browser_test.py
 ```
 
-The intodo-view pack has its own browser suite against a mock
+The tindak-view pack has its own browser suite against a mock
 controller (loading and ready states, rendering, add/done commands,
 markup-injection safety):
 

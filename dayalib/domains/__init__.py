@@ -1,5 +1,5 @@
 """Domain packs: one per kind of code daya can generate."""
 
-from . import intodo_view, web, webxdc
+from . import tindak_view, web, webxdc
 
-DOMAINS = {"web": web, "webxdc": webxdc, "intodo-view": intodo_view}
+DOMAINS = {"web": web, "webxdc": webxdc, "tindak-view": tindak_view}
