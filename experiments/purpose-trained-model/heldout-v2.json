@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "description": "Second separately authored held-out set, written 2026-11-23 for the abstention milestone. Fresh phrasings, disjoint from heldout.json v1 and from both synthetic splits; the v0.1 model weights and the abstention gate were evaluated on it exactly once. Same honest limit as v1: the author had seen v1's failure analysis, so future iterations tuned on these results turn v2 into a development benchmark too. tier=core: phrasings close to the documented spec that engines should handle. tier=stretch: plausible user wording beyond the current spec; misses here are product gaps, not engine bugs. refuse=true: a correct engine declines.",
+  "description": "Second AI-written held-out set, written 2026-11-23 for the abstention milestone. Fresh phrasings, disjoint from heldout.json v1 and from both synthetic splits; the v0.1 model weights and the abstention gate were evaluated on it exactly once. Same honest limit as v1: the author had seen v1's failure analysis, so future iterations tuned on these results turn v2 into a development benchmark too. tier=core: phrasings close to the documented spec that engines should handle. tier=stretch: plausible user wording beyond the current spec; misses here are product gaps, not engine bugs. refuse=true: a correct engine declines.",
   "cases": [
     {"text": "a 5 minute timer for coffee", "tier": "core", "intents": ["timer"], "seconds": [300]},
     {"text": "make a 20 second timer for planks", "tier": "core", "intents": ["timer"], "seconds": [20]},

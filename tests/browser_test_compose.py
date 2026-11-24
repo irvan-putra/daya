@@ -89,7 +89,7 @@ DRIVER = r"""
   }
 
   /* Classical engine behavior (engines live only in the browser port, so
-     expectations are written directly here rather than fixture-generated). */
+     expectations are written out here (AI-written) rather than fixture-generated). */
   function canon(value) {
     if (value === null || typeof value !== "object") return JSON.stringify(value);
     if (Array.isArray(value)) return "[" + value.map(canon).join(",") + "]";

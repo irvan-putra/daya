@@ -41,7 +41,7 @@ recipe. It is a **bounded rule-based parser**: a fixed set of documented
 phrasings is recognized, anything else is reported as "not understood"
 instead of guessed, and the same text always yields the same recipe.
 No network, no AI service, no cost. The parsed recipe passes the same
-validation as a directly written one before it is printed, so a description
+validation as an AI-written one before it is printed, so a description
 can never produce a recipe the schema would reject.
 
 ```sh
@@ -149,7 +149,7 @@ and validation checks the recipe's shape, not that the chatbot
 understood the description.
 
 The compose page is
-directly coded tooling: pages generated from recipes keep their
+AI-written tooling: pages generated from recipes keep their
 self-contained, no-network property.
 
 ## Demo
@@ -234,7 +234,7 @@ absolute guarantee.
 
 Offline experiments live in `experiments/`. The first one,
 `experiments/purpose-trained-model/`, measures how well the text-to-recipe
-routes handle separately authored paraphrases and whether a small purpose-trained
+routes handle AI-written paraphrases and whether a small purpose-trained
 model is worth building (synthetic data only, no shipped-code changes).
 
 ## Development

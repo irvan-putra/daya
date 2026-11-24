@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "description": "Hand-authored held-out paraphrases. Written separately, NOT generated from the dataset blueprints, so template leak cannot inflate scores. tier=core: phrasings close to the documented spec that engines should handle. tier=stretch: plausible user wording beyond the current spec; misses here are product gaps, not engine bugs. refuse=true: a correct engine declines.",
+  "description": "AI-written held-out paraphrases. AI-written separately, NOT generated from the dataset blueprints, so template leak cannot inflate scores. tier=core: phrasings close to the documented spec that engines should handle. tier=stretch: plausible user wording beyond the current spec; misses here are product gaps, not engine bugs. refuse=true: a correct engine declines.",
   "cases": [
     {"text": "a 25 minute timer for focus, called \"Focus\", green", "tier": "core", "intents": ["timer"], "seconds": [1500], "note": "in-distribution control"},
     {"text": "countdown of 90 seconds", "tier": "core", "intents": ["timer"], "seconds": [90]},
