@@ -4,7 +4,7 @@
  * Loads the SHIPPED engines (docs/compose-core.js + docs/compose-engines.js,
  * read-only, no modifications) and scores them on a split file:
  *   - dataset-train.json : synthetic training split (coverage sanity check)
- *   - heldout.json       : hand-authored paraphrases (the number that matters)
+ *   - heldout.json       : separately authored paraphrases (the number that matters)
  *
  * Arms:
  *   engines : rules, grammar, template, bayes, auto (end-to-end: recipe must
