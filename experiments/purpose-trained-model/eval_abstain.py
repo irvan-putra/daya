@@ -74,6 +74,8 @@ def gate(nb, weights, tags, tokens, theta):
     """Returns (intent, tags_out) to proceed, or (None, reason) to refuse."""
     probs = posterior(nb_all_scores(nb, tokens))
     top = max(probs, key=probs.get)
+    if top == "out_of_scope":
+        return None, "out-of-scope class"  # v0.2 models only; v0.1 never predicts it
     if probs[top] < theta:
         return None, "posterior %.3f < %.2f" % (probs[top], theta)
     tags_out = tag_sentence(weights, tags, tokens)

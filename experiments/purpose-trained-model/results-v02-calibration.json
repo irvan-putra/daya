@@ -1,0 +1,68 @@
+{
+ "model": "model-slotfiller-v02.json",
+ "accept_side": "561 in-scope synthetic valid samples",
+ "refuse_side": "65 out-of-scope synthetic valid samples + 20 calib probes",
+ "sweep": [
+  {
+   "theta": 0.3,
+   "valid_accept": 0.9982,
+   "probe_refuse": 0.9059,
+   "youden_j": 0.9041
+  },
+  {
+   "theta": 0.4,
+   "valid_accept": 0.9982,
+   "probe_refuse": 0.9529,
+   "youden_j": 0.9512
+  },
+  {
+   "theta": 0.5,
+   "valid_accept": 0.9982,
+   "probe_refuse": 0.9529,
+   "youden_j": 0.9512
+  },
+  {
+   "theta": 0.6,
+   "valid_accept": 0.9911,
+   "probe_refuse": 0.9765,
+   "youden_j": 0.9676
+  },
+  {
+   "theta": 0.7,
+   "valid_accept": 0.9857,
+   "probe_refuse": 0.9882,
+   "youden_j": 0.974
+  },
+  {
+   "theta": 0.8,
+   "valid_accept": 0.8663,
+   "probe_refuse": 1.0,
+   "youden_j": 0.8663
+  },
+  {
+   "theta": 0.9,
+   "valid_accept": 0.8431,
+   "probe_refuse": 1.0,
+   "youden_j": 0.8431
+  },
+  {
+   "theta": 0.95,
+   "valid_accept": 0.7843,
+   "probe_refuse": 1.0,
+   "youden_j": 0.7843
+  },
+  {
+   "theta": 0.99,
+   "valid_accept": 0.6898,
+   "probe_refuse": 1.0,
+   "youden_j": 0.6898
+  }
+ ],
+ "chosen": {
+  "theta": 0.7,
+  "valid_accept": 0.9857,
+  "probe_refuse": 0.9882,
+  "youden_j": 0.974
+ },
+ "note": "theta picked by Youden J on synthetic data only; ties break to higher valid accept, then lower theta"
+}

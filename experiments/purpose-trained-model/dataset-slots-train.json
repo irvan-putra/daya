@@ -1,5 +1,5 @@
 {
- "version": 2,
+ "version": 3,
  "tags": "type-only",
  "samples": [
   {
@@ -25429,6 +25429,2496 @@
     [
      "ready",
      "BODY"
+    ]
+   ]
+  },
+  {
+   "text": "a map of the airport",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "map",
+     "O"
+    ],
+    [
+     "of",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "airport",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "directions to the airport",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "directions",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "airport",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "how do i get to the airport",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "how",
+     "O"
+    ],
+    [
+     "do",
+     "O"
+    ],
+    [
+     "i",
+     "O"
+    ],
+    [
+     "get",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "airport",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "show me the airport on a map",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "show",
+     "O"
+    ],
+    [
+     "me",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "airport",
+     "O"
+    ],
+    [
+     "on",
+     "O"
+    ],
+    [
+     "a",
+     "O"
+    ],
+    [
+     "map",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a map of jogja",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "map",
+     "O"
+    ],
+    [
+     "of",
+     "O"
+    ],
+    [
+     "jogja",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "directions to jogja",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "directions",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "jogja",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "how do i get to jogja",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "how",
+     "O"
+    ],
+    [
+     "do",
+     "O"
+    ],
+    [
+     "i",
+     "O"
+    ],
+    [
+     "get",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "jogja",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "show me jogja on a map",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "show",
+     "O"
+    ],
+    [
+     "me",
+     "O"
+    ],
+    [
+     "jogja",
+     "O"
+    ],
+    [
+     "on",
+     "O"
+    ],
+    [
+     "a",
+     "O"
+    ],
+    [
+     "map",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a map of bandung",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "map",
+     "O"
+    ],
+    [
+     "of",
+     "O"
+    ],
+    [
+     "bandung",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "directions to bandung",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "directions",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "bandung",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "how do i get to bandung",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "how",
+     "O"
+    ],
+    [
+     "do",
+     "O"
+    ],
+    [
+     "i",
+     "O"
+    ],
+    [
+     "get",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "bandung",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "show me bandung on a map",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "show",
+     "O"
+    ],
+    [
+     "me",
+     "O"
+    ],
+    [
+     "bandung",
+     "O"
+    ],
+    [
+     "on",
+     "O"
+    ],
+    [
+     "a",
+     "O"
+    ],
+    [
+     "map",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a map of the station",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "map",
+     "O"
+    ],
+    [
+     "of",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "station",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "directions to the station",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "directions",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "station",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "how do i get to the station",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "how",
+     "O"
+    ],
+    [
+     "do",
+     "O"
+    ],
+    [
+     "i",
+     "O"
+    ],
+    [
+     "get",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "station",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "show me the station on a map",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "show",
+     "O"
+    ],
+    [
+     "me",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "station",
+     "O"
+    ],
+    [
+     "on",
+     "O"
+    ],
+    [
+     "a",
+     "O"
+    ],
+    [
+     "map",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a map of the night market",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "map",
+     "O"
+    ],
+    [
+     "of",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "night",
+     "O"
+    ],
+    [
+     "market",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "directions to the night market",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "directions",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "night",
+     "O"
+    ],
+    [
+     "market",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "how do i get to the night market",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "how",
+     "O"
+    ],
+    [
+     "do",
+     "O"
+    ],
+    [
+     "i",
+     "O"
+    ],
+    [
+     "get",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "night",
+     "O"
+    ],
+    [
+     "market",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "show me the night market on a map",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "show",
+     "O"
+    ],
+    [
+     "me",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "night",
+     "O"
+    ],
+    [
+     "market",
+     "O"
+    ],
+    [
+     "on",
+     "O"
+    ],
+    [
+     "a",
+     "O"
+    ],
+    [
+     "map",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "play some lofi music",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "play",
+     "O"
+    ],
+    [
+     "some",
+     "O"
+    ],
+    [
+     "lofi",
+     "O"
+    ],
+    [
+     "music",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a video player for some lofi music",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "video",
+     "O"
+    ],
+    [
+     "player",
+     "O"
+    ],
+    [
+     "for",
+     "O"
+    ],
+    [
+     "some",
+     "O"
+    ],
+    [
+     "lofi",
+     "O"
+    ],
+    [
+     "music",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "listen to some lofi music",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "listen",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "some",
+     "O"
+    ],
+    [
+     "lofi",
+     "O"
+    ],
+    [
+     "music",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "play my clips",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "play",
+     "O"
+    ],
+    [
+     "my",
+     "O"
+    ],
+    [
+     "clips",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a video player for my clips",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "video",
+     "O"
+    ],
+    [
+     "player",
+     "O"
+    ],
+    [
+     "for",
+     "O"
+    ],
+    [
+     "my",
+     "O"
+    ],
+    [
+     "clips",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "listen to my clips",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "listen",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "my",
+     "O"
+    ],
+    [
+     "clips",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "play the news",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "play",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "news",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a video player for the news",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "video",
+     "O"
+    ],
+    [
+     "player",
+     "O"
+    ],
+    [
+     "for",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "news",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "listen to the news",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "listen",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "news",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "play a podcast",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "play",
+     "O"
+    ],
+    [
+     "a",
+     "O"
+    ],
+    [
+     "podcast",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a video player for a podcast",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "video",
+     "O"
+    ],
+    [
+     "player",
+     "O"
+    ],
+    [
+     "for",
+     "O"
+    ],
+    [
+     "a",
+     "O"
+    ],
+    [
+     "podcast",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "listen to a podcast",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "listen",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "a",
+     "O"
+    ],
+    [
+     "podcast",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "play jazz",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "play",
+     "O"
+    ],
+    [
+     "jazz",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a video player for jazz",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "video",
+     "O"
+    ],
+    [
+     "player",
+     "O"
+    ],
+    [
+     "for",
+     "O"
+    ],
+    [
+     "jazz",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "listen to jazz",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "listen",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "jazz",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "wake me at 6am",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "wake",
+     "O"
+    ],
+    [
+     "me",
+     "O"
+    ],
+    [
+     "at",
+     "O"
+    ],
+    [
+     "6am",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "set an alarm for 6am",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "set",
+     "O"
+    ],
+    [
+     "an",
+     "O"
+    ],
+    [
+     "alarm",
+     "O"
+    ],
+    [
+     "for",
+     "O"
+    ],
+    [
+     "6am",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "wake me at seven tomorrow morning",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "wake",
+     "O"
+    ],
+    [
+     "me",
+     "O"
+    ],
+    [
+     "at",
+     "O"
+    ],
+    [
+     "seven",
+     "O"
+    ],
+    [
+     "tomorrow",
+     "O"
+    ],
+    [
+     "morning",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "set an alarm for seven tomorrow morning",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "set",
+     "O"
+    ],
+    [
+     "an",
+     "O"
+    ],
+    [
+     "alarm",
+     "O"
+    ],
+    [
+     "for",
+     "O"
+    ],
+    [
+     "seven",
+     "O"
+    ],
+    [
+     "tomorrow",
+     "O"
+    ],
+    [
+     "morning",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "wake me at noon",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "wake",
+     "O"
+    ],
+    [
+     "me",
+     "O"
+    ],
+    [
+     "at",
+     "O"
+    ],
+    [
+     "noon",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "set an alarm for noon",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "set",
+     "O"
+    ],
+    [
+     "an",
+     "O"
+    ],
+    [
+     "alarm",
+     "O"
+    ],
+    [
+     "for",
+     "O"
+    ],
+    [
+     "noon",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "remind me to call mom",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "remind",
+     "O"
+    ],
+    [
+     "me",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "call",
+     "O"
+    ],
+    [
+     "mom",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "remind me to pay the bills",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "remind",
+     "O"
+    ],
+    [
+     "me",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "pay",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "bills",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "remind me to email the landlord",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "remind",
+     "O"
+    ],
+    [
+     "me",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "email",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "landlord",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "what is the weather in the airport",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "what",
+     "O"
+    ],
+    [
+     "is",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "weather",
+     "O"
+    ],
+    [
+     "in",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "airport",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "will it rain in the airport",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "will",
+     "O"
+    ],
+    [
+     "it",
+     "O"
+    ],
+    [
+     "rain",
+     "O"
+    ],
+    [
+     "in",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "airport",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "what is the weather in jogja",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "what",
+     "O"
+    ],
+    [
+     "is",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "weather",
+     "O"
+    ],
+    [
+     "in",
+     "O"
+    ],
+    [
+     "jogja",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "will it rain in jogja",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "will",
+     "O"
+    ],
+    [
+     "it",
+     "O"
+    ],
+    [
+     "rain",
+     "O"
+    ],
+    [
+     "in",
+     "O"
+    ],
+    [
+     "jogja",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "what is the weather in bandung",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "what",
+     "O"
+    ],
+    [
+     "is",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "weather",
+     "O"
+    ],
+    [
+     "in",
+     "O"
+    ],
+    [
+     "bandung",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "will it rain in bandung",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "will",
+     "O"
+    ],
+    [
+     "it",
+     "O"
+    ],
+    [
+     "rain",
+     "O"
+    ],
+    [
+     "in",
+     "O"
+    ],
+    [
+     "bandung",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "what is the weather in the station",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "what",
+     "O"
+    ],
+    [
+     "is",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "weather",
+     "O"
+    ],
+    [
+     "in",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "station",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "will it rain in the station",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "will",
+     "O"
+    ],
+    [
+     "it",
+     "O"
+    ],
+    [
+     "rain",
+     "O"
+    ],
+    [
+     "in",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "station",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "what is the weather in the night market",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "what",
+     "O"
+    ],
+    [
+     "is",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "weather",
+     "O"
+    ],
+    [
+     "in",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "night",
+     "O"
+    ],
+    [
+     "market",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "will it rain in the night market",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "will",
+     "O"
+    ],
+    [
+     "it",
+     "O"
+    ],
+    [
+     "rain",
+     "O"
+    ],
+    [
+     "in",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "night",
+     "O"
+    ],
+    [
+     "market",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "send an email to my boss",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "send",
+     "O"
+    ],
+    [
+     "an",
+     "O"
+    ],
+    [
+     "email",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "my",
+     "O"
+    ],
+    [
+     "boss",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "call my boss",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "call",
+     "O"
+    ],
+    [
+     "my",
+     "O"
+    ],
+    [
+     "boss",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "text my boss",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "text",
+     "O"
+    ],
+    [
+     "my",
+     "O"
+    ],
+    [
+     "boss",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "send an email to ana",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "send",
+     "O"
+    ],
+    [
+     "an",
+     "O"
+    ],
+    [
+     "email",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "ana",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "call ana",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "call",
+     "O"
+    ],
+    [
+     "ana",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "text ana",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "text",
+     "O"
+    ],
+    [
+     "ana",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "send an email to the landlord",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "send",
+     "O"
+    ],
+    [
+     "an",
+     "O"
+    ],
+    [
+     "email",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "landlord",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "call the landlord",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "call",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "landlord",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "text the landlord",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "text",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "landlord",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "send an email to mom",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "send",
+     "O"
+    ],
+    [
+     "an",
+     "O"
+    ],
+    [
+     "email",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "mom",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "call mom",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "call",
+     "O"
+    ],
+    [
+     "mom",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "text mom",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "text",
+     "O"
+    ],
+    [
+     "mom",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "order a pizza",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "order",
+     "O"
+    ],
+    [
+     "a",
+     "O"
+    ],
+    [
+     "pizza",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "book a pizza",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "book",
+     "O"
+    ],
+    [
+     "a",
+     "O"
+    ],
+    [
+     "pizza",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "order a flight to singapore",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "order",
+     "O"
+    ],
+    [
+     "a",
+     "O"
+    ],
+    [
+     "flight",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "singapore",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "book a flight to singapore",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "book",
+     "O"
+    ],
+    [
+     "a",
+     "O"
+    ],
+    [
+     "flight",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "singapore",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "order a taxi",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "order",
+     "O"
+    ],
+    [
+     "a",
+     "O"
+    ],
+    [
+     "taxi",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "book a taxi",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "book",
+     "O"
+    ],
+    [
+     "a",
+     "O"
+    ],
+    [
+     "taxi",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "order concert tickets",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "order",
+     "O"
+    ],
+    [
+     "concert",
+     "O"
+    ],
+    [
+     "tickets",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "book concert tickets",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "book",
+     "O"
+    ],
+    [
+     "concert",
+     "O"
+    ],
+    [
+     "tickets",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "turn on the lights",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "turn",
+     "O"
+    ],
+    [
+     "on",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "lights",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "switch off the lights",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "switch",
+     "O"
+    ],
+    [
+     "off",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "lights",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "turn on the door",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "turn",
+     "O"
+    ],
+    [
+     "on",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "door",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "switch off the door",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "switch",
+     "O"
+    ],
+    [
+     "off",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "door",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "turn on the fan",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "turn",
+     "O"
+    ],
+    [
+     "on",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "fan",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "switch off the fan",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "switch",
+     "O"
+    ],
+    [
+     "off",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "fan",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "turn on the ac",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "turn",
+     "O"
+    ],
+    [
+     "on",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "ac",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "switch off the ac",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "switch",
+     "O"
+    ],
+    [
+     "off",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "ac",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a photo gallery for my holiday pictures",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "photo",
+     "O"
+    ],
+    [
+     "gallery",
+     "O"
+    ],
+    [
+     "for",
+     "O"
+    ],
+    [
+     "my",
+     "O"
+    ],
+    [
+     "holiday",
+     "O"
+    ],
+    [
+     "pictures",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a quiz for world capitals",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "quiz",
+     "O"
+    ],
+    [
+     "for",
+     "O"
+    ],
+    [
+     "world",
+     "O"
+    ],
+    [
+     "capitals",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a stopwatch for my runs",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "stopwatch",
+     "O"
+    ],
+    [
+     "for",
+     "O"
+    ],
+    [
+     "my",
+     "O"
+    ],
+    [
+     "runs",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a game for my friends",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "game",
+     "O"
+    ],
+    [
+     "for",
+     "O"
+    ],
+    [
+     "my",
+     "O"
+    ],
+    [
+     "friends",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a chatbot for customers",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "chatbot",
+     "O"
+    ],
+    [
+     "for",
+     "O"
+    ],
+    [
+     "customers",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a music player for parties",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "music",
+     "O"
+    ],
+    [
+     "player",
+     "O"
+    ],
+    [
+     "for",
+     "O"
+    ],
+    [
+     "parties",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a video editor for my footage",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "video",
+     "O"
+    ],
+    [
+     "editor",
+     "O"
+    ],
+    [
+     "for",
+     "O"
+    ],
+    [
+     "my",
+     "O"
+    ],
+    [
+     "footage",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a compass for hiking",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "compass",
+     "O"
+    ],
+    [
+     "for",
+     "O"
+    ],
+    [
+     "hiking",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a flashlight for power cuts",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "flashlight",
+     "O"
+    ],
+    [
+     "for",
+     "O"
+    ],
+    [
+     "power",
+     "O"
+    ],
+    [
+     "cuts",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "what is the capital of france",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "what",
+     "O"
+    ],
+    [
+     "is",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "capital",
+     "O"
+    ],
+    [
+     "of",
+     "O"
+    ],
+    [
+     "france",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "how old is the moon",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "how",
+     "O"
+    ],
+    [
+     "old",
+     "O"
+    ],
+    [
+     "is",
+     "O"
+    ],
+    [
+     "the",
+     "O"
+    ],
+    [
+     "moon",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "fix my bike",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "fix",
+     "O"
+    ],
+    [
+     "my",
+     "O"
+    ],
+    [
+     "bike",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "a good book to read",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "a",
+     "O"
+    ],
+    [
+     "good",
+     "O"
+    ],
+    [
+     "book",
+     "O"
+    ],
+    [
+     "to",
+     "O"
+    ],
+    [
+     "read",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "lorem ipsum dolor sit amet",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "lorem",
+     "O"
+    ],
+    [
+     "ipsum",
+     "O"
+    ],
+    [
+     "dolor",
+     "O"
+    ],
+    [
+     "sit",
+     "O"
+    ],
+    [
+     "amet",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "foo bar baz",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "foo",
+     "O"
+    ],
+    [
+     "bar",
+     "O"
+    ],
+    [
+     "baz",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "how do i fix a flat tire",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "how",
+     "O"
+    ],
+    [
+     "do",
+     "O"
+    ],
+    [
+     "i",
+     "O"
+    ],
+    [
+     "fix",
+     "O"
+    ],
+    [
+     "a",
+     "O"
+    ],
+    [
+     "flat",
+     "O"
+    ],
+    [
+     "tire",
+     "O"
+    ]
+   ]
+  },
+  {
+   "text": "how do i learn guitar",
+   "intent": "out_of_scope",
+   "tokens": [
+    [
+     "how",
+     "O"
+    ],
+    [
+     "do",
+     "O"
+    ],
+    [
+     "i",
+     "O"
+    ],
+    [
+     "learn",
+     "O"
+    ],
+    [
+     "guitar",
+     "O"
     ]
    ]
   }

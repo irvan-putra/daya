@@ -5,10 +5,11 @@ Question: can a small model trained for daya's narrow recipe intents beat
 hand-written paraphrases, using synthetic-only data, free compute and no
 model download?
 
-Status: **step 3 completed** — baselines measured, slot filler v0.1 trained,
-abstention gate added (no retraining) and both arms measured once on a
-fresh held-out set (bottom section). No shipped code, route or download
-changed; this directory is offline tooling and its results, nothing else.
+Status: **step 4 completed** — baselines measured, slot filler v0.1 trained,
+abstention gate added, and v0.2 retrained with an explicit out-of-scope
+class (approved 2026-11-24) and measured once on a third fresh held-out
+set (bottom section). No shipped code, route or download changed; this
+directory is offline tooling and its results, nothing else.
 
 Approved scope (WhatsApp 2026-11-19, "yes, add all as options"):
 synthetic-only data, no paid compute, no new accounts, no private data,
@@ -217,11 +218,81 @@ splits. Both arms were evaluated on it exactly once
   theta=0.7 is tuned on it, so probe_refuse 90% is a tuning-set number.
 - The gate's coverage stopword list is English-only by construction.
 
+## Slot filler v0.2: explicit out-of-scope class (2026-11-24, fourth sitting)
+
+Approved on WhatsApp 2026-11-24 ("yes" to the abstention readout's
+proposal). Same sanctioned route: `slot_filler.py`, synthetic-only data,
+Python standard library, no spend, no model swap, no shipped-code change.
+
+- Dataset v3 adds 99 train / 65 valid out-of-scope samples (maps, media,
+  alarms, reminders, weather, comms, commerce, smart home, other apps,
+  gibberish): every token O, intent `out_of_scope`, vocabulary disjoint
+  between splits and from every calibration probe and held-out refuse
+  case. When the classifier picks `out_of_scope` the model refuses.
+- Calibration lesson (synthetic data only): training the slot tagger on
+  the all-O out-of-scope samples collapsed slot evidence on in-scope
+  text (the gate refused ~31% of the synthetic valid split). The tagger
+  now trains on in-scope samples only; out-of-scope is an intent-level
+  concept. Epoch selection as before (12, span F1 0.908 on the in-scope
+  synthetic valid).
+- Gate theta recalibrated on synthetic data only: 0.7 again (valid
+  accept 98.6%, probe refuse 98.8%, Youden J 0.974 vs 0.873 for the
+  v0.1 gate).
+
+`heldout-v3.json` is a third fresh hand-authored set (46 cases: 18
+core, 18 stretch, 10 should-refuse), written BEFORE any v0.2 run. Each
+arm was evaluated on it exactly once (`results-v02-heldout-v3.json`);
+the cascade comparison is `results-cascade-v3.json`.
+
+| arm (held-out v3)                 | end-to-end correct | refusal P / R | gen-acc on accepted |
+| --------------------------------- | ------------------ | ------------- | ------------------- |
+| raw slot filler v0.1              | 80.6% (29/36; core 17/18, stretch 12/18) | 0.33 / 0.10 | 85.3% |
+| gated slot filler v0.1            | 66.7% (24/36; core 15/18, stretch 9/18)  | 0.42 / 0.80 | 96.0% |
+| raw slot filler v0.2              | 77.8% (28/36; core 17/18, stretch 11/18) | 0.60 / 0.60 | 87.5% |
+| **gated slot filler v0.2**        | **66.7% (24/36; core 15/18, stretch 9/18)** | **0.45 / 1.00** | **100%** |
+| auto cascade (what the page runs) | 77.8% (28/36; core 16/18, stretch 12/18) | 0.62 / 0.80 | 90.3% |
+
+## Findings (step 4)
+
+13. **The explicit out-of-scope class works:** gated v0.2 refused every
+    out-of-scope case on fresh held-out text (recall 1.00, zero
+    violations) and every input it accepted generated a correct recipe
+    (0 wrong). Finding 12's failure mode is gone: "fnord fnord fnord",
+    "a karaoke machine" and "check my blood pressure" all refuse now,
+    although gibberish and those categories were smoothed into counters
+    by every previous arm.
+14. **The gate still over-refuses paraphrases:** gated v0.2 refused 12
+    should-parse cases (precision 0.45), about the same as gated v0.1
+    (11, precision 0.42) — including core "list: mercury, venus, earth"
+    and "note: water the plants". The gain over v0.1 is not fewer false
+    refusals but zero missed refusals and zero wrong generations. The
+    false refusals are gate-driven (raw v0.2 refused only 4): coverage
+    and theta now compound with the out-of-scope class's prior.
+15. **The class itself carries most of the abstention work:** raw v0.2
+    with NO gate already beats the v0.1 gate's trade-off (P/R 0.60/0.60
+    vs 0.54/0.70 on v2), so a looser gate — or the finding-11 union
+    with the grammar engine's refusals — is the obvious next dial.
+
+## Honest limits (step 4 additions)
+
+- heldout-v3.json shares v1/v2's authorship limit (the author had read
+  both earlier failure analyses) and is now development-contaminated for
+  future iterations; the NEXT quality claim needs a fourth fresh set.
+- v0.2's out-of-scope categories were chosen from v1/v2's observed
+  failures; the v3 refuse cases probe category generalization with
+  unseen vocabulary, but the category choice itself was failure-guided.
+- 46 cases is small; precision 0.45 vs 0.42 is directional, not a
+  measured tie-break.
+
 ## Next steps (proposals, not started)
 
-- Abstention v2: an explicit out-of-scope training class (finding 12) and
-  a union of the gate with the grammar engine's refusals (finding 11).
-  Tune only on synthetic data; measure on a third fresh held-out set.
+- Abstention v2, remaining half: a union of the gate with the grammar
+  engine's refusals (finding 11), and loosening the gate now that the
+  out-of-scope class does the heavy lifting (findings 14-15). Tune only
+  on synthetic data; measure on a fourth fresh held-out set.
+- Next approved milestone (2026-11-24): code generation for existing
+  apps — first a small, testable step; preserve the apps, test generated
+  code before proposing any app change.
 - An abstention gate for the classifier route too: correct hears scored
   0.40-0.95 here, several wrong hears scored under 0.5, but "countdown
   of 90 seconds" scored 0.506, so a threshold needs care.

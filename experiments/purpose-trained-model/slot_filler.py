@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Purpose-trained intent classifier + slot filler v0.1 (synthetic-only).
+"""Purpose-trained intent classifier + slot filler v0.2 (synthetic-only).
 
 Subcommands:
   generate  -> dataset-slots-train.json / dataset-slots-valid.json
                (disjoint slot vocab between splits: validation tests
                generalization to unseen labels/items/bodies)
-  train     -> model-slotfiller.json (NB intent + per-token perceptron tagger;
-               epoch selected on the SYNTHETIC validation split only)
+  train     -> model-slotfiller-v02.json (NB intent + per-token perceptron
+               tagger; epoch selected on the SYNTHETIC validation split only)
   eval      -> results-slotfiller.json (ONE held-out run, no iteration)
 
 heldout.json is evaluation-only. Nothing here tunes on it.
@@ -15,6 +15,14 @@ No dependencies; Python 3 standard library only.
 v0.1 lessons baked in: B/I tags let global features (bias/punct flags)
 accumulate runaway I- weights and the model collapsed (valid span F1
 ~0.10). Type-only tags (a slot is a maximal run of its tag) fixed it.
+
+v0.2 (2026-11-24): adds an explicit out-of-scope training class (v2
+finding 12: remaining gate violations were NB-prior artifacts, OOV words
+smoothing toward high-token-count intents). Same architecture, same
+training route, same tuning budget (epoch count on synthetic valid);
+the only change is the sixth intent label with all-O synthetic samples
+whose vocabulary is disjoint between train and valid. The v0.1 model
+file (model-slotfiller.json) stays frozen for same-set comparison.
 """
 import json, os, re, sys, copy, math, collections
 
@@ -73,6 +81,60 @@ def tag_seq(text, spans):
                 break
     return [[t, g] for t, g in zip(tokens, tags)]
 
+OOS_PLACES_TRAIN = ["the airport", "jogja", "bandung", "the station", "the night market"]
+OOS_PLACES_VALID = ["surabaya", "the harbor", "the museum"]
+OOS_MEDIA_TRAIN = ["some lofi music", "my clips", "the news", "a podcast", "jazz"]
+OOS_MEDIA_VALID = ["classical music", "my recordings", "the radio"]
+OOS_PEOPLE_TRAIN = ["my boss", "ana", "the landlord", "mom"]
+OOS_PEOPLE_VALID = ["my sister", "the dentist", "pak budi"]
+OOS_DEVICES_TRAIN = ["the lights", "the door", "the fan", "the ac"]
+OOS_DEVICES_VALID = ["the heater", "the tv", "the curtains"]
+OOS_APPS_TRAIN = ["photo gallery", "quiz", "stopwatch", "game", "chatbot",
+                  "music player", "video editor", "compass", "flashlight"]
+OOS_APPS_TOPICS_TRAIN = ["my holiday pictures", "world capitals", "my runs",
+                         "my friends", "customers", "parties", "my footage",
+                         "hiking", "power cuts"]
+OOS_APPS_VALID = ["diary", "forum", "wiki", "drawing board"]
+OOS_APPS_TOPICS_VALID = ["my dreams", "the project", "recipes", "my sketches"]
+OOS_THINGS_TRAIN = ["a pizza", "a flight to singapore", "a taxi", "concert tickets"]
+OOS_THINGS_VALID = ["a train ticket", "a hotel room", "a new phone"]
+OOS_FIXED_TRAIN = ["what is the capital of france", "how old is the moon",
+                   "fix my bike", "a good book to read", "lorem ipsum dolor sit amet",
+                   "foo bar baz", "how do i fix a flat tire", "how do i learn guitar"]
+OOS_FIXED_VALID = ["what is the meaning of life", "how tall is merapi",
+                   "teach me to juggle", "zork mid trebor"]
+# Vocabulary above is disjoint from calib-refuse.json probes and from every
+# held-out refuse case (v1/v2/v3): training must not memorize the test.
+
+def gen_oos_samples(places, media, people, devices, apps, apps_topics, things, fixed):
+    """Out-of-scope requests: every token tagged O, intent out_of_scope."""
+    out = []
+    def add(text):
+        out.append({"text": text, "intent": "out_of_scope",
+                    "tokens": [[t, "O"] for t in tokenize(text)]})
+    for p in places:
+        add("a map of %s" % p); add("directions to %s" % p)
+        add("how do i get to %s" % p); add("show me %s on a map" % p)
+    for m in media:
+        add("play %s" % m); add("a video player for %s" % m); add("listen to %s" % m)
+    for t in ["6am", "seven tomorrow morning", "noon"]:
+        add("wake me at %s" % t); add("set an alarm for %s" % t)
+    for task in ["call mom", "pay the bills", "email the landlord"]:
+        add("remind me to %s" % task)
+    for p in places:
+        add("what is the weather in %s" % p); add("will it rain in %s" % p)
+    for person in people:
+        add("send an email to %s" % person); add("call %s" % person); add("text %s" % person)
+    for th in things:
+        add("order %s" % th); add("book %s" % th)
+    for d in devices:
+        add("turn on %s" % d); add("switch off %s" % d)
+    for app, topic in zip(apps, apps_topics):
+        add("a %s for %s" % (app, topic))
+    for s in fixed:
+        add(s)
+    return out
+
 def gen_samples(timer_labels, counter_labels, item_sets, text_bodies):
     out = []
     def add(intent, text, spans):
@@ -121,9 +183,15 @@ def gen_samples(timer_labels, counter_labels, item_sets, text_bodies):
 def cmd_generate():
     train = gen_samples(TIMER_LABELS_TRAIN, COUNTER_LABELS_TRAIN, ITEM_SETS_TRAIN, TEXT_BODIES_TRAIN)
     valid = gen_samples(TIMER_LABELS_VALID, COUNTER_LABELS_VALID, ITEM_SETS_VALID, TEXT_BODIES_VALID)
+    train += gen_oos_samples(OOS_PLACES_TRAIN, OOS_MEDIA_TRAIN, OOS_PEOPLE_TRAIN,
+                             OOS_DEVICES_TRAIN, OOS_APPS_TRAIN, OOS_APPS_TOPICS_TRAIN,
+                             OOS_THINGS_TRAIN, OOS_FIXED_TRAIN)
+    valid += gen_oos_samples(OOS_PLACES_VALID, OOS_MEDIA_VALID, OOS_PEOPLE_VALID,
+                             OOS_DEVICES_VALID, OOS_APPS_VALID, OOS_APPS_TOPICS_VALID,
+                             OOS_THINGS_VALID, OOS_FIXED_VALID)
     for name, data in [("dataset-slots-train.json", train), ("dataset-slots-valid.json", valid)]:
         with open(os.path.join(HERE, name), "w") as f:
-            json.dump({"version": 2, "tags": "type-only", "samples": data}, f, indent=1)
+            json.dump({"version": 3, "tags": "type-only", "samples": data}, f, indent=1)
         counts = collections.Counter(s["intent"] for s in data)
         print("%s: %d samples %s" % (name, len(data), dict(counts)))
 
@@ -275,6 +343,8 @@ def run_model(nb, weights, tags, text):
         tokens = tokenize(sent)
         if not tokens: continue
         intent = nb_classify(nb, tokens)
+        if intent == "out_of_scope":
+            return None  # v0.2: the model itself refuses; assemble never runs
         tags_out = []
         for i in range(len(tokens)):
             fs = feats(tokens, i)
@@ -290,12 +360,20 @@ def cmd_train():
     valid = json.load(open(os.path.join(HERE, "dataset-slots-valid.json")))["samples"]
     tags = sorted({g for s in train for _, g in s["tokens"]} | {"O"})
     nb = nb_train(train)
-    weights, history = tagger_train(train, tags, epochs=12, valid=valid)
+    # v0.2: the out_of_scope class is an intent-level concept; its samples
+    # carry no slot information (all O), so the per-token tagger trains and
+    # selects epochs on in-scope samples only. Including them taught the
+    # tagger "tag everything O" and gutted slot evidence on real inputs.
+    ins_train = [s for s in train if s["intent"] != "out_of_scope"]
+    ins_valid = [s for s in valid if s["intent"] != "out_of_scope"]
+    weights, history = tagger_train(ins_train, tags, epochs=12, valid=ins_valid)
     model = {"nb": nb, "weights": {"|".join(k): v for k, v in weights.items()}, "tags": tags,
-             "selection": history, "vocab_note": "per-token perceptron, type-only tags"}
-    with open(os.path.join(HERE, "model-slotfiller.json"), "w") as f:
+             "selection": history, "vocab_note": "per-token perceptron, type-only tags",
+             "model_version": "v0.2", "dataset_version": 3,
+             "change": "explicit out_of_scope training class (finding 12); v0.1 architecture unchanged"}
+    with open(os.path.join(HERE, "model-slotfiller-v02.json"), "w") as f:
         json.dump(model, f)
-    print("trained; epoch selection on synthetic valid:", json.dumps(history))
+    print("trained v0.2; epoch selection on synthetic valid:", json.dumps(history))
 
 def cmd_eval():
     model = json.load(open(os.path.join(HERE, "model-slotfiller.json")))
