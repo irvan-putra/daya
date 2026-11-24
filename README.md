@@ -275,3 +275,7 @@ AGPL-3.0, see LICENSE.
 ## Model reference
 
 [Models so far in Kaji](https://vanipy.com/kaji/models/) compares named classifier and generator artifacts, sizes, licenses and runtime limits, including Inkling 2 Mini. Catalog only; existing routes and research notes are unchanged.
+
+---
+
+Built with AI assistance (Instinct and others). Not everything has been reviewed by Irvan.
