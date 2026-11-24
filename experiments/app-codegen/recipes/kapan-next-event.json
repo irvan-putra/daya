@@ -1,0 +1,9 @@
+{
+  "domain": "app-section",
+  "app": "kapan",
+  "section": {
+    "type": "timer",
+    "label": "next event",
+    "binding": "soonest-upcoming-event"
+  }
+}

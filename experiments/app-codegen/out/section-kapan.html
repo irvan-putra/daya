@@ -1,0 +1,40 @@
+<section class="daya-section" id="daya-section" aria-label="next event">
+<h2 class="day">next event</h2>
+<a class="ev" id="daya-target" rel="noopener">
+<div class="b">
+<div class="t" id="daya-title">…</div>
+<div class="m" id="daya-when"></div>
+</div>
+<span class="tag on" id="daya-left" aria-live="polite"></span>
+</a>
+</section>
+<script>
+(function(){
+"use strict";
+function init(){
+var dataEl=document.getElementById("evdata");if(!dataEl)return;
+var data;try{data=JSON.parse(dataEl.textContent);}catch(e){return;}
+var evs=(data.events||[]).slice();
+evs.sort(function(a,b){return new Date(a.start)-new Date(b.start);});
+var now=Date.now(),next=null,i,t;
+for(i=0;i<evs.length;i++){t=new Date(evs[i].start).getTime();if(t>now){next=evs[i];break;}}
+var card=document.getElementById("daya-target");
+if(!next){card.style.display="none";return;}
+var target=new Date(next.start).getTime();
+document.getElementById("daya-title").textContent=next.title||"untitled event";
+if(next.url)card.href=next.url;
+var fmtDay=new Intl.DateTimeFormat("en-US",{weekday:"long",day:"numeric",month:"long",timeZone:"Asia/Jakarta"});
+var fmtTime=new Intl.DateTimeFormat("en-US",{hour:"2-digit",minute:"2-digit",hour12:false,timeZone:"Asia/Jakarta"});
+document.getElementById("daya-when").textContent=(fmtDay.format(target)+", "+fmtTime.format(target)+" WIB").toLowerCase();
+function pad(n){return (n<10?"0":"")+n;}
+function tick(){
+var ms=Math.max(0,target-Date.now());
+var s=Math.floor(ms/1000),d=Math.floor(s/86400);s%=86400;
+var h=Math.floor(s/3600),m=Math.floor(s%3600/60),sec=s%60;
+document.getElementById("daya-left").textContent=(d>0?d+"d ":"")+pad(h)+":"+pad(m)+":"+pad(sec);
+}
+tick();setInterval(tick,1000);
+}
+if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init);}else{init();}
+})();
+</script>

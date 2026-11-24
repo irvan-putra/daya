@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kapan - developer events in jakarta &amp; jogja</title>
+<meta name="description" content="upcoming developer events in jakarta and yogyakarta, gathered from public community pages. best effort, not exhaustive.">
+<link rel="alternate" type="text/calendar" href="/kapan/events.ics" title="kapan events feed">
+<style>
+:root{--bg:#0e0f13;--panel:#171a21;--line:#262b36;--text:#e8eaf0;--dim:#9aa3b2;--accent:#7ee0a3;--accent2:#7ec3e0}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--text);font:16px/1.5 -apple-system,system-ui,"Segoe UI",roboto,sans-serif;max-width:760px;margin:0 auto;padding:20px 16px 80px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+h1{font-size:1.6rem;letter-spacing:-.02em}
+.sub{color:var(--dim);margin:.2rem 0 1rem;font-size:.95rem}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 1.2rem}
+.chip{border:1px solid var(--line);background:var(--panel);color:var(--dim);border-radius:999px;padding:5px 14px;font-size:.9rem;cursor:pointer}
+.chip.on{color:#0c0d10;background:var(--accent);border-color:var(--accent);font-weight:600}
+.day{margin:1.4rem 0 .5rem;color:var(--dim);font-size:.85rem;text-transform:lowercase;letter-spacing:.04em;border-bottom:1px solid var(--line);padding-bottom:4px}
+.ev{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0}
+.ev .b{flex:1;min-width:0}
+.ev .p{width:72px;height:72px;flex:none;border-radius:8px;object-fit:cover;border:1px solid var(--line);cursor:zoom-in;background:var(--bg)}
+.ev:hover{border-color:var(--accent)}
+.ev .t{font-weight:600}
+.ev .m{color:var(--dim);font-size:.85rem;margin-top:3px}
+.tag{display:inline-block;font-size:.72rem;border:1px solid var(--line);border-radius:6px;padding:1px 7px;margin-left:6px;color:var(--dim);vertical-align:middle}
+.tag.on{color:var(--accent2);border-color:var(--accent2)}
+.tag.tbd{color:#e0b47e;border-color:#e0b47e}
+.empty{color:var(--dim);background:var(--panel);border:1px dashed var(--line);border-radius:12px;padding:24px;text-align:center}
+footer{margin-top:3rem;color:var(--dim);font-size:.85rem;border-top:1px solid var(--line);padding-top:1rem}
+footer a{color:var(--accent2);text-decoration:none}
+.src{word-break:break-all}
+details{margin:.6rem 0}
+summary{cursor:pointer}
+a.brand{color:inherit}
+.mobcities{display:none}
+@media (max-width:640px){
+body{padding:8px 10px 48px;line-height:1.35}
+h1{font-size:1.15rem;display:inline}
+.sub{margin:.1rem 0 .3rem;font-size:.72rem;line-height:1.3}
+.sub.cities{display:none}
+.mobcities{display:block}
+.chips{gap:5px;margin:0 0 .35rem;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{padding:2px 9px;font-size:.74rem;white-space:nowrap;flex:none}
+.day{margin:.5rem 0 .25rem;font-size:.78rem;padding-bottom:2px}
+.ev{padding:7px 10px;margin:5px 0;border-radius:10px;gap:8px}
+.ev .p{width:48px;height:48px;border-radius:6px}
+.ev .t{font-size:.92rem;line-height:1.3}
+.ev .m{font-size:.76rem;margin-top:2px;line-height:1.3}
+}
+</style>
+</head>
+<body>
+<h1>kapan</h1>
+<p class="sub">developer events in jakarta &amp; jogja, gathered from public community pages.<br>
+best effort, not exhaustive. every event links back to its organizer page.</p>
+<p class="sub cities" style="margin-bottom:.6rem"><a class="brand" href="/kapan/">all</a> · <a class="brand" href="/kapan/jakarta/">jakarta</a> · <a class="brand" href="/kapan/jogja/">jogja</a></p>
+<div class="chips" id="chips"><button class="chip on" data-c="all">all (5)</button><button class="chip " data-c="jakarta">jakarta (4)</button><button class="chip " data-c="jogja">jogja (0)</button><button class="chip " data-c="online">online (1)</button><button class="chip " data-c="tbd">venue tbd (0)</button></div>
+<section class="daya-section" id="daya-section" aria-label="next event">
+<h2 class="day">next event</h2>
+<a class="ev" id="daya-target" rel="noopener" href="https://lu.ma/ye9ovqrp">
+<div class="b">
+<div class="t" id="daya-title">From SAP to AI: Building Your Data Foundation with Fivetran and Snowflake on AWS</div>
+<div class="m" id="daya-when">wednesday, november 25, 12:00 wib</div>
+</div>
+<span class="tag on" id="daya-left" aria-live="polite">1d 00:38:57</span>
+</a>
+</section>
+<script>
+(function(){
+"use strict";
+function init(){
+var dataEl=document.getElementById("evdata");if(!dataEl)return;
+var data;try{data=JSON.parse(dataEl.textContent);}catch(e){return;}
+var evs=(data.events||[]).slice();
+evs.sort(function(a,b){return new Date(a.start)-new Date(b.start);});
+var now=Date.now(),next=null,i,t;
+for(i=0;i<evs.length;i++){t=new Date(evs[i].start).getTime();if(t>now){next=evs[i];break;}}
+var card=document.getElementById("daya-target");
+if(!next){card.style.display="none";return;}
+var target=new Date(next.start).getTime();
+document.getElementById("daya-title").textContent=next.title||"untitled event";
+if(next.url)card.href=next.url;
+var fmtDay=new Intl.DateTimeFormat("en-US",{weekday:"long",day:"numeric",month:"long",timeZone:"Asia/Jakarta"});
+var fmtTime=new Intl.DateTimeFormat("en-US",{hour:"2-digit",minute:"2-digit",hour12:false,timeZone:"Asia/Jakarta"});
+document.getElementById("daya-when").textContent=(fmtDay.format(target)+", "+fmtTime.format(target)+" WIB").toLowerCase();
+function pad(n){return (n<10?"0":"")+n;}
+function tick(){
+var ms=Math.max(0,target-Date.now());
+var s=Math.floor(ms/1000),d=Math.floor(s/86400);s%=86400;
+var h=Math.floor(s/3600),m=Math.floor(s%3600/60),sec=s%60;
+document.getElementById("daya-left").textContent=(d>0?d+"d ":"")+pad(h)+":"+pad(m)+":"+pad(sec);
+}
+tick();setInterval(tick,1000);
+}
+if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init);}else{init();}
+})();
+</script>
+<div id="list"><div class="day">Wednesday, November 25</div><a class="ev" href="https://lu.ma/ye9ovqrp" target="_blank" rel="noopener"><div class="b"><div class="t">From SAP to AI: Building Your Data Foundation with Fivetran and Snowflake on AWS</div><div class="m">12:00 wib · AWS (Amazon Web Services) Jakarta Office<span class="tag">luma</span></div></div><img class="p" src="https://images.lumacdn.com/uploads/0t/7d9e40e3-d36c-4033-a802-1c2b875ddf06.png" alt="From SAP to AI: Building Your Data Foundation with Fivetran and Snowflake on AWS" loading="lazy" referrerpolicy="no-referrer" onclick="event.preventDefault();event.stopPropagation();window.open(this.src,'_blank','noopener')" onerror="this.style.display='none'"></a><a class="ev" href="https://lu.ma/nqv9479h" target="_blank" rel="noopener"><div class="b"><div class="t">Build 24/7 AI Team for Your Businesses | Road to SCALECON 2027</div><div class="m">18:30 wib · Centennial Tower · Build Club<span class="tag">luma</span></div></div><img class="p" src="https://images.lumacdn.com/uploads/6g/41d00201-d10e-4191-b8df-0024269efa6e.png" alt="Build 24/7 AI Team for Your Businesses | Road to SCALECON 2027" loading="lazy" referrerpolicy="no-referrer" onclick="event.preventDefault();event.stopPropagation();window.open(this.src,'_blank','noopener')" onerror="this.style.display='none'"></a><div class="day">Thursday, November 26</div><a class="ev" href="https://lu.ma/calendar/cal-voSSwwLPSpm5LRL" target="_blank" rel="noopener"><div class="b"><div class="t">On-site mini Hackathon (Qwen Conference 2026 Breakout session)</div><div class="m">15:30 wib · Raffles Jakarta, Ciputra World, Jl. Prof. DR. Satrio No.Kav 3 – 5, RT.18/RW.4… · Alibaba Cloud Indonesia<span class="tag">luma</span></div></div><img class="p" src="https://images.lumacdn.com/uploads/gf/aa8fc06b-c9f5-49ad-8e4e-a18bf4adca42.png" alt="On-site mini Hackathon (Qwen Conference 2026 Breakout session)" loading="lazy" referrerpolicy="no-referrer" onclick="event.preventDefault();event.stopPropagation();window.open(this.src,'_blank','noopener')" onerror="this.style.display='none'"></a><div class="day">Monday, November 30</div><a class="ev" href="https://www.meetup.com/owasp-jakarta-chapter/events/317297987/" target="_blank" rel="noopener"><div class="b"><div class="t">OWASP Jakarta Security Week #2</div><div class="m">15:00 wib · online · owasp jakarta chapter<span class="tag on">online</span><span class="tag">meetup</span></div></div><img class="p" src="https://secure.meetupstatic.com/photos/event/d/e/c/1/600_476877025.jpeg" alt="OWASP Jakarta Security Week #2" loading="lazy" referrerpolicy="no-referrer" onclick="event.preventDefault();event.stopPropagation();window.open(this.src,'_blank','noopener')" onerror="this.style.display='none'"></a><div class="day">Wednesday, December 9</div><a class="ev" href="https://www.meetup.com/aws-ug-jakarta/events/317465233/" target="_blank" rel="noopener"><div class="b"><div class="t">AWS User Group Jakarta x Commvault: Race to Recover: Mission Earth</div><div class="m">17:00 wib · venue to be announced · aws ug jakarta<span class="tag tbd">venue tbd</span><span class="tag">meetup</span></div></div><img class="p" src="https://secure.meetupstatic.com/photos/event/3/c/4/600_537180964.jpeg" alt="AWS User Group Jakarta x Commvault: Race to Recover: Mission Earth" loading="lazy" referrerpolicy="no-referrer" onclick="event.preventDefault();event.stopPropagation();window.open(this.src,'_blank','noopener')" onerror="this.style.display='none'"></a></div>
+<footer>
+<p class="mobcities">city pages: <a href="/kapan/">all</a> · <a href="/kapan/jakarta/">jakarta</a> · <a href="/kapan/jogja/">jogja</a></p>
+<p>subscribe: <a href="/kapan/events.ics">events.ics</a> (add by url in your calendar app) · source: <a href="https://github.com/irvan-putra/kapan">github.com/irvan-putra/kapan</a> · add a source: <a href="https://github.com/irvan-putra/kapan/edit/main/sources.json">edit sources.json</a></p>
+<p id="meta">updated Tuesday, November 24, 04:30 wib · 5 events · times in western indonesia time</p>
+<details><summary>sources &amp; freshness</summary><div id="srcs"><p class="src">✓ <a href="https://lu.ma/jakarta" target="_blank" rel="noopener">luma jakarta city page</a> · 2 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://lu.ma/calendar/cal-0mY59kiyIHcP3Cx" target="_blank" rel="noopener">The Reader's Trail Activation</a> · 0 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://lu.ma/calendar/cal-63iJeJNzGiVDSAC" target="_blank" rel="noopener">luma community calendar iVDSAC</a> · 0 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://lu.ma/calendar/cal-Mp1VFMzLld51zRB" target="_blank" rel="noopener">Sip &amp; Scale Jakarta</a> · 0 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://lu.ma/calendar/cal-ltexIzUnSUtV2Ug" target="_blank" rel="noopener">luma community calendar UtV2Ug</a> · 1 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://lu.ma/calendar/cal-voSSwwLPSpm5LRL" target="_blank" rel="noopener">Alibaba Cloud Indonesia</a> · 1 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://lu.ma/calendar/cal-yrYsEKDQ91hPMWy" target="_blank" rel="noopener">Build Club</a> · 3 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://www.meetup.com/aws-ug-jakarta/" target="_blank" rel="noopener">aws ug jakarta</a> · 1 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://www.meetup.com/owasp-jakarta-chapter/" target="_blank" rel="noopener">owasp jakarta chapter</a> · 1 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://www.meetup.com/gdg-jakarta/" target="_blank" rel="noopener">gdg jakarta</a> · 0 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://www.meetup.com/flutter-jakarta/" target="_blank" rel="noopener">flutter jakarta</a> · 0 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://www.meetup.com/jakarta-node-js-meetup/" target="_blank" rel="noopener">jakarta node js meetup</a> · 0 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://www.meetup.com/jakartas-linux-open-source-software-meetup-group/" target="_blank" rel="noopener">jakartas linux open source software meetup group</a> · 0 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://www.meetup.com/python-id/" target="_blank" rel="noopener">python id</a> · 0 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://www.meetup.com/gdg-jogjakarta/" target="_blank" rel="noopener">gdg jogjakarta</a> · 0 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://www.meetup.com/aws-user-group-jogja/" target="_blank" rel="noopener">aws user group jogja</a> · 0 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://www.meetup.com/aws-sbg-at-university-of-amikom-yogyakarta/" target="_blank" rel="noopener">aws sbg at university of amikom yogyakarta</a> · 0 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://www.meetup.com/yogyakarta-wordpress-meetup/" target="_blank" rel="noopener">yogyakarta wordpress meetup</a> · 0 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://www.meetup.com/stacks-indonesia/" target="_blank" rel="noopener">stacks indonesia</a> · 0 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://gdg.community.dev/gdg-jakarta/" target="_blank" rel="noopener">gdg jakarta</a> · 0 events · last ok Tuesday, November 24</p><p class="src">✓ <a href="https://gdg.community.dev/gdg-jogjakarta/" target="_blank" rel="noopener">gdg jogjakarta</a> · 0 events · last ok Tuesday, November 24</p></div></details>
+<p>missing something? that is expected - coverage depends on the public feeds listed above. pull requests adding sources are welcome.</p>
+</footer>
+<script id="evdata" type="application/json">{"app": "kapan", "repo": "irvan-putra/kapan", "generated_at": "2026-11-23T21:30:49.895493Z", "timezone": "Asia/Jakarta", "window_days": 90, "cities": ["jakarta", "jogja"], "sources": [{"id": "luma-city-jakarta", "type": "luma-city", "name": "luma jakarta city page", "page_url": "https://lu.ma/jakarta", "feed_url": "https://lu.ma/jakarta", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 2, "last_success_at": "2026-11-23T21:30:49.895493Z", "calendars_found": 6}, {"id": "luma-cal-cal-0mY59kiyIHcP3Cx", "name": "The Reader's Trail Activation", "page_url": "https://lu.ma/calendar/cal-0mY59kiyIHcP3Cx", "feed_url": "https://api.lu.ma/ics/get?entity=calendar&id=cal-0mY59kiyIHcP3Cx", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 0, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "luma-cal-cal-63iJeJNzGiVDSAC", "name": "luma community calendar iVDSAC", "page_url": "https://lu.ma/calendar/cal-63iJeJNzGiVDSAC", "feed_url": "https://api.lu.ma/ics/get?entity=calendar&id=cal-63iJeJNzGiVDSAC", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 0, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "luma-cal-cal-Mp1VFMzLld51zRB", "name": "Sip & Scale Jakarta", "page_url": "https://lu.ma/calendar/cal-Mp1VFMzLld51zRB", "feed_url": "https://api.lu.ma/ics/get?entity=calendar&id=cal-Mp1VFMzLld51zRB", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 0, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "luma-cal-cal-ltexIzUnSUtV2Ug", "name": "luma community calendar UtV2Ug", "page_url": "https://lu.ma/calendar/cal-ltexIzUnSUtV2Ug", "feed_url": "https://api.lu.ma/ics/get?entity=calendar&id=cal-ltexIzUnSUtV2Ug", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 1, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "luma-cal-cal-voSSwwLPSpm5LRL", "name": "Alibaba Cloud Indonesia", "page_url": "https://lu.ma/calendar/cal-voSSwwLPSpm5LRL", "feed_url": "https://api.lu.ma/ics/get?entity=calendar&id=cal-voSSwwLPSpm5LRL", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 1, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "luma-cal-cal-yrYsEKDQ91hPMWy", "name": "Build Club", "page_url": "https://lu.ma/calendar/cal-yrYsEKDQ91hPMWy", "feed_url": "https://api.lu.ma/ics/get?entity=calendar&id=cal-yrYsEKDQ91hPMWy", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 3, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "meetup-aws-ug-jakarta", "name": "aws ug jakarta", "page_url": "https://www.meetup.com/aws-ug-jakarta/", "feed_url": "https://www.meetup.com/aws-ug-jakarta/events/ical/", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 1, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "meetup-owasp-jakarta-chapter", "name": "owasp jakarta chapter", "page_url": "https://www.meetup.com/owasp-jakarta-chapter/", "feed_url": "https://www.meetup.com/owasp-jakarta-chapter/events/ical/", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 1, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "meetup-gdg-jakarta", "name": "gdg jakarta", "page_url": "https://www.meetup.com/gdg-jakarta/", "feed_url": "https://www.meetup.com/gdg-jakarta/events/ical/", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 0, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "meetup-flutter-jakarta", "name": "flutter jakarta", "page_url": "https://www.meetup.com/flutter-jakarta/", "feed_url": "https://www.meetup.com/flutter-jakarta/events/ical/", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 0, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "meetup-jakarta-node-js-meetup", "name": "jakarta node js meetup", "page_url": "https://www.meetup.com/jakarta-node-js-meetup/", "feed_url": "https://www.meetup.com/jakarta-node-js-meetup/events/ical/", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 0, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "meetup-jakartas-linux-open-source-software-meetup-group", "name": "jakartas linux open source software meetup group", "page_url": "https://www.meetup.com/jakartas-linux-open-source-software-meetup-group/", "feed_url": "https://www.meetup.com/jakartas-linux-open-source-software-meetup-group/events/ical/", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 0, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "meetup-python-id", "name": "python id", "page_url": "https://www.meetup.com/python-id/", "feed_url": "https://www.meetup.com/python-id/events/ical/", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 0, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "meetup-gdg-jogjakarta", "name": "gdg jogjakarta", "page_url": "https://www.meetup.com/gdg-jogjakarta/", "feed_url": "https://www.meetup.com/gdg-jogjakarta/events/ical/", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 0, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "meetup-aws-user-group-jogja", "name": "aws user group jogja", "page_url": "https://www.meetup.com/aws-user-group-jogja/", "feed_url": "https://www.meetup.com/aws-user-group-jogja/events/ical/", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 0, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "meetup-aws-sbg-at-university-of-amikom-yogyakarta", "name": "aws sbg at university of amikom yogyakarta", "page_url": "https://www.meetup.com/aws-sbg-at-university-of-amikom-yogyakarta/", "feed_url": "https://www.meetup.com/aws-sbg-at-university-of-amikom-yogyakarta/events/ical/", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 0, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "meetup-yogyakarta-wordpress-meetup", "name": "yogyakarta wordpress meetup", "page_url": "https://www.meetup.com/yogyakarta-wordpress-meetup/", "feed_url": "https://www.meetup.com/yogyakarta-wordpress-meetup/events/ical/", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 0, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "meetup-stacks-indonesia", "name": "stacks indonesia", "page_url": "https://www.meetup.com/stacks-indonesia/", "feed_url": "https://www.meetup.com/stacks-indonesia/events/ical/", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 0, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "gdg-gdg-jakarta", "type": "gdg", "name": "gdg jakarta", "page_url": "https://gdg.community.dev/gdg-jakarta/", "feed_url": "https://gdg.community.dev/api/event_slim/for_chapter/642/?page_size=20&status=Live&include_cohosted_events=true&order=start_date&fields=title,start_date,end_date,event_type_title,url,description_short,picture", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 0, "last_success_at": "2026-11-23T21:30:49.895493Z"}, {"id": "gdg-gdg-jogjakarta", "type": "gdg", "name": "gdg jogjakarta", "page_url": "https://gdg.community.dev/gdg-jogjakarta/", "feed_url": "https://gdg.community.dev/api/event_slim/for_chapter/577/?page_size=20&status=Live&include_cohosted_events=true&order=start_date&fields=title,start_date,end_date,event_type_title,url,description_short,picture", "fetched_at": "2026-11-23T21:30:49.895493Z", "ok": true, "count": 0, "last_success_at": "2026-11-23T21:30:49.895493Z"}], "events": [{"title": "From SAP to AI: Building Your Data Foundation with Fivetran and Snowflake on AWS", "start": "2026-11-25T05:00:00Z", "end": "2026-11-25T10:00:00Z", "city": "jakarta", "online": false, "venue": "AWS (Amazon Web Services) Jakarta Office", "url": "https://lu.ma/ye9ovqrp", "source": "luma", "organizer": null, "uid": "luma-evt-E5gruzrIskfDE8h", "source_id": "luma-city-jakarta", "poster": "https://images.lumacdn.com/uploads/0t/7d9e40e3-d36c-4033-a802-1c2b875ddf06.png", "also_on": ["https://lu.ma/calendar/cal-ltexIzUnSUtV2Ug"]}, {"title": "Build 24/7 AI Team for Your Businesses | Road to SCALECON 2027", "start": "2026-11-25T11:30:00Z", "end": "2026-11-25T14:30:00Z", "city": "jakarta", "online": false, "venue": "Centennial Tower", "url": "https://lu.ma/nqv9479h", "source": "luma", "organizer": "Build Club", "uid": "luma-evt-5zWDseFIaZufez0", "source_id": "luma-city-jakarta", "poster": "https://images.lumacdn.com/uploads/6g/41d00201-d10e-4191-b8df-0024269efa6e.png", "also_on": ["https://lu.ma/calendar/cal-yrYsEKDQ91hPMWy"]}, {"title": "On-site mini Hackathon (Qwen Conference 2026 Breakout session)", "start": "2026-11-26T08:30:00Z", "end": "2026-11-26T10:00:00Z", "city": "jakarta", "online": false, "venue": "Raffles Jakarta, Ciputra World, Jl. Prof. DR. Satrio No.Kav 3 – 5, RT.18/RW.4, Kuningan, Karet Kuningan, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12940, Indonesia", "url": "https://lu.ma/calendar/cal-voSSwwLPSpm5LRL", "source": "luma", "organizer": "Alibaba Cloud Indonesia", "uid": "evt-tYJ8oBwUss7ttko@events.lu.ma", "venue_tbd": false, "source_id": "luma-cal-cal-voSSwwLPSpm5LRL", "recurring": false, "poster": "https://images.lumacdn.com/uploads/gf/aa8fc06b-c9f5-49ad-8e4e-a18bf4adca42.png"}, {"title": "OWASP Jakarta Security Week #2", "start": "2026-11-30T08:00:00Z", "end": "2026-11-30T09:00:00Z", "city": null, "online": true, "venue": null, "url": "https://www.meetup.com/owasp-jakarta-chapter/events/317297987/", "source": "meetup", "organizer": "owasp jakarta chapter", "uid": "event_317297987@meetup.com", "venue_tbd": false, "source_id": "meetup-owasp-jakarta-chapter", "recurring": false, "poster": "https://secure.meetupstatic.com/photos/event/d/e/c/1/600_476877025.jpeg"}, {"title": "AWS User Group Jakarta x Commvault: Race to Recover: Mission Earth", "start": "2026-12-09T10:00:00Z", "end": "2026-12-09T13:30:00Z", "city": "jakarta", "online": false, "venue": null, "url": "https://www.meetup.com/aws-ug-jakarta/events/317465233/", "source": "meetup", "organizer": "aws ug jakarta", "uid": "event_317465233@meetup.com", "venue_tbd": true, "source_id": "meetup-aws-ug-jakarta", "recurring": false, "poster": "https://secure.meetupstatic.com/photos/event/3/c/4/600_537180964.jpeg"}]}</script>
+<script>
+const DATA = JSON.parse(document.getElementById('evdata').textContent);
+const evs = DATA.events || [];
+let city = 'all';
+const wibDay = d => new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Jakarta'}).format(d);
+const fmtDay = new Intl.DateTimeFormat('en-US',{weekday:'long',day:'numeric',month:'long',timeZone:'Asia/Jakarta'});
+const fmtTime = new Intl.DateTimeFormat('en-US',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Asia/Jakarta'});
+function bucket(e){ return e.online ? 'online' : (e.city || 'tbd'); }
+function cityFiltered(){ return evs.filter(e=> city==='all' || bucket(e)===city); }
+function render(){
+  const chipsEl = document.getElementById('chips');
+  const counts = {all:evs.length, jakarta:0, jogja:0, online:0, tbd:0};
+  evs.forEach(e=>{counts[bucket(e)]++});
+  chipsEl.innerHTML = ['all','jakarta','jogja','online','tbd'].map(c=>
+    `<button class="chip ${c===city?'on':''}" data-c="${c}">${c==='tbd'?'venue tbd':c} (${counts[c]})</button>`).join('');
+  chipsEl.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{city=b.dataset.c;render();});
+  let shown = cityFiltered();
+  const list = document.getElementById('list');
+  if(!shown.length){ list.innerHTML = '<div class="empty">no upcoming events found in the checked sources right now.<br>that means none found, not none happening - the checked sources are listed below, and new events appear as organizers publish them.</div>'; return; }
+  let html='', lastDay='';
+  for(const e of shown){
+    const d = new Date(e.start);
+    const day = fmtDay.format(d);
+    if(day!==lastDay){ html += `<div class="day">${day}</div>`; lastDay=day; }
+    const time = fmtTime.format(d);
+    let where = e.online ? 'online' : (e.venue || 'venue to be announced');
+    if(where.length>90) where = where.slice(0,87).replace(/[, ]+[^, ]*$/,'')+'…';
+    const tags = [
+      e.online ? '<span class="tag on">online</span>' : '',
+      (!e.online && !e.venue) ? '<span class="tag tbd">venue tbd</span>' : '',
+      e.recurring ? '<span class="tag">repeats</span>' : '',
+      `<span class="tag">${e.source}</span>`
+    ].join('');
+    const poster = (e.poster && /^https:\/\//.test(e.poster))
+      ? `<img class="p" src="${e.poster.replace(/"/g,'')}" alt="${e.title.replace(/"/g,'&quot;')}" loading="lazy" referrerpolicy="no-referrer" onclick="event.preventDefault();event.stopPropagation();window.open(this.src,'_blank','noopener')" onerror="this.style.display='none'">`
+      : '';
+    html += `<a class="ev" href="${e.url}" target="_blank" rel="noopener"><div class="b"><div class="t">${e.title}</div><div class="m">${time} wib · ${where}${e.organizer?` · ${e.organizer}`:''}${tags}</div></div>${poster}</a>`;
+  }
+  list.innerHTML = html;
+}
+const gen = new Date(DATA.generated_at);
+document.getElementById('meta').textContent = `updated ${fmtDay.format(gen)}, ${fmtTime.format(gen)} wib · ${evs.length} events · times in western indonesia time`;
+document.getElementById('srcs').innerHTML = (DATA.sources||[]).map(s=>{
+  const state = s.ok ? `${s.count} events` : `failed (${s.error||'error'})${s.kept_stale?`, showing ${s.kept_stale} older events`:''}`;
+  const fresh = s.last_success_at ? new Date(s.last_success_at) : null;
+  return `<p class="src">${s.ok?'✓':'✗'} <a href="${s.page_url}" target="_blank" rel="noopener">${s.name}</a> · ${state}${fresh?` · last ok ${fmtDay.format(fresh)}`:''}</p>`;
+}).join('');
+render();
+</script>
+<script>
+(function(){
+var first=null;
+function sample(){var el=document.getElementById("daya-left");return el?el.textContent:null;}
+function report(){
+var second=sample();
+var dataEl=document.getElementById("evdata");
+var data=JSON.parse(dataEl.textContent);
+var evs=(data.events||[]).slice().sort(function(a,b){return new Date(a.start)-new Date(b.start);});
+var now=Date.now(),next=null;
+for(var i=0;i<evs.length;i++){if(new Date(evs[i].start).getTime()>now){next=evs[i];break;}}
+var facts={
+section_present:!!document.getElementById("daya-section"),
+uses_kapan_classes:!!document.querySelector("#daya-section .ev .b .t")&&!!document.querySelector("#daya-section .tag.on"),
+heading:document.querySelector("#daya-section h2.day")?document.querySelector("#daya-section h2.day").textContent:null,
+title_matches_next_event:next?document.getElementById("daya-title").textContent===(next.title||"untitled event"):null,
+href_matches_next_event:next?document.getElementById("daya-target").href===next.url:null,
+countdown_format:/^(\d+d )?\d{2}:\d{2}:\d{2}$/.test(second||""),
+countdown_ticks:first!==null&&second!==null&&first!==second
+};
+var div=document.createElement("div");
+div.id="render-test-result";
+div.textContent=JSON.stringify(facts);
+document.body.appendChild(div);
+}
+setTimeout(function(){first=sample();setTimeout(report,1100);},300);
+})();
+</script>
+
+
+<div id="render-test-result">{"section_present":true,"uses_kapan_classes":true,"heading":"next event","title_matches_next_event":true,"href_matches_next_event":true,"countdown_format":true,"countdown_ticks":true}</div></body></html>
