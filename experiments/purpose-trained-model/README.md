@@ -2,7 +2,7 @@
 
 Question: can a small model trained for daya's narrow recipe intents beat
 (a) the classical cascade and (b) a general zero-shot classifier, on
-hand-written paraphrases, using synthetic-only data, free compute and no
+separately authored paraphrases, using synthetic-only data, free compute and no
 model download?
 
 Status: **step 4 completed** — baselines measured, slot filler v0.1 trained,
@@ -21,7 +21,7 @@ no quality claims without held-out paraphrase results.
   randomness; same script, same dataset) with richer slots than the
   page's built-in sample generator. Writes `dataset-train.json`
   (v2: 1,579 samples, 5 intents, roughly balanced).
-- `heldout.json` — 45 hand-authored cases, **written by hand, not
+- `heldout.json` — 45 separately authored cases, **written separately, not
   derived from the blueprints** (so template leak cannot inflate
   scores): 18 core (documented-adjacent phrasings), 20 stretch
   (plausible wording beyond the current spec; misses here are product
@@ -139,7 +139,7 @@ Held-out results (the single evaluation run):
 
 - End-to-end: 31/38 (core 16/18, stretch 15/20). Same range as the auto
   cascade (32/38) and ahead of every single classical engine, with no
-  hand-written rules for slots.
+  explicit rules for slots.
 - Refusal: 2/7. The model has NO abstention mechanism: the classifier
   always picks an intent and the tagger fills it, so "a map of jogja"
   still becomes a counter. Until an abstention gate exists, this
@@ -173,7 +173,7 @@ probes (tuning data, never evaluation). Sweep in
 `results-abstain-calibration.json`; chosen theta 0.7 (valid accept 97.3%,
 probe refuse 90%, Youden J 0.873).
 
-`heldout-v2.json` is a NEW hand-authored set (46 cases: 18 core, 18
+`heldout-v2.json` is a NEW separately authored set (46 cases: 18 core, 18
 stretch, 10 should-refuse), disjoint from v1 and from both synthetic
 splits. Both arms were evaluated on it exactly once
 (`results-abstain-v2.json`); the cascade comparison is
@@ -239,7 +239,7 @@ Python standard library, no spend, no model swap, no shipped-code change.
   accept 98.6%, probe refuse 98.8%, Youden J 0.974 vs 0.873 for the
   v0.1 gate).
 
-`heldout-v3.json` is a third fresh hand-authored set (46 cases: 18
+`heldout-v3.json` is a third fresh separately authored set (46 cases: 18
 core, 18 stretch, 10 should-refuse), written BEFORE any v0.2 run. Each
 arm was evaluated on it exactly once (`results-v02-heldout-v3.json`);
 the cascade comparison is `results-cascade-v3.json`.
