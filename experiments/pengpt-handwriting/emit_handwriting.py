@@ -1,0 +1,173 @@
+#!/usr/bin/env python3
+"""Emit a self-contained handwriting test page from a Daya recipe.
+
+Experiment (approved 2026-11-25): can a Daya recipe drive PenGPT's 6 MB
+handwriting model to render an SVG section? Same safety model as
+dayalib's web domain: recipe values are data, never code. The recipe
+supplies only validated text, hand name, temperature and seed; the only
+JavaScript is the fixed template below plus the vendor inference core
+(vendor/pengpt-core.js, greydanus/pengpt, Apache-2.0, extracted
+verbatim). The SVG layout constants and path helpers in the template
+are copied from the same demo's UI with attribution.
+
+Usage:
+  python3 emit_handwriting.py recipes/hello-hand.json out/test-page.html
+"""
+import json
+import re
+import sys
+
+MAX_TEXT = 280
+WRITER_RE = re.compile(r"^[a-z0-9][a-z0-9 ._-]{0,39}$")
+
+TEMPLATE = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>daya experiment: pengpt handwriting section</title>
+<style>
+body{background:#f4f1eb;color:#202b29;font:16px/1.5 system-ui,sans-serif;max-width:760px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:1.3rem}
+.meta{color:#597269;font-size:.9rem}
+code{font-size:.9em}
+.sheet svg{display:block;width:100%;height:auto;background:#fffdf8;border:1px solid #d9dfda;border-radius:12px}
+.sheet line{stroke:#bccadb;stroke-width:.008}
+.sheet path{fill:none;stroke:var(--ink,#1a237e);stroke-width:.0135;stroke-linecap:round;stroke-linejoin:round}
+#status{color:#597269;font-size:.9rem;margin-top:.5rem}
+</style>
+</head>
+<body>
+<h1>daya &middot; pengpt handwriting (experiment)</h1>
+<p class="meta">recipe: <code id="recipe"></code></p>
+<div class="sheet"><svg id="page" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="handwriting"></svg></div>
+<p id="status">loading weights&hellip;</p>
+<script type="module">
+// Fixed template: the only recipe values are the validated data in RECIPE.
+// SVG layout constants and the path/strokes/ink/rule/place helpers are
+// copied from the PenGPT browser demo UI (greydanus/pengpt web/index.html,
+// Apache-2.0, vendor/LICENSE-pengpt.txt); the animation queue is dropped
+// and strokes render complete.
+import {npz, Pen, accelerate, spans} from '../vendor/pengpt-core.js'
+
+const RECIPE = __RECIPE_JSON__
+const WEIGHTS = '../vendor/hand.npz'
+document.getElementById('recipe').textContent = JSON.stringify(RECIPE)
+
+const facts = {weights_loaded:false, writer_ok:false, writers_count:0,
+               words_written:0, path_count:0, point_total:0, ms:0,
+               viewbox:null, error:null}
+const status = document.getElementById('status')
+function done(){
+  const div = document.createElement('div')
+  div.id = 'render-test-result'
+  div.style.display = 'none'
+  div.textContent = JSON.stringify(facts)
+  document.body.appendChild(div)
+  status.textContent = facts.error
+    ? ('error: ' + facts.error)
+    : (`wrote ${facts.words_written} word(s), ${facts.path_count} stroke(s), ` +
+       `${facts.point_total} points in ${(facts.ms/1000).toFixed(2)} s ` +
+       `(${facts.writers_count} hands available)`)
+}
+
+const NS = 'http://www.w3.org/2000/svg', PAD = 0.25, TOP = 0.42, LINE = 0.55, SPACE = 0.16
+const INKS = [[26,35,126],[15,76,92],[27,67,50],[95,15,64],[107,45,15],[43,42,39]]
+const page = document.getElementById('page')
+let x = 0, ln = 0
+const width = 8
+
+function el(name, attrs){
+  const e = document.createElementNS(NS, name)
+  for (const k in attrs) e.setAttribute(k, attrs[k])
+  return page.appendChild(e)
+}
+function path(points){
+  return 'M' + points.map(([u,v]) => `${u.toFixed(3)} ${v.toFixed(3)}`).join(' L') +
+         (points.length === 1 ? ' l0.001 0' : '')
+}
+function strokes(p, dx=0, dy=0){
+  return spans(p).map(([a,b]) => Array.from({length:b-a}, (_,i) => [p[3*(a+i)]+dx, p[3*(a+i)+1]+dy]))
+}
+function ink(writer){
+  let h = 0
+  for (const c of writer) h = (h*31 + c.charCodeAt(0)) % 9973
+  const t = h/9973*INKS.length, a = INKS[t|0], b = INKS[((t|0)+1)%INKS.length]
+  return `rgb(${a.map((u,i) => Math.round(u + (b[i]-u)*(t%1)))})`
+}
+function rule(k){
+  el('line', {x1:-PAD, x2:width+PAD, y1:k*LINE, y2:k*LINE})
+  page.setAttribute('viewBox', `${-PAD} ${-TOP} ${width+2*PAD} ${TOP+Math.max(k,2)*LINE+0.3}`)
+}
+function placeWord(p){
+  if (!p.length) return
+  let lo = Infinity, hi = -Infinity
+  for (let i = 0; i < p.length; i += 3) [lo,hi] = [Math.min(lo,p[i]), Math.max(hi,p[i])]
+  if (x > 0 && x + hi - lo > width) [x,ln] = [0, ln+1]
+  if (ln > 2 && !page.querySelector(`[y1="${ln*LINE}"]`)) rule(ln)
+  for (const points of strokes(p, x-lo, ln*LINE)){
+    el('path', {d:path(points)})
+    facts.path_count++
+    facts.point_total += points.length
+  }
+  x += hi - lo + SPACE
+  facts.words_written++
+}
+
+try {
+  const t0 = performance.now()
+  const buf = await (await fetch(WEIGHTS)).arrayBuffer()
+  const pen = new Pen(await npz(buf))
+  await accelerate(pen).catch(() => pen)
+  facts.weights_loaded = true
+  facts.writers_count = pen.writers.length
+  if (!pen.writers.includes(RECIPE.writer))
+    throw new Error(`unknown hand "${RECIPE.writer}" (${pen.writers.length} hands in the model)`)
+  facts.writer_ok = true
+  page.style.setProperty('--ink', ink(RECIPE.writer))
+  for (let k = 0; k < 3; k++) rule(k)
+  for await (const p of pen.write(RECIPE.text, RECIPE.writer, RECIPE.temperature, null, RECIPE.seed))
+    placeWord(p)
+  facts.ms = performance.now() - t0
+  facts.viewbox = page.getAttribute('viewBox')
+} catch (e) {
+  facts.error = String(e && e.message || e)
+}
+done()
+</script>
+</body>
+</html>
+"""
+
+
+def emit(recipe, out_path):
+    if recipe.get("type") != "handwriting":
+        raise SystemExit('recipe.type must be "handwriting"')
+    unknown = set(recipe) - {"type", "text", "writer", "temperature", "seed"}
+    if unknown:
+        raise SystemExit("unknown recipe keys: %s" % ", ".join(sorted(unknown)))
+    text = recipe.get("text")
+    if not isinstance(text, str) or not 1 <= len(text.strip()) <= MAX_TEXT:
+        raise SystemExit("recipe.text must be a string of 1..%d chars" % MAX_TEXT)
+    writer = recipe.get("writer", "sam")
+    if not isinstance(writer, str) or not WRITER_RE.match(writer):
+        raise SystemExit("recipe.writer must match %s" % WRITER_RE.pattern)
+    temperature = recipe.get("temperature", 0)
+    if not isinstance(temperature, (int, float)) or not 0 <= temperature <= 1:
+        raise SystemExit("recipe.temperature must be a number in [0, 1]")
+    seed = recipe.get("seed", 0)
+    if not isinstance(seed, int) or not 0 <= seed < 2**31:
+        raise SystemExit("recipe.seed must be an int in [0, 2^31)")
+    model = {"text": text.strip(), "writer": writer,
+             "temperature": float(temperature), "seed": seed}
+    page = TEMPLATE.replace("__RECIPE_JSON__",
+                            json.dumps(model, ensure_ascii=False).replace("</", "<\\/"))
+    with open(out_path, "w") as f:
+        f.write(page)
+    print("wrote", out_path)
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        raise SystemExit(__doc__)
+    emit(json.load(open(sys.argv[1])), sys.argv[2])
