@@ -9,8 +9,15 @@ free/synthetic only, no app changes, no retraining.
 
 - PenGPT: https://greydanus.github.io/2026/11/12/pengpt/ (Sam Greydanus)
 - Code: https://github.com/greydanus/pengpt (Apache-2.0)
-- Weights: release `models-2026-11-16`, `hand.npz` (5,800,624 bytes,
-  sha256 `4470544dc428d1da41a7c5c6096652556b1dc6afc4c87d1ccd1ee62716153514`)
+- Weights: release `models-2026-11-16`:
+  `hand.npz` (5,800,624 bytes,
+  sha256 `4470544dc428d1da41a7c5c6096652556b1dc6afc4c87d1ccd1ee62716153514`),
+  `sketch.npz` (49,845,522 bytes,
+  sha256 `096c56ab634897bd500ed67aa80692e4edcf9fed697ed9beb1beebfb0fa5ce2a`),
+  `words.npz` (25,875,536 bytes,
+  sha256 `f2264f7431bd3c617c2b79bb42ec06e680820607650097c98feb8485e22ec77c`).
+  Drawing needs the last two: the sketch transformer plus the words
+  encoder that turns the prompt into a vector.
 
 ## Layout
 
@@ -31,11 +38,16 @@ free/synthetic only, no app changes, no retraining.
 - `test/render_test.py` — serves the experiment root locally, drives
   headless Chrome over CDP, waits for the page's fact harness, asserts
   the facts, writes a phone-width screenshot.
-- `render_recipe.py` — the bridge into dayalib: renders text with the
+- `render_recipe.py` — the bridge into dayalib: renders with the
   model at authoring time and writes a daya `web` recipe whose
-  `handwriting` section carries the laid-out strokes as validated
+  section carries the laid-out strokes as validated
   numbers. The generated app inlines them as SVG; it needs no model
-  and no network. Example: `examples/handwritten-note.json`.
+  and no network. Modes: `"write"` (default) makes a `handwriting`
+  section from hand.npz; `"draw"` makes a `drawing` section from
+  sketch.npz + words.npz (temperature 0.6, guidance 2 by default,
+  like the demo). Examples: `examples/handwritten-note.json`,
+  `examples/pen-and-ink.json` (published at
+  https://vanipy.com/daya/pen-and-ink.html).
 - `out/` — last emitted page, dumped DOM, screenshot (committed as
   evidence).
 
@@ -47,10 +59,12 @@ committed extract).
 ## Run
 
 ```
-# one-time: fetch the weights
-curl -L -o vendor/hand.npz \
-  https://github.com/greydanus/pengpt/releases/download/models-2026-11-16/hand.npz
-sha256sum vendor/hand.npz   # expect 4470544d...
+# one-time: fetch the weights (hand for writing; sketch + words for drawing)
+for f in hand.npz sketch.npz words.npz; do
+  curl -L -o vendor/$f \
+    https://github.com/greydanus/pengpt/releases/download/models-2026-11-16/$f
+done
+sha256sum vendor/*.npz   # expect the three sha256 above
 
 python3 emit_handwriting.py recipes/hello-hand.json out/test-page.html
 python3 test/render_test.py
@@ -76,14 +90,18 @@ model.
 - Static render: the demo animates the pen; this draws complete strokes.
 - Weights are fetched separately (sha256 above), not committed; the
   render test needs them present.
-- `hand.npz` only does handwriting. The 76 MB `pengpt.npz` adds
-  drawing/sketching and streaming range-request loading; not used here.
+- Drawing runs locally at authoring time (sketch.npz + words.npz,
+  ~76 MB, gitignored). Serving drawings live from a generated app is
+  not possible for free: release assets answer Range requests but send
+  no Access-Control-Allow-Origin, so vanipy.com pages cannot fetch
+  them cross-origin (checked 2026-11-25), and committing 81.5 MB of
+  weights to a repo is ruled out. Pre-rendering sidesteps both.
 - The weights have no separate license document; the repo is
   Apache-2.0 and the post describes the weights as open. Attribution
   is kept in `vendor/` regardless.
 - The SVG layout constants and path helpers in the template are copied
   from the demo's UI (Apache-2.0) with the animation queue removed.
-- The `handwriting` section type now lives in `dayalib`'s web domain
-  (approved 2026-11-25): the recipe carries pre-rendered strokes, the
-  generator only validates and draws them. Publishing a live example
-  page is still a separate step.
+- The `handwriting` and `drawing` section types now live in
+  `dayalib`'s web domain (approved 2026-11-25): the recipe carries
+  pre-rendered strokes, the generator only validates and draws them.
+  Live example: https://vanipy.com/daya/pen-and-ink.html

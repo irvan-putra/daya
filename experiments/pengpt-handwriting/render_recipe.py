@@ -9,10 +9,15 @@ recipe is validated with dayalib itself before it is written.
 Usage:
   python3 render_recipe.py input.json output.json
 
-input.json: {"text": "hello from daya", "writer": "sam",
-             "temperature": 0, "seed": 0, "title": "Handwritten note"}
-title is optional (default "Handwritten note"). Requires
-vendor/hand.npz (see README) and a Chrome/Chromium binary.
+input.json, handwriting mode (default):
+  {"text": "hello from daya", "writer": "sam",
+   "temperature": 0, "seed": 0, "title": "Handwritten note"}
+input.json, drawing mode:
+  {"mode": "draw", "text": "a penguin wearing a top hat",
+   "temperature": 0.6, "seed": 0, "guidance": 2, "title": "Sketch"}
+title is optional (default "Handwritten note" / "Drawing").
+Handwriting needs vendor/hand.npz; drawing needs vendor/sketch.npz
+and vendor/words.npz (see README). Also needs a Chrome/Chromium binary.
 """
 import json
 import os
@@ -85,16 +90,58 @@ div.textContent = JSON.stringify(facts)
 """
 
 
+DRAW_DRIVER_HTML = """<!doctype html>
+<meta charset="utf-8">
+<script type="module">
+import {npz, Pen, Words, accelerate, mulberry, spans} from '../vendor/pengpt-core.js'
+
+const INPUT = __INPUT_JSON__
+const facts = {viewbox: null, strokes: null, error: null}
+const div = document.createElement('div')
+div.id = 'render-test-result'
+div.style.display = 'none'
+document.body.appendChild(div)
+
+try {
+  const [pen, words] = await Promise.all([
+    (async () => {
+      const buf = await (await fetch('../vendor/sketch.npz')).arrayBuffer()
+      const p = new Pen(await npz(buf))
+      await accelerate(p).catch(() => p)
+      return p
+    })(),
+    (async () => new Words(await npz(await (await fetch('../vendor/words.npz')).arrayBuffer())))(),
+  ])
+  pen.encoder = text => words.encode(text)
+  let latest = null
+  const rng = mulberry(INPUT.seed)
+  for await (const p of pen.draw(INPUT.text.toLowerCase(), '', INPUT.temperature, null, rng, INPUT.guidance))
+    latest = p
+  const strokes = spans(latest).map(([a,b]) =>
+    Array.from({length: b - a}, (_, i) => [latest[3*(a+i)], latest[3*(a+i)+1]]))
+  if (!strokes.length) throw new Error('the model drew nothing')
+  facts.strokes = strokes
+  // Same fixed sheet as the demo's draw grid (web/index.html, Apache-2.0).
+  facts.viewbox = [-0.62, -0.62, 1.24, 1.24]
+} catch (e) {
+  facts.error = String(e && e.message || e)
+}
+div.textContent = JSON.stringify(facts)
+</script>
+"""
+
+
 class Quiet(SimpleHTTPRequestHandler):
     def log_message(self, *args):
         pass
 
 
-def render(source):
+def render(source, mode):
     """Run the model headless; return {"viewbox": ..., "strokes": ...}."""
     os.makedirs(OUT, exist_ok=True)
+    template = DRIVER_HTML if mode == "write" else DRAW_DRIVER_HTML
     with open(DRIVER, "w") as f:
-        f.write(DRIVER_HTML.replace("__INPUT_JSON__", json.dumps(source)))
+        f.write(template.replace("__INPUT_JSON__", json.dumps(source)))
 
     httpd = ThreadingHTTPServer(("127.0.0.1", 0), Quiet)
     threading.Thread(target=httpd.serve_forever, daemon=True).start()
@@ -166,21 +213,36 @@ def main():
     if len(sys.argv) != 3:
         raise SystemExit(__doc__)
     source = json.load(open(sys.argv[1]))
+    mode = source.get("mode", "write")
+    if mode not in ("write", "draw"):
+        raise SystemExit('mode must be "write" or "draw"')
     text = source["text"]
     if not 1 <= len(text.strip()) <= web.MAX_HANDWRITING_TEXT:
         raise SystemExit("text must be 1..%d chars" % web.MAX_HANDWRITING_TEXT)
-    request = {
-        "text": text.strip(),
-        "writer": source.get("writer", "sam"),
-        "temperature": float(source.get("temperature", 0)),
-        "seed": int(source.get("seed", 0)),
-    }
-    rendered = render(request)
+    if mode == "write":
+        request = {
+            "text": text.strip(),
+            "writer": source.get("writer", "sam"),
+            "temperature": float(source.get("temperature", 0)),
+            "seed": int(source.get("seed", 0)),
+        }
+        section_type = "handwriting"
+        default_title = "Handwritten note"
+    else:
+        request = {
+            "text": text.strip(),
+            "temperature": float(source.get("temperature", 0.6)),
+            "seed": int(source.get("seed", 0)),
+            "guidance": float(source.get("guidance", 2)),
+        }
+        section_type = "drawing"
+        default_title = "Drawing"
+    rendered = render(request, mode)
     recipe = {
         "domain": "web",
-        "title": source.get("title", "Handwritten note"),
+        "title": source.get("title", default_title),
         "sections": [{
-            "type": "handwriting",
+            "type": section_type,
             "text": request["text"],
             "viewbox": rendered["viewbox"],
             "strokes": rendered["strokes"],

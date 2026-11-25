@@ -1,4 +1,6 @@
 # Weights: fetch from the models-2026-11-16 release (see README), sha256-checked
 vendor/hand.npz
+vendor/sketch.npz
+vendor/words.npz
 # Unmodified greydanus/pengpt reference sources; vendor/pengpt-core.js is the committed extract
 vendor/web-*

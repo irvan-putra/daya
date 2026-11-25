@@ -21,7 +21,7 @@ DOMAIN = "web"
 DESCRIPTION = (
     "One self-contained HTML mini-app: styled text, lists, counters, "
     "quizzes, timers, persistent todo lists and pre-rendered handwriting "
-    "(inline SVG). No images or custom "
+    "or drawings (inline SVG). No images or custom "
     "code; links limited to an optional validated relative back link."
 )
 
@@ -38,10 +38,12 @@ DEFAULT_ACCENT = "indigo"
 MAX_SECTIONS = 24
 MAX_LIST_ITEMS = 50
 MAX_TODO_SEED_ITEMS = 50
-SECTION_TYPES = ("text", "list", "counter", "quiz", "timer", "todo", "handwriting")
+SECTION_TYPES = (
+    "text", "list", "counter", "quiz", "timer", "todo", "handwriting", "drawing",
+)
 
-# A handwriting section inlines pre-rendered strokes (a list of polylines
-# in SVG user units) produced ahead of time, e.g. by
+# Handwriting and drawing sections inline pre-rendered strokes (a list of
+# polylines in SVG user units) produced ahead of time, e.g. by
 # experiments/pengpt-handwriting/render_recipe.py. The generator only
 # validates and draws numbers: the model never runs at build time, so the
 # output still depends only on the recipe and this file.
@@ -288,7 +290,7 @@ def _validate_section(check, section, path):
             "items": clean_items,
         }
 
-    if stype == "handwriting":
+    if stype in ("handwriting", "drawing"):
         check_no_unknown_keys(
             check, section, {"type", "heading", "text", "viewbox", "strokes"}, path
         )
@@ -305,7 +307,7 @@ def _validate_section(check, section, path):
         if text is None or viewbox is None or strokes is None:
             return None
         return {
-            "type": "handwriting",
+            "type": stype,
             "heading": heading,
             "text": text,
             "viewbox": viewbox,
@@ -434,8 +436,9 @@ button:disabled { opacity: 0.55; cursor: default; }
 .daya-todo li.daya-done .daya-todo-text { text-decoration: line-through; color: #9aa5b1; }
 .daya-todo-toggle, .daya-todo-archive, .daya-todo-unarchive { background: #fff; color: var(--accent); border: 1px solid var(--accent); padding: 0.3rem 0.6rem; font-size: 0.85rem; }
 .daya-todo-archived { margin-top: 0.75rem; color: #52606d; }
-.daya-handwriting svg { display: block; width: 100%; height: auto; background: #fffdf8; border: 1px solid #e4e7eb; border-radius: 0.5rem; }
+.daya-handwriting svg, .daya-drawing svg { display: block; width: 100%; height: auto; background: #fffdf8; border: 1px solid #e4e7eb; border-radius: 0.5rem; }
 .daya-hand path { fill: none; stroke: var(--accent); stroke-width: 2px; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.daya-drawing path { fill: none; stroke: #111; stroke-width: 2px; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
 .daya-back { font-size: 0.85rem; margin: 0 0 0.5rem; }
 .daya-back a { color: var(--accent); }
 footer { text-align: center; color: #9aa5b1; font-size: 0.8rem; margin: 2rem 0 1rem; }
@@ -811,14 +814,15 @@ def _section_html(section):
         )
         return lines
 
-    if stype == "handwriting":
-        lines = ['<section class="daya-handwriting">']
+    if stype in ("handwriting", "drawing"):
+        lines = ['<section class="daya-{}">'.format(stype)]
         if section["heading"]:
             lines.append("<h2>{}</h2>".format(_esc(section["heading"])))
         x, y, w, h = section["viewbox"]
         lines.append(
-            '<svg class="daya-hand" viewBox="{} {} {} {}" role="img"'
+            '<svg class="daya-{}" viewBox="{} {} {} {}" role="img"'
             ' aria-label="{}">'.format(
+                "hand" if stype == "handwriting" else "drawing",
                 _fmt_num(x), _fmt_num(y), _fmt_num(w), _fmt_num(h),
                 _esc(section["text"]),
             )
@@ -909,7 +913,7 @@ def _expected_strings(model):
             if section["heading"]:
                 found.append(_esc(section["heading"]))
             found.extend(_esc(item) for item in section["items"])
-        elif section["type"] == "handwriting":
+        elif section["type"] in ("handwriting", "drawing"):
             if section["heading"]:
                 found.append(_esc(section["heading"]))
             found.append(_esc(section["text"]))
@@ -992,6 +996,11 @@ def schema():
                     MAX_HANDWRITING_POINTS,
                 ),
             },
+            "drawing": (
+                "same fields as handwriting (text is the drawing prompt, "
+                "used as the accessible name); strokes render in dark ink "
+                "instead of the accent color"
+            ),
             "todo": {
                 "heading": "optional string 1..80",
                 "storage_key": (

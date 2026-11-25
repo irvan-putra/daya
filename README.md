@@ -155,16 +155,16 @@ self-contained, no-network property.
 ## Demo
 
 The example recipes are published from `docs/`: `focus-timer.html`,
-`reading-quiz.html` and `shared-list.html` as pages, plus
-`shared-list-v0.1.1.xdc`, the same list packaged as a mini-app zip.
+`reading-quiz.html`, `shared-list.html` and `pen-and-ink.html` as pages,
+plus `shared-list-v0.1.1.xdc`, the same list packaged as a mini-app zip.
 
 ## Domains
 
 - `web` — one self-contained HTML mini-app: styled text, lists,
   counters, quizzes, timers (with pause, resume and reset), todo
   lists (add, tick done, archive instead of delete, restore; the list
-  persists in the browser's local storage) and handwriting sections
-  (pre-rendered strokes drawn as inline SVG; the recipe carries only
+  persists in the browser's local storage) and handwriting or drawing
+  sections (pre-rendered strokes drawn as inline SVG; the recipe carries only
   validated numbers, e.g. produced by
   `experiments/pengpt-handwriting/render_recipe.py`, so the build
   stays deterministic and the generated page needs no model and no

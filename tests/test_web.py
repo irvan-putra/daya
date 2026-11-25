@@ -306,7 +306,7 @@ class ValidateTests(unittest.TestCase):
         _model, errors = web.validate(
             {"domain": "web", "title": "t", "sections": [{"type": "video"}]}
         )
-        self.assertIn("sections[0].type: must be one of: text, list, counter, quiz, timer, todo, handwriting", errors)
+        self.assertIn("sections[0].type: must be one of: text, list, counter, quiz, timer, todo, handwriting, drawing", errors)
 
     def test_quiz_answer_must_be_valid_index(self):
         recipe = {
@@ -481,6 +481,53 @@ class HandwritingTests(unittest.TestCase):
         page = build(self.recipe(section))
         self.assertIn('viewBox="0 0 8 2"', page)
         self.assertIn('<path d="M0 0 L7 1"/>', page)
+
+
+class DrawingTests(unittest.TestCase):
+    def recipe(self, section):
+        return {"domain": "web", "title": "Sketch", "sections": [section]}
+
+    def valid_section(self):
+        return {
+            "type": "drawing",
+            "heading": "A penguin",
+            "text": "a penguin wearing a top hat",
+            "viewbox": [-0.62, -0.62, 1.24, 1.24],
+            "strokes": [
+                [[-0.3, 0.1], [0, -0.4], [0.3, 0.1], [0, 0.45], [-0.3, 0.1]],
+                [[-0.1, -0.45], [0.1, -0.45]],
+            ],
+        }
+
+    def test_drawing_builds(self):
+        page = build(self.recipe(self.valid_section()))
+        self.assertIn('<section class="daya-drawing">', page)
+        self.assertIn("<h2>A penguin</h2>", page)
+        self.assertIn(
+            '<svg class="daya-drawing" viewBox="-0.62 -0.62 1.24 1.24"'
+            ' role="img" aria-label="a penguin wearing a top hat">',
+            page,
+        )
+        self.assertIn(
+            '<path d="M-0.3 0.1 L0 -0.4 L0.3 0.1 L0 0.45 L-0.3 0.1"/>', page
+        )
+        self.assertIn("stroke: #111", page)  # dark ink, not the accent
+
+    def test_drawing_deterministic_bytes(self):
+        self.assertEqual(
+            build(self.recipe(self.valid_section())),
+            build(self.recipe(self.valid_section())),
+        )
+
+    def test_drawing_validation_shared_with_handwriting(self):
+        section = self.valid_section()
+        section["strokes"] = [[[float("nan"), 0]]]
+        _model, errors = web.validate(self.recipe(section))
+        self.assertTrue(errors)
+        section = self.valid_section()
+        section["writer"] = "sam"
+        _model, errors = web.validate(self.recipe(section))
+        self.assertIn("sections[0]: unknown field 'writer'", errors)
 
 
 if __name__ == "__main__":
