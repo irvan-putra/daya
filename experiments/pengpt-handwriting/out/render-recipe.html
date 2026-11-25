@@ -29,8 +29,16 @@ try {
     Array.from({length: b - a}, (_, i) => [latest[3*(a+i)], latest[3*(a+i)+1]]))
   if (!strokes.length) throw new Error('the model drew nothing')
   facts.strokes = strokes
-  // Same fixed sheet as the demo's draw grid (web/index.html, Apache-2.0).
-  facts.viewbox = [-0.62, -0.62, 1.24, 1.24]
+  // Tight bounds per drawing (approved 2026-11-25), small padding, so
+  // nothing clips and the sheet fits the sketch instead of the demo's
+  // fixed square.
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity
+  for (const stroke of strokes) for (const [u, v] of stroke){
+    if (u < x0) x0 = u; if (u > x1) x1 = u
+    if (v < y0) y0 = v; if (v > y1) y1 = v
+  }
+  const pad = 0.05
+  facts.viewbox = [x0 - pad, y0 - pad, x1 - x0 + 2*pad, y1 - y0 + 2*pad]
 } catch (e) {
   facts.error = String(e && e.message || e)
 }
