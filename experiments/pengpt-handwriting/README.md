@@ -31,6 +31,11 @@ free/synthetic only, no app changes, no retraining.
 - `test/render_test.py` — serves the experiment root locally, drives
   headless Chrome over CDP, waits for the page's fact harness, asserts
   the facts, writes a phone-width screenshot.
+- `render_recipe.py` — the bridge into dayalib: renders text with the
+  model at authoring time and writes a daya `web` recipe whose
+  `handwriting` section carries the laid-out strokes as validated
+  numbers. The generated app inlines them as SVG; it needs no model
+  and no network. Example: `examples/handwritten-note.json`.
 - `out/` — last emitted page, dumped DOM, screenshot (committed as
   evidence).
 
@@ -78,5 +83,7 @@ model.
   is kept in `vendor/` regardless.
 - The SVG layout constants and path helpers in the template are copied
   from the demo's UI (Apache-2.0) with the animation queue removed.
-- No app integration: nothing here touches `dayalib` emitters or any
-  shipped site. That step needs the user's go-ahead.
+- The `handwriting` section type now lives in `dayalib`'s web domain
+  (approved 2026-11-25): the recipe carries pre-rendered strokes, the
+  generator only validates and draws them. Publishing a live example
+  page is still a separate step.

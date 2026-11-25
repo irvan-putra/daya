@@ -306,7 +306,7 @@ class ValidateTests(unittest.TestCase):
         _model, errors = web.validate(
             {"domain": "web", "title": "t", "sections": [{"type": "video"}]}
         )
-        self.assertIn("sections[0].type: must be one of: text, list, counter, quiz, timer, todo", errors)
+        self.assertIn("sections[0].type: must be one of: text, list, counter, quiz, timer, todo, handwriting", errors)
 
     def test_quiz_answer_must_be_valid_index(self):
         recipe = {
@@ -364,6 +364,123 @@ class ValidateTests(unittest.TestCase):
         }
         _model, errors = web.validate(recipe)
         self.assertGreaterEqual(len(errors), 3)
+
+
+class HandwritingTests(unittest.TestCase):
+    STROKES = [
+        [[0.1, 0.2], [0.3456, 0.2], [0.5, -0.1]],
+        [[1, 2]],
+    ]
+
+    def recipe(self, section):
+        return {"domain": "web", "title": "Note", "sections": [section]}
+
+    def valid_section(self):
+        return {
+            "type": "handwriting",
+            "heading": "A note",
+            "text": "hello from daya",
+            "viewbox": [-0.25, -0.42, 8.5, 1.82],
+            "strokes": self.STROKES,
+        }
+
+    def test_handwriting_builds(self):
+        page = build(self.recipe(self.valid_section()))
+        self.assertIn('<section class="daya-handwriting">', page)
+        self.assertIn("<h2>A note</h2>", page)
+        self.assertIn(
+            '<svg class="daya-hand" viewBox="-0.25 -0.42 8.5 1.82" role="img"'
+            ' aria-label="hello from daya">',
+            page,
+        )
+        self.assertIn('<path d="M0.1 0.2 L0.346 0.2 L0.5 -0.1"/>', page)
+        self.assertIn('<path d="M1 2 l0.001 0"/>', page)  # single point = dot
+
+    def test_handwriting_deterministic_bytes(self):
+        self.assertEqual(
+            build(self.recipe(self.valid_section())),
+            build(self.recipe(self.valid_section())),
+        )
+
+    def test_handwriting_heading_optional(self):
+        section = self.valid_section()
+        del section["heading"]
+        page = build(self.recipe(section))
+        self.assertIn('<section class="daya-handwriting">', page)
+        self.assertNotIn("<h2>", page)
+
+    def test_handwriting_text_escaped_in_aria_label(self):
+        section = self.valid_section()
+        section["text"] = '<script>alert(1)</script> & "quotes"'
+        page = build(self.recipe(section))
+        self.assertIn(
+            "aria-label=\"&lt;script&gt;alert(1)&lt;/script&gt; &amp;"
+            " &quot;quotes&quot;\"",
+            page,
+        )
+        self.assertNotIn("<script>alert(1)</script>", page.split("<script>")[0])
+
+    def test_handwriting_rejects_unknown_field(self):
+        section = self.valid_section()
+        section["writer"] = "sam"
+        _model, errors = web.validate(self.recipe(section))
+        self.assertIn("sections[0]: unknown field 'writer'", errors)
+
+    def test_handwriting_rejects_bad_viewbox(self):
+        for bad in (
+            None,
+            [0, 0, 1],
+            [0, 0, -1, 1],
+            [0, 0, 0, 1],
+            [0, 0, 1, 10001],
+            [0, 0, 1, "x"],
+        ):
+            section = self.valid_section()
+            section["viewbox"] = bad
+            _model, errors = web.validate(self.recipe(section))
+            self.assertTrue(errors, "viewbox={!r} should fail".format(bad))
+
+    def test_handwriting_rejects_bad_strokes(self):
+        for bad in (
+            None,
+            [],
+            "not a list",
+            [["not a point"]],
+            [[[0, 0, 0]]],
+            [[[True, 0]]],
+            [[[float("inf"), 0]]],
+            [[[float("nan"), 0]]],
+            [[[1001, 0]]],
+            [[]],
+        ):
+            section = self.valid_section()
+            section["strokes"] = bad
+            _model, errors = web.validate(self.recipe(section))
+            self.assertTrue(errors, "strokes={!r} should fail".format(bad))
+
+    def test_handwriting_rejects_too_many_points(self):
+        section = self.valid_section()
+        section["strokes"] = [
+            [[0, 0]] * 2000 for _ in range(11)  # 22000 points overall
+        ]
+        _model, errors = web.validate(self.recipe(section))
+        self.assertTrue(
+            any("too many points" in e for e in errors), errors
+        )
+
+    def test_handwriting_rejects_long_text(self):
+        section = self.valid_section()
+        section["text"] = "x" * 281
+        _model, errors = web.validate(self.recipe(section))
+        self.assertTrue(errors)
+
+    def test_handwriting_accepts_int_coordinates(self):
+        section = self.valid_section()
+        section["viewbox"] = [0, 0, 8, 2]
+        section["strokes"] = [[[0, 0], [7, 1]]]
+        page = build(self.recipe(section))
+        self.assertIn('viewBox="0 0 8 2"', page)
+        self.assertIn('<path d="M0 0 L7 1"/>', page)
 
 
 if __name__ == "__main__":

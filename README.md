@@ -161,9 +161,14 @@ The example recipes are published from `docs/`: `focus-timer.html`,
 ## Domains
 
 - `web` — one self-contained HTML mini-app: styled text, lists,
-  counters, quizzes, timers (with pause, resume and reset) and todo
+  counters, quizzes, timers (with pause, resume and reset), todo
   lists (add, tick done, archive instead of delete, restore; the list
-  persists in the browser's local storage). No links, no images, no
+  persists in the browser's local storage) and handwriting sections
+  (pre-rendered strokes drawn as inline SVG; the recipe carries only
+  validated numbers, e.g. produced by
+  `experiments/pengpt-handwriting/render_recipe.py`, so the build
+  stays deterministic and the generated page needs no model and no
+  network). No links, no images, no
   custom code: the only JavaScript is a fixed template, and every recipe
   string is data that gets escaped before it reaches the page.
 - `webxdc` — wraps a `web` recipe into a complete `.xdc` mini-app (a

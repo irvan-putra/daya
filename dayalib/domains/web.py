@@ -11,6 +11,7 @@ timestamps, no randomness, no network access: same recipe, same bytes.
 """
 
 import html
+import math
 import re
 
 from .. import __version__
@@ -19,7 +20,8 @@ from ..recipe import Checker, check_int, check_no_unknown_keys, check_string
 DOMAIN = "web"
 DESCRIPTION = (
     "One self-contained HTML mini-app: styled text, lists, counters, "
-    "quizzes, timers and persistent todo lists. No images or custom "
+    "quizzes, timers, persistent todo lists and pre-rendered handwriting "
+    "(inline SVG). No images or custom "
     "code; links limited to an optional validated relative back link."
 )
 
@@ -36,7 +38,19 @@ DEFAULT_ACCENT = "indigo"
 MAX_SECTIONS = 24
 MAX_LIST_ITEMS = 50
 MAX_TODO_SEED_ITEMS = 50
-SECTION_TYPES = ("text", "list", "counter", "quiz", "timer", "todo")
+SECTION_TYPES = ("text", "list", "counter", "quiz", "timer", "todo", "handwriting")
+
+# A handwriting section inlines pre-rendered strokes (a list of polylines
+# in SVG user units) produced ahead of time, e.g. by
+# experiments/pengpt-handwriting/render_recipe.py. The generator only
+# validates and draws numbers: the model never runs at build time, so the
+# output still depends only on the recipe and this file.
+MAX_HANDWRITING_TEXT = 280
+MAX_HANDWRITING_STROKES = 500
+MAX_HANDWRITING_POINTS = 20000
+MAX_STROKE_POINTS = 2000
+MAX_HANDWRITING_COORD = 1000
+MAX_VIEWBOX_DIM = 10000
 
 # A todo section keeps its state in the browser's localStorage under this
 # key, so it must be a restricted slug: lowercase letters, digits, hyphens.
@@ -274,7 +288,100 @@ def _validate_section(check, section, path):
             "items": clean_items,
         }
 
+    if stype == "handwriting":
+        check_no_unknown_keys(
+            check, section, {"type", "heading", "text", "viewbox", "strokes"}, path
+        )
+        heading = section.get("heading")
+        if heading is not None:
+            heading = check_string(check, heading, path + ".heading", 1, 80)
+        text = check_string(
+            check, section.get("text"), path + ".text", 1, MAX_HANDWRITING_TEXT
+        )
+        viewbox = _check_viewbox(check, section.get("viewbox"), path + ".viewbox")
+        strokes = _check_strokes(check, section.get("strokes"), path + ".strokes")
+        if section.get("heading") is not None and heading is None:
+            return None
+        if text is None or viewbox is None or strokes is None:
+            return None
+        return {
+            "type": "handwriting",
+            "heading": heading,
+            "text": text,
+            "viewbox": viewbox,
+            "strokes": strokes,
+        }
+
     raise AssertionError("unhandled section type")  # pragma: no cover
+
+
+def _check_coord(check, value, path):
+    """One finite coordinate in a bounded range; rounded to 3 decimals."""
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        check.fail(path, "must be a number")
+        return None
+    if not math.isfinite(value) or abs(value) > MAX_HANDWRITING_COORD:
+        check.fail(path, "must be a finite number with |value| <= {}".format(MAX_HANDWRITING_COORD))
+        return None
+    return round(float(value), 3)
+
+
+def _check_viewbox(check, viewbox, path):
+    if not isinstance(viewbox, list) or len(viewbox) != 4:
+        check.fail(path, "must be a list of 4 numbers: x, y, width, height")
+        return None
+    cleaned = [
+        _check_coord(check, value, "{}[{}]".format(path, i))
+        for i, value in enumerate(viewbox)
+    ]
+    if any(value is None for value in cleaned):
+        return None
+    if cleaned[2] <= 0 or cleaned[3] <= 0:
+        check.fail(path, "width and height must be positive")
+        return None
+    if cleaned[2] > MAX_VIEWBOX_DIM or cleaned[3] > MAX_VIEWBOX_DIM:
+        check.fail(path, "width and height must be <= {}".format(MAX_VIEWBOX_DIM))
+        return None
+    return cleaned
+
+
+def _check_strokes(check, strokes, path):
+    if not isinstance(strokes, list) or not 1 <= len(strokes) <= MAX_HANDWRITING_STROKES:
+        check.fail(
+            path, "must be a list of 1..{} strokes".format(MAX_HANDWRITING_STROKES)
+        )
+        return None
+    cleaned = []
+    total = 0
+    ok = True
+    for i, stroke in enumerate(strokes):
+        spath = "{}[{}]".format(path, i)
+        if not isinstance(stroke, list) or not 1 <= len(stroke) <= MAX_STROKE_POINTS:
+            check.fail(spath, "must be a list of 1..{} points".format(MAX_STROKE_POINTS))
+            ok = False
+            continue
+        clean_stroke = []
+        for j, point in enumerate(stroke):
+            ppath = "{}[{}]".format(spath, j)
+            if not isinstance(point, list) or len(point) != 2:
+                check.fail(ppath, "must be a point: [x, y]")
+                ok = False
+                continue
+            x = _check_coord(check, point[0], ppath + "[0]")
+            y = _check_coord(check, point[1], ppath + "[1]")
+            if x is None or y is None:
+                ok = False
+            else:
+                clean_stroke.append([x, y])
+        total += len(clean_stroke)
+        if clean_stroke:
+            cleaned.append(clean_stroke)
+    if not ok or not cleaned:
+        return None
+    if total > MAX_HANDWRITING_POINTS:
+        check.fail(path, "too many points in total (limit {})".format(MAX_HANDWRITING_POINTS))
+        return None
+    return cleaned
 
 
 def _esc(text):
@@ -287,6 +394,12 @@ def _esc_multiline(text):
 
 def _mmss(seconds):
     return "{:02d}:{:02d}".format(seconds // 60, seconds % 60)
+
+
+def _fmt_num(value):
+    """Shortest deterministic rendering of a coordinate (<= 3 decimals)."""
+    text = "{:.3f}".format(value).rstrip("0").rstrip(".")
+    return text if text and text != "-0" else "0"
 
 
 _CSS = """
@@ -321,6 +434,8 @@ button:disabled { opacity: 0.55; cursor: default; }
 .daya-todo li.daya-done .daya-todo-text { text-decoration: line-through; color: #9aa5b1; }
 .daya-todo-toggle, .daya-todo-archive, .daya-todo-unarchive { background: #fff; color: var(--accent); border: 1px solid var(--accent); padding: 0.3rem 0.6rem; font-size: 0.85rem; }
 .daya-todo-archived { margin-top: 0.75rem; color: #52606d; }
+.daya-handwriting svg { display: block; width: 100%; height: auto; background: #fffdf8; border: 1px solid #e4e7eb; border-radius: 0.5rem; }
+.daya-hand path { fill: none; stroke: var(--accent); stroke-width: 2px; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
 .daya-back { font-size: 0.85rem; margin: 0 0 0.5rem; }
 .daya-back a { color: var(--accent); }
 footer { text-align: center; color: #9aa5b1; font-size: 0.8rem; margin: 2rem 0 1rem; }
@@ -696,6 +811,29 @@ def _section_html(section):
         )
         return lines
 
+    if stype == "handwriting":
+        lines = ['<section class="daya-handwriting">']
+        if section["heading"]:
+            lines.append("<h2>{}</h2>".format(_esc(section["heading"])))
+        x, y, w, h = section["viewbox"]
+        lines.append(
+            '<svg class="daya-hand" viewBox="{} {} {} {}" role="img"'
+            ' aria-label="{}">'.format(
+                _fmt_num(x), _fmt_num(y), _fmt_num(w), _fmt_num(h),
+                _esc(section["text"]),
+            )
+        )
+        for stroke in section["strokes"]:
+            d = "M" + " L".join(
+                "{} {}".format(_fmt_num(px), _fmt_num(py)) for px, py in stroke
+            )
+            if len(stroke) == 1:
+                d += " l0.001 0"  # a single point still draws a dot
+            lines.append('<path d="{}"/>'.format(d))
+        lines.append("</svg>")
+        lines.append("</section>")
+        return lines
+
     raise AssertionError("unhandled section type")  # pragma: no cover
 
 
@@ -771,6 +909,10 @@ def _expected_strings(model):
             if section["heading"]:
                 found.append(_esc(section["heading"]))
             found.extend(_esc(item) for item in section["items"])
+        elif section["type"] == "handwriting":
+            if section["heading"]:
+                found.append(_esc(section["heading"]))
+            found.append(_esc(section["text"]))
     return found
 
 
@@ -829,6 +971,26 @@ def schema():
             "timer": {
                 "label": "string 1..80",
                 "seconds": "whole number, 5..3600",
+            },
+            "handwriting": {
+                "heading": "optional string 1..80",
+                "text": (
+                    "string 1..{}: the written words, used as the SVG's "
+                    "accessible name".format(MAX_HANDWRITING_TEXT)
+                ),
+                "viewbox": "list of 4 numbers: x, y, width, height (positive size)",
+                "strokes": (
+                    "list of 1..{} polylines, each a list of 1..{} [x, y] "
+                    "points (finite numbers, |v| <= {}), at most {} points "
+                    "overall; pre-rendered ahead of time, e.g. by "
+                    "experiments/pengpt-handwriting/render_recipe.py - the "
+                    "generator only validates and draws the numbers"
+                ).format(
+                    MAX_HANDWRITING_STROKES,
+                    MAX_STROKE_POINTS,
+                    MAX_HANDWRITING_COORD,
+                    MAX_HANDWRITING_POINTS,
+                ),
             },
             "todo": {
                 "heading": "optional string 1..80",

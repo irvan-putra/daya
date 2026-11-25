@@ -1,0 +1,46 @@
+<!doctype html>
+<meta charset="utf-8">
+<script type="module">
+import {npz, Pen, accelerate, spans} from '../vendor/pengpt-core.js'
+
+const INPUT = {"text": "handwritten by daya", "writer": "sam", "temperature": 0.0, "seed": 0}
+const facts = {viewbox: null, strokes: null, error: null}
+const div = document.createElement('div')
+div.id = 'render-test-result'
+div.style.display = 'none'
+document.body.appendChild(div)
+
+// Same sheet layout as the demo UI (greydanus/pengpt web/index.html,
+// Apache-2.0): PAD, TOP, LINE, SPACE and the wrap rule.
+const PAD = 0.25, TOP = 0.42, LINE = 0.55, SPACE = 0.16, WIDTH = 8
+let x = 0, ln = 0
+const strokes = []
+
+function placeWord(p){
+  if (!p.length) return
+  let lo = Infinity, hi = -Infinity
+  for (let i = 0; i < p.length; i += 3) [lo,hi] = [Math.min(lo,p[i]), Math.max(hi,p[i])]
+  if (x > 0 && x + hi - lo > WIDTH) [x,ln] = [0, ln+1]
+  for (const [a,b] of spans(p)){
+    const stroke = []
+    for (let i = a; i < b; i++) stroke.push([p[3*i] + x - lo, p[3*i+1] + ln*LINE])
+    strokes.push(stroke)
+  }
+  x += hi - lo + SPACE
+}
+
+try {
+  const buf = await (await fetch('../vendor/hand.npz')).arrayBuffer()
+  const pen = new Pen(await npz(buf))
+  await accelerate(pen).catch(() => pen)
+  if (!pen.writers.includes(INPUT.writer))
+    throw new Error(`unknown hand "${INPUT.writer}" (${pen.writers.length} hands in the model)`)
+  for await (const p of pen.write(INPUT.text, INPUT.writer, INPUT.temperature, null, INPUT.seed))
+    placeWord(p)
+  facts.strokes = strokes
+  facts.viewbox = [-PAD, -TOP, WIDTH + 2*PAD, TOP + Math.max(ln, 2)*LINE + 0.3]
+} catch (e) {
+  facts.error = String(e && e.message || e)
+}
+div.textContent = JSON.stringify(facts)
+</script>
